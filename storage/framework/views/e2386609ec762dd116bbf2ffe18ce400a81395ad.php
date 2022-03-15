@@ -1,0 +1,2 @@
+<input type="checkbox" <?php echo $attributes->merge(['class' => 'form-check-input']); ?>>
+<?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/vendor/jetstream/components/checkbox.blade.php ENDPATH**/ ?>

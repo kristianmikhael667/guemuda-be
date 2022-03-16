@@ -37,7 +37,8 @@
                     <div class="box">
                         <input type="checkbox" id="toggle" class="box__toggle" hidden>
                         <img src="images/resources/login-top.jpg" alt="Picture by Autumn Studio" class="box__image">
-                        <form class="form form--register">
+                        <form method="POST" action="{{ route('register') }}" class="form form--register">
+                            @csrf
                             <span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -49,8 +50,9 @@
                                 </svg></span>
                             <h1 class="form__title">Sign up</h1>
                             <div class="form__helper">
-                                <input type="text" name="user" id="new-user" placeholder="User" class="form__input" />
-                                <label class="form__label" for="new-user">User</label>
+                                <input type="text" name="username" id="new-user" placeholder="User"
+                                    class="form__input" />
+                                <label class="form__label" for="new-user">Username</label>
                             </div>
                             <div class="form__helper">
                                 <input type="email" name="email" id="email" placeholder="Email" class="form__input" />
@@ -62,7 +64,7 @@
                                 <label class="form__label" for="new-user-password">Password</label>
                             </div>
                             <div class="form__helper">
-                                <input type="password" name="password" id="confirm-password"
+                                <input type="password" name="password_confirmation" id="confirm-password"
                                     Placeholder="Confirm password" class="form__input" />
                                 <label class="form__label" for="confirm-password">Confirm password</label>
                             </div>

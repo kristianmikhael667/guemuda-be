@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title>GueMuda | Page Admin</title>
+    <title>GueMuda | Page <?php echo e($page); ?></title>
     <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
 
     <link rel="stylesheet" href="css/main.min.css">
@@ -18,7 +18,7 @@
 
 <body>
 
-    <?php echo $__env->make('partials.loader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('loader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div>
         <?php echo $__env->yieldContent('container'); ?>
@@ -34,5 +34,4 @@
 
 </body>
 
-</html>
-<?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/layouts/main.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/layouts/main.blade.php ENDPATH**/ ?>

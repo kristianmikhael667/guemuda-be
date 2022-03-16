@@ -1,7 +1,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
         <li class="active">
-            <a class="" href="index.html" title="">
+            <a class="" href="/admin" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
                         stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
                         xmlns="http://www.w3.org/2000/svg">
@@ -10,15 +10,7 @@
                     </svg></i> Dashboard
             </a>
         </li>
-        <li class="">
-            <a class="" href="analytics.html" title="">
-                <i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round"
-                        stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                    </svg></i>Analytics
-            </a>
-        </li>
+
         <li class="">
             <a class="" href="profile.html" title="">
                 <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round"
@@ -28,7 +20,7 @@
                         <circle r="4" cy="7" cx="9" />
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                    </svg></i> Profile
+                    </svg></i> User Management
             </a>
         </li>
         <li class="">
@@ -62,7 +54,7 @@
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <path d="M16 10a4 4 0 0 1-8 0"></path>
-                    </svg></i>Products
+                    </svg></i>Content
             </a>
         </li>
         <li class="">
@@ -138,4 +130,4 @@
         </li>
     </ul>
 </nav>
-<!-- sidebar -->
+<!-- sidebar --><?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/partials_admin/sidebar.blade.php ENDPATH**/ ?>

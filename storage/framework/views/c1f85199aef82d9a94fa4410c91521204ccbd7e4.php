@@ -1,10 +1,9 @@
-@extends('layouts.main')
-@section('container')
+<?php $__env->startSection('container'); ?>
 <div class="theme-layout">
-    @include('partials.responsiveheader')
-    @include('partials.header')
-    @include('partials.topsubbar')
-    @include('partials.sidebar')
+    <?php echo $__env->make('partials_admin.responsiveheader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.topsubbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -820,4 +819,5 @@
     </div>
     <!-- side slide message & popup -->
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/admin/dashboard.blade.php ENDPATH**/ ?>

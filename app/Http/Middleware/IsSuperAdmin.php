@@ -6,13 +6,12 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class IsSuperAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->roles == 'common.admin') {
-            return $next($request);
-        }
+        var_dump($request);
+        die;
         if (Auth::user() && Auth::user()->roles == 'common.superadmin') {
             return $next($request);
         }

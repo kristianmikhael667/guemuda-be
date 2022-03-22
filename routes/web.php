@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\SuperAdmin\DashboardSuperAdmin;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,18 +24,8 @@ Route::get('/debug-sentry', function () {
     throw new Exception('My first Sentry error!');
 });
 
-// Login Superadmin
-Route::prefix('superadmin')->middleware(['auth:sanctum', 'superadmin'])->group(function () {
-    Route::get('/', [DashboardSuperAdmin::class, 'index'])->name('dashboard');
-});
-
-// Login Admin
-Route::prefix('admin')->middleware(['auth:sanctum', 'admin'])->group(function () {
+// Login Admin Superadmin Editor
+Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('users', UserController::class);
 });
-
-// Login Editor
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');

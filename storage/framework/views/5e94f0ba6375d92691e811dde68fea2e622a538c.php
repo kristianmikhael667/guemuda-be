@@ -1,7 +1,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
-        <li class="active">
-            <a class="" href="/admin" title="">
+        <li class="<?php echo e(Request::is('administrator') ? 'active' : ''); ?>">
+            <a class="" href="/administrator" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
                         stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
                         xmlns="http://www.w3.org/2000/svg">
@@ -11,8 +11,9 @@
             </a>
         </li>
 
-        <li class="">
-            <a class="" href="profile.html" title="">
+        <?php if(Auth::user()->roles == "common.superadmin"): ?>
+        <li class=" <?php echo e(Request::is('administrator/users*') ? 'active' : ''); ?>">
+            <a class="" href="<?php echo e(url('administrator/users')); ?>" title="">
                 <i><svg id="ab1" class="feather feather-users" stroke-linejoin="round" stroke-linecap="round"
                         stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
                         xmlns="http://www.w3.org/2000/svg">
@@ -23,6 +24,8 @@
                     </svg></i> User Management
             </a>
         </li>
+        <?php endif; ?>
+
         <li class="">
             <a class="" href="reviews.html" title="">
                 <i class="">

@@ -8,12 +8,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-content">
-                    <h4 class="main-title">Users Management</h4>
+                    
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
                                 <div class="d-widget-title">
-                                    <h5>Manage Users</h5>
+                                    <h5>Manage Admin</h5>
                                 </div>
                                 <div class="d-widget-content">
                                     <table class="table manage-user table-default table-responsive-md">

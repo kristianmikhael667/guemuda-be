@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +29,6 @@ Route::get('/debug-sentry', function () {
 // Login Admin Superadmin Editor
 Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('users', UserController::class);
+    Route::resource('admin', AdminController::class);
+    Route::resource('post', ContentController::class);
 });

@@ -6,18 +6,19 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Content extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, Sluggable;
 
-    protected $fillable = [
-        'uid_user', 'avatar', 'video', 'voice', 'description', 'link', 'status'
-    ];
+    protected $guarded = ['id'];
+    protected $with = ['user'];
+
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'uid', 'uid_user');
+        return $this->belongsTo(User::class, 'uid_user');
     }
 
     public function getCreatedAtAttribute($value)
@@ -28,6 +29,15 @@ class Content extends Model
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
 

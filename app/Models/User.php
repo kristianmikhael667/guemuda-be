@@ -12,6 +12,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -62,6 +63,15 @@ class User extends Authenticatable
         'avatar',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->uuid = Str::uuid();
+        });
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;
@@ -70,5 +80,10 @@ class User extends Authenticatable
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Content::class);
     }
 }

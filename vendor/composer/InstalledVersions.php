@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'c1c52ff585b5276deb27ebf93722045d522a4b51',
+    'reference' => 'f81eed93f38b8f7da337a146f40a19002482378a',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -71,12 +71,30 @@ private static $installed = array (
       ),
       'reference' => 'd6169430c7731d8509da7aecd0af756a5747b78e',
     ),
+    'cocur/slugify' => 
+    array (
+      'pretty_version' => 'v4.1.0',
+      'version' => '4.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2611e6081dbbb05837a16ed339c0451923d4046e',
+    ),
     'cordoval/hamcrest-php' => 
     array (
       'replaced' => 
       array (
         0 => '*',
       ),
+    ),
+    'cviebrock/eloquent-sluggable' => 
+    array (
+      'pretty_version' => '8.0.8',
+      'version' => '8.0.8.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '16e21db24d80180f870c3c7c4faf3d3af23f4117',
     ),
     'dasprid/enum' => 
     array (
@@ -93,6 +111,42 @@ private static $installed = array (
       array (
         0 => '*',
       ),
+    ),
+    'doctrine/cache' => 
+    array (
+      'pretty_version' => '2.1.1',
+      'version' => '2.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '331b4d5dbaeab3827976273e9356b3b453c300ce',
+    ),
+    'doctrine/dbal' => 
+    array (
+      'pretty_version' => '3.3.4',
+      'version' => '3.3.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '83f779beaea1893c0bece093ab2104c6d15a7f26',
+    ),
+    'doctrine/deprecations' => 
+    array (
+      'pretty_version' => 'v0.5.3',
+      'version' => '0.5.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9504165960a1f83cc1480e2be1dd0a0478561314',
+    ),
+    'doctrine/event-manager' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '41370af6a30faa9dc0368c4a6814d596e81aba7f',
     ),
     'doctrine/inflector' => 
     array (
@@ -541,7 +595,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'c1c52ff585b5276deb27ebf93722045d522a4b51',
+      'reference' => 'f81eed93f38b8f7da337a146f40a19002482378a',
     ),
     'laravel/sail' => 
     array (
@@ -921,6 +975,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '26c4c5cf30a2844ba121760fd7301f8ad240100b',
+    ),
+    'psr/cache' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
     ),
     'psr/container' => 
     array (

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,13 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::user()->roles === 'common.superadmin') {
-            return view('admin/users', [
-                'page' => 'Administrator'
+            // $user = User::firstWhere('slug', request('category'));
+
+            // var_dump($user);
+            // die;
+            return view('admin/admins', [
+                'page' => 'Administrator',
+                // 'admin' =>
             ]);
         } else {
             return redirect()->back();

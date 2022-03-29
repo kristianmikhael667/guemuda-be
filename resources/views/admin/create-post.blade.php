@@ -46,15 +46,36 @@
                                                         placeholder="Textarea">{{ old('description') }}</textarea>
                                                 </div>
                                                 <div class="uk-margin">
-                                                    <input type="file" name="image" id="image" class="dropify"
-                                                        data-max-file-size="5M" </div>
+                                                    <div class="uk-margin">
+                                                        <select class="uk-select" onchange="yesnoCheck(this)">
+                                                            <option disabled="disabled" selected>-- Choose Type File --
+                                                            </option>
+                                                            <option value="on">File Image</option>
+                                                            <option value="off">File Video</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="uk-margin" id="imagepost" style="display: none">
+                                                        <input type="file" name="image" id="image" class="dropify"
+                                                            data-max-file-size="5M">
+                                                    </div>
+                                                    <div class="uk-margin" id="videopost" style="display: none">
+                                                        {{-- <input type="file" name="image" id="image"> --}}
+                                                        <div class="d-flex">
+
+                                                            <div uk-form-custom="target: true">
+                                                                <label for="" class="mr-2">Upload Video</label>
+                                                                <input type="file" name="video" id="video">
+                                                                <input class="uk-input uk-form-width-medium" type="text"
+                                                                    placeholder="Select file video" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </fieldset>
 
                                         </div>
 
                                         <div class="uk-width-1-3@m">
-
-
                                             <div class="uk-card uk-card-default uk-card-body">
                                                 <div class="d-widget-title">
                                                     <div class="d-flex justify-content-between">
@@ -109,31 +130,19 @@
     </div>
     <!-- main content -->
     <script>
-        const title = document.querySelector('#title');
-        const slug = document.querySelector('#slug');
-    
-        title.addEventListener('change', function(){
-            fetch('/administrator/post/checkSlug?title=' + title.value).then(response => response.json()).then(data => slug.value = data.slug  )
-        });
-    
-        document.addEventListener('trix-file-accept', function(e){
-            e.preventDefault();
-        })
-    
-        function previewImage(){
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
-    
-            imgPreview.style.display = 'block';
-    
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-    
-            oFReader.onload = function (oFReader){
-                imgPreview.src = oFReader.target.result;
-            }
+        function yesnoCheck(that) {
+            console.log('apa itu : ', that.value);
+        if (that.value == "on") {
+            document.getElementById("imagepost").style.display = "block";
+            document.getElementById("videopost").style.display = "none";
+        } else {
+            document.getElementById("imagepost").style.display = "none";
+            document.getElementById("videopost").style.display = "block";
         }
+    }
     </script>
+
+
     <div class="popup-wraper">
         <div class="popup">
             <span class="popup-closed"><i class="icofont-close"></i></span>

@@ -72,14 +72,16 @@ class ContentController extends Controller
             $validatedData['video'] = '-';
             $validatedData['voice'] = '-';
         }
+        if ($request->hasFile('video')) {
+            $validatedData['video'] = $request->file('video')->store('post-video');
+            $validatedData['image'] = '-';
+        }
         $slug = SlugService::createSlug(Content::class, 'slug', $request->title);
 
         $validatedData['uid_user'] = auth()->user()->uuid;
         $validatedData['slug'] = $slug;
-        $validatedData['link'] = 'bokep';
+        $validatedData['link'] = 'gada';
         // $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
-        // var_dump($slug);
-        // die;
         Content::create($validatedData);
         return redirect('/administrator/post')->with('success', 'New post has been added!');
     }

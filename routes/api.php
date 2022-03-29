@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContentApi;
+use App\Http\Controllers\PictureApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/category', [CategoryController::class, 'index']);
 Route::get('content', [ContentApi::class, 'all']);
+Route::get('image/{filename}', [PictureApi::class, 'image']);
+Route::get('video/{filename}', [PictureApi::class, 'video']);

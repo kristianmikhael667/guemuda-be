@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ContentApi extends Controller
 {
@@ -19,6 +20,7 @@ class ContentApi extends Controller
 
         if ($id) {
             $content = Content::find($id);
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -34,11 +36,14 @@ class ContentApi extends Controller
         }
 
         $content = Content::query();
+
         if ($title) {
             $content->where('title', 'like', '%' . $title . '%');
         }
+
         return ResponseFormatter::success(
-            $content->paginate($limit),
+            DB::table('contents')->orderBy('created_at', 'desc')->paginate($limit),
+            // $content->paginate($limit),
             'Data Content retrieved successfully'
         );
     }

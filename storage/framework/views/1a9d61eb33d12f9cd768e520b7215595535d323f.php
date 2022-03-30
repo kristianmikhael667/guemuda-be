@@ -26,6 +26,8 @@
                                     </div>
                                 </div>
                                 <!-- Table start -->
+                                <?php echo e($contents); ?>
+
                                 <table id="table_id" class="display">
                                     <thead>
                                         <tr>

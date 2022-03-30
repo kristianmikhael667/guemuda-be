@@ -28,7 +28,7 @@ class ContentController extends Controller
             //         'contents' => $contents
             //     ]);
             // }
-            $contents = Content::orderBy('id', 'DESC')->get();
+            $contents = Content::orderBy('created_at', 'desc')->get();
             return view('admin.content', [
                 'page' => 'Administrator',
                 'contents' => $contents

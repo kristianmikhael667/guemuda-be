@@ -27,6 +27,7 @@
                                     </div>
                                 </div>
                                 <!-- Table start -->
+                                {{ $contents }}
                                 <table id="table_id" class="display">
                                     <thead>
                                         <tr>

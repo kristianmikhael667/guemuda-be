@@ -28,6 +28,7 @@
         <?php echo $__env->yieldContent('container'); ?>
     </div>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?php echo e('/js/main.min.js'); ?>"></script>
     <script src="<?php echo e('/js/vivus.min.js'); ?>"></script>
     <script src="<?php echo e('/js/script.js'); ?>"></script>

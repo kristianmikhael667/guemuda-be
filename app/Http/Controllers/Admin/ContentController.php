@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Content;
+use App\Models\Tags;
+use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ContentController extends Controller
@@ -16,22 +21,35 @@ class ContentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         if (Auth::user()->roles === 'common.admin') {
-            // $contents = Content::when($request->has("title"), function ($q) use ($request) {
-            //     return $q->where("title", "like", "%" . $request->get("title") . "%");
-            // })->paginate(10);
-            // if ($request->ajax()) {
-            //     return view('admin.content-pagination', [
-            //         'page' => 'Administrator',
-            //         'contents' => $contents
-            //     ]);
-            // }
-            $contents = Content::orderBy('created_at', 'desc')->get();
+
+            $search = '';
+            if (request('category')) {
+                // $contents = DB::table('contents')
+                //     ->where('title', 'like', "%" . $search . "%")
+                //     ->paginate();
+
+                // return view('admin.content', [
+                //     'page' => 'Administrator',
+                //     'contents' => $contents
+                // ]);
+                $category = Category::firstWhere('slug', request('category'));
+                $title = ' iner ' . $category->name;
+            }
+
+            if (request('user')) {
+                $user = User::firstWhere('username', request('user'));
+                $title = ' by ' . $user->username;
+            }
+
+            $contents = Content::latest()->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+            $taggers = Tags::all();
             return view('admin.content', [
                 'page' => 'Administrator',
-                'contents' => $contents
+                'contents' => $contents,
+                'tages' => $taggers
             ]);
         } else {
             return redirect()->back();
@@ -47,6 +65,8 @@ class ContentController extends Controller
     {
         return view('admin.create-post', [
             'page' => 'Administrator',
+            'categories' => Category::all(),
+            'tags' => Tags::all()
         ]);
     }
 
@@ -58,10 +78,10 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'title' => 'required',
-            'tags' => 'required',
+            'tags_id' => 'required',
+            'category_id' => 'required',
             'image' => 'image|file|max:1024',
             'description' => 'required',
             'video' => 'mimes:mp4,x-flv,x-mpegURL,MP2T,3gpp,quicktime,x-msvideo,x-ms-wmv',
@@ -78,9 +98,11 @@ class ContentController extends Controller
         }
         $slug = SlugService::createSlug(Content::class, 'slug', $request->title);
 
-        $validatedData['uid_user'] = auth()->user()->uuid;
+        $validatedData['uid_user'] = auth()->user()->id;
         $validatedData['slug'] = $slug;
         $validatedData['link'] = 'gada';
+        $validatedData['tags_id'] = implode(",", $validatedData['tags_id']);
+
         // $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
         Content::create($validatedData);
         return redirect('/administrator/post')->with('success', 'New post has been added!');
@@ -126,8 +148,12 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Content $content)
     {
-        //
+        if ($content->image) {
+            Storage::delete($content->image);
+        }
+        Content::destroy($content->id);
+        return redirect('/administrator/post')->with('success', 'New post has been deleted!');
     }
 }

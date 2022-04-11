@@ -56,7 +56,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                                     <textarea class="uk-textarea" name="description" id="createnews"
-                                                        rows="5"
+                                                        rows="12"
                                                         placeholder="Textarea"><?php echo e(old('description')); ?></textarea>
                                                 </div>
                                                 <div class="uk-margin">
@@ -100,19 +100,11 @@ unset($__errorArgs, $__bag); ?>
                                                 </div>
                                                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                                     <div class="row">
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox"
-                                                                checked>
-                                                            Investment</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Bussiness</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Sport</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Digital</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Travel</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Technology</label>
+                                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <label class="mr-2"><input class="uk-radio" name="category_id"
+                                                                value="<?php echo e($item->id); ?>" type="radio">
+                                                            <?php echo e($item->name); ?></label>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -123,13 +115,29 @@ unset($__errorArgs, $__bag); ?>
                                                         <div>
                                                             <h4>Tags</h4>
                                                         </div>
+                                                        <div>
+                                                            <button uk-toggle="target: #createtags" type="button"
+                                                                class="btn btn-outline-primary btn-sm">Add Tags</button>
+                                                            
+                                                            <?php echo $__env->make('admin.modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
-                                                    <input class="uk-input" name="tags" id="tags" type="text"
-                                                        placeholder="Tags News">
+                                                    <select class="uk-input" multiple="multiple" style="width: 100%;"
+                                                        name="tags_id[]" id="tagger" data-placeholder="Input Tags"
+                                                        required>
+                                                        <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($tag->id); ?>">
+                                                            <?php echo e($tag->name); ?>
+
+                                                        </option>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </select>
                                                 </div>
                                             </div>
+
+                                            
                                         </div>
 
                                     </div>
@@ -143,19 +151,8 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <!-- main content -->
-    <script>
-        function yesnoCheck(that) {
-            console.log('apa itu : ', that.value);
-        if (that.value == "on") {
-            document.getElementById("imagepost").style.display = "block";
-            document.getElementById("videopost").style.display = "none";
-        } else {
-            document.getElementById("imagepost").style.display = "none";
-            document.getElementById("videopost").style.display = "block";
-        }
-    }
-    </script>
-
+    
+    <?php echo $__env->make('admin.ajax', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="popup-wraper">
         <div class="popup">

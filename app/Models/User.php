@@ -30,8 +30,10 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'username', 'first_name', 'last_name', 'address', 'city', 'job', 'bio', 'phone_number', 'date_birth', 'status', 'email', 'password', 'roles'
+        'username', 'avatar', 'first_name', 'last_name', 'address', 'city', 'job', 'bio', 'phone_number', 'date_birth', 'status', 'email', 'password', 'roles'
     ];
+
+    public $incrementing = false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -59,16 +61,16 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = [
-        'avatar',
-    ];
+    // protected $appends = [
+    //     'avatar',
+    // ];
 
     protected static function boot()
     {
         parent::boot();
 
         static::creating(function ($model) {
-            $model->uuid = Str::uuid();
+            $model->userId = Str::uuid();
         });
     }
 

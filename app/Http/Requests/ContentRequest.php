@@ -25,7 +25,7 @@ class ContentRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'uid_user' => 'required',
+            'userId' => 'required',
             'tags' => 'required',
             'avatar' => 'image|file|max:1024',
             'description' => 'required',

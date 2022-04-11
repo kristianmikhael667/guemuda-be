@@ -17,15 +17,30 @@ class ContentApi extends Controller
         $title = $request->input('title');
         $slug = $request->input('slug');
         $status = $request->input('status');
+        $category_id = $request->input('category_id');
 
-        if ($id) {
-            $content = Content::find($id);
+        if ($slug) {
+            $content = Content::where('slug', $slug)->first();
 
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
-                    '
-                   Data content retrieved successfully'
+                    'Data content by slug retrieved successfully'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data Content is empty'
+                );
+            }
+        }
+
+        if ($category_id) {
+            $content = Content::where('category_id', $category_id)->orderBy('created_at', 'desc')->get();
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data content by slug retrieved successfully'
                 );
             } else {
                 return ResponseFormatter::error(

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Content;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -13,33 +16,41 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $parents = Category::where('parent', 0)->get();
-        foreach ($parents as $parent) {
-            $childs = Category::where('parent', $parent->id)->get();
-            if (count($childs) > 0) {
-                $subCat = array();
-                $players = array();
-                $roster[$parent->name] = $players;
-                foreach ($childs as $i => $child) {
-                    $subchilds = Category::where('parent', $child->id)->get();
-                    if (count($subchilds) > 0) {
+        // $category = Category::all();
+        // if ($category) {
+        //     return ResponseFormatter::success($category, 'Data Category is Complate');
+        // } else {
+        //     return ResponseFormatter::success(null, 'Data Category is empty', 404);
+        // }
+        $id = $request->input('id');
+        $limit = $request->input('limit', 10);
+        $title = $request->input('title');
+        $slug = $request->input('slug');
+        $status = $request->input('status');
 
-                        $roster[$parent->name][$child->name] = $subCat;
-                        foreach ($subchilds as $subchild) {
-
-                            $roster[$parent->name][$child->name][] = array(
-                                'name' => $subchild->name
-                            );
-                        }
-                    } else {
-                        $roster[$parent->name][$child->name] = $players;
-                    }
-                }
+        if ($slug) {
+            $content = Category::where('slug', $slug)->first();
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data Category by slug retrieved successfully'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data Category is empty'
+                );
             }
         }
-        return $roster;
+
+
+        return ResponseFormatter::success(
+            DB::table('categories')->orderBy('created_at', 'desc')->paginate($limit),
+            // $content->paginate($limit),
+            'Data Content retrieved successfully'
+        );
     }
 
     /**

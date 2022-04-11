@@ -15,10 +15,38 @@ class Content extends Model
     protected $guarded = ['id'];
     protected $with = ['user'];
 
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    // protected $casts = [
+    //     'tags_id' => 'integer',
+    // ];
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', '%' . $search . '%');
+        });
+
+        $query->when($filters['user'] ?? false, function ($query, $user) {
+            return $query->whereHas('user', function ($query) use ($user) {
+                $query->where('username', $user);
+            });
+        });
+
+        $query->when($filters['category'] ?? false, function ($query, $category) {
+            return $query->whereHas('category', function ($query) use ($category) {
+                $query->where('slug', $category);
+            });
+        });
+    }
 
     public function user()
     {
         return $this->belongsTo(User::class, 'uid_user');
+    }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
     }
 
     public function getCreatedAtAttribute($value)
@@ -29,6 +57,16 @@ class Content extends Model
     public function getUpdatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsTo(Tags::class);
     }
 
     public function sluggable(): array

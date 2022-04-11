@@ -26,7 +26,7 @@ class CreateNewUser implements CreatesNewUsers
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+            // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
 
         return DB::transaction(function () use ($input) {
@@ -43,7 +43,7 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => Hash::make($input['password']),
                 'roles' => 'common.admin'
             ]), function (User $user) {
-                $this->createTeam($user);
+                // $this->createTeam($user);
             });
         });
     }
@@ -54,12 +54,12 @@ class CreateNewUser implements CreatesNewUsers
      * @param  \App\Models\User  $user
      * @return void
      */
-    protected function createTeam(User $user)
-    {
-        $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0] . "'s Team",
-            'personal_team' => true,
-        ]));
-    }
+    // protected function createTeam(User $user)
+    // {
+    //     $user->ownedTeams()->save(Team::forceCreate([
+    //         'user_id' => $user->id,
+    //         'name' => explode(' ', $user->name, 2)[0] . "'s Team",
+    //         'personal_team' => true,
+    //     ]));
+    // }
 }

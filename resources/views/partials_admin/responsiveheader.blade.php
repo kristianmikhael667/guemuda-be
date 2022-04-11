@@ -4,8 +4,8 @@
     <div class="user-avatar mobile">
         <a href="profile.html" title="View Profile"><img alt="" src="images/resources/user.jpg"></a>
         <div class="name">
-            <h4>Saim Turan</h4>
-            <span>Antalaya, Turky</span>
+            <h4>{{ Auth::user()->username }}</h4>
+            {{-- <span>{{ Auth::user()->email }}</span> --}}
         </div>
     </div>
     <div class="right-compact">

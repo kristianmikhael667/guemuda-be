@@ -42,7 +42,7 @@
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                     <textarea class="uk-textarea" name="description" id="createnews"
-                                                        rows="5"
+                                                        rows="12"
                                                         placeholder="Textarea">{{ old('description') }}</textarea>
                                                 </div>
                                                 <div class="uk-margin">
@@ -86,19 +86,11 @@
                                                 </div>
                                                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                                     <div class="row">
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox"
-                                                                checked>
-                                                            Investment</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Bussiness</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Sport</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Digital</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Travel</label>
-                                                        <label class="mr-2"><input class="uk-checkbox" type="checkbox">
-                                                            Technology</label>
+                                                        @foreach ($categories as $item)
+                                                        <label class="mr-2"><input class="uk-radio" name="category_id"
+                                                                value="{{ $item->id }}" type="radio">
+                                                            {{ $item->name }}</label>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,13 +101,40 @@
                                                         <div>
                                                             <h4>Tags</h4>
                                                         </div>
+                                                        <div>
+                                                            <button uk-toggle="target: #createtags" type="button"
+                                                                class="btn btn-outline-primary btn-sm">Add Tags</button>
+                                                            {{-- Modal --}}
+                                                            @include('admin.modal')
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
-                                                    <input class="uk-input" name="tags" id="tags" type="text"
-                                                        placeholder="Tags News">
+                                                    <select class="uk-input" multiple="multiple" style="width: 100%;"
+                                                        name="tags_id[]" id="tagger" data-placeholder="Input Tags"
+                                                        required>
+                                                        @foreach ($tags as $tag)
+                                                        <option value="{{ $tag->id }}">
+                                                            {{ $tag->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
+                                            {{-- <div class="uk-card uk-card-default uk-card-body">
+                                                <div class="d-widget-title">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <h4>Tags</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-card uk-card-hover">
+                                                    <input multiple="multiple" class="uk-input" name="tags" id="tags"
+                                                        type="text" placeholder="Tags News">
+                                                </div>
+                                            </div> --}}
                                         </div>
 
                                     </div>
@@ -129,19 +148,8 @@
         </div>
     </div>
     <!-- main content -->
-    <script>
-        function yesnoCheck(that) {
-            console.log('apa itu : ', that.value);
-        if (that.value == "on") {
-            document.getElementById("imagepost").style.display = "block";
-            document.getElementById("videopost").style.display = "none";
-        } else {
-            document.getElementById("imagepost").style.display = "none";
-            document.getElementById("videopost").style.display = "block";
-        }
-    }
-    </script>
-
+    {{-- Ajax --}}
+    @include('admin.ajax')
 
     <div class="popup-wraper">
         <div class="popup">

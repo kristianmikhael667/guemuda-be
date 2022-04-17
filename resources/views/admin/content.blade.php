@@ -70,8 +70,10 @@
                                             <th>Author</th>
                                             <th>Category</th>
                                             <th>Tag</th>
+                                            <th>Hit</th>
                                             <th>Status</th>
                                             <th>Created</th>
+                                            <th>Updated</th>
                                             <th class="disableFilterBy">Actions</th>
                                         </tr>
                                     </thead>
@@ -82,19 +84,33 @@
                                         ?>
                                         <tr>
                                             <td>{{ $contents->firstItem() + $num }}</td>
-                                            <td>{{ $content->title }}</td>
+                                            <td><a href="/administrator/post/edittitle/{{ $content->slug }}">{{
+                                                    $content->title
+                                                    }}</a></td>
                                             <td>{{ $content->user->username }}</td>
                                             <td>{{ $content->category['name'] }}</td>
-                                            <td>@foreach ($tages as $item)
+                                            <td>
+                                                {{ $string = ""; }}
+                                                @foreach ($tages as $item)
                                                 @foreach ($explode_id as $pok)
                                                 @if ($pok == $item->id)
-                                                {{$item->name . ','}}
+                                                <?php $string .= $item->name . ', '; ?>
                                                 @endif
                                                 @endforeach
-                                                @endforeach</td>
-                                            <td><span class="text-success">{{ $content->status }}</span></td>
+                                                @endforeach
+                                                {{ substr($string, 0, strlen($string) - 2)}}
+                                            </td>
+                                            <td>
+                                                @foreach ($views as $view)
+                                                @if ($view->id == $content->id)
+                                                {{ $view->total_views }}
+                                                @endif
+                                                @endforeach
+                                            </td>
+                                            <td><span class=" text-success">{{ $content->status }}</span></td>
                                             <td>{{ \Carbon\Carbon::parse($content->created_at)->diffForHumans() }}
                                             </td>
+                                            <td>{{ \Carbon\Carbon::parse($content->updated_at)->diffForHumans() }}</td>
                                             <td>
                                                 <a href="/dashboard/posts/{{ $content->slug }}" class="badge btn-light">
 
@@ -105,7 +121,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="/dashboard/posts/{{ $content->slug }}/edit"
+                                                <a href="{{ route('post.edit', $content->slug) }}"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -137,6 +153,7 @@
                                                 </form>
                                             </td>
                                         </tr>
+
                                         @empty
                                         <tr>
                                             <td colspan="8" class="prova">

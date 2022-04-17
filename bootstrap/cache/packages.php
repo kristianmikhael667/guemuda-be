@@ -1,4 +1,15 @@
 <?php return array (
+  'awssat/laravel-visits' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Awssat\\Visits\\VisitsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Visits' => 'Awssat\\Visits\\Visits',
+    ),
+  ),
   'cviebrock/eloquent-sluggable' => 
   array (
     'providers' => 
@@ -22,6 +33,17 @@
     'providers' => 
     array (
       0 => 'Fruitcake\\Cors\\CorsServiceProvider',
+    ),
+  ),
+  'hisorange/browser-detect' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'hisorange\\BrowserDetect\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Browser' => 'hisorange\\BrowserDetect\\Facade',
     ),
   ),
   'itsgoingd/clockwork' => 
@@ -127,6 +149,24 @@
     'aliases' => 
     array (
       'Sentry' => 'Sentry\\Laravel\\Facade',
+    ),
+  ),
+  'spatie/laravel-referer' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Spatie\\Referer\\RefererServiceProvider',
+    ),
+  ),
+  'torann/geoip' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Torann\\GeoIP\\GeoIPServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'GeoIP' => 'Torann\\GeoIP\\Facades\\GeoIP',
     ),
   ),
 );

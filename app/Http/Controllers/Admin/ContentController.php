@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\ContentViews;
 use App\Models\Tags;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -16,11 +17,6 @@ use Illuminate\Support\Str;
 
 class ContentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         if (Auth::user()->roles === 'common.admin') {
@@ -44,11 +40,34 @@ class ContentController extends Controller
                 $title = ' by ' . $user->username;
             }
 
-            $contents = Content::latest()->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+            $contents = Content::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+            $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
+                ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+                ->groupBy("contents.slug")
+                ->groupBy("contents.id")
+                ->groupBy("contents.uid_user")
+                ->groupBy("contents.description")
+                ->groupBy("contents.link")
+                ->groupBy("contents.status")
+                ->groupBy("contents.created_at")
+                ->groupBy("contents.updated_at")
+                ->groupBy("contents.title")
+                ->groupBy("contents.subdesc")
+                ->groupBy("contents.image")
+                ->groupBy("contents.video")
+                ->groupBy("contents.category_id")
+                ->groupBy("contents.tags_id")
+                ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+                ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
+            // foreach ($kinanda as $kinan) {
+            // echo json_encode($kinanda);
+            // die;
+            // }
             $taggers = Tags::all();
             return view('admin.content', [
                 'page' => 'Administrator',
                 'contents' => $contents,
+                'views' => $kinanda,
                 'tages' => $taggers
             ]);
         } else {
@@ -56,11 +75,6 @@ class ContentController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.create-post', [
@@ -70,12 +84,6 @@ class ContentController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -100,10 +108,10 @@ class ContentController extends Controller
 
         $validatedData['uid_user'] = auth()->user()->id;
         $validatedData['slug'] = $slug;
-        $validatedData['link'] = 'gada';
+        $validatedData['link'] = '-';
         $validatedData['tags_id'] = implode(",", $validatedData['tags_id']);
-
-        // $validatedData['excerpt'] = Str::limit(strip_tags($request->body, 200));
+        $taglessBody = strip_tags($validatedData['description']);
+        $validatedData['subdesc'] = $taglessBody;
         Content::create($validatedData);
         return redirect('/administrator/post')->with('success', 'New post has been added!');
     }
@@ -125,9 +133,24 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Content $post)
     {
-        //
+        return view('admin.content-edit', [
+            'page' => 'Administrator',
+            'contents' => $post
+        ]);
+    }
+
+    public function edittitle($id)
+    {
+        $title = DB::table('contents')->where('slug', $id)->get();
+        $title_data = $title[0]->title;
+        $slugs = $title[0]->slug;
+        return view('admin.content-title', [
+            'page' => 'Administrator',
+            'contents' => $title_data,
+            'slugs' => $slugs
+        ]);
     }
 
     /**
@@ -137,9 +160,18 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request, Content $post)
     {
-        //
+        if ($request->title) {
+            DB::table('contents')->where('slug', $post->slug)->update([
+                'title' => $request->title,
+                'slug' =>  SlugService::createSlug(Content::class, 'slug', $request->title),
+                'uid_user' => auth()->user()->id,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            return redirect('/administrator/post')->with('success', 'Post has been updated!');
+        }
     }
 
     /**

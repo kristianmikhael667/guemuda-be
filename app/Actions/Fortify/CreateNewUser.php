@@ -32,13 +32,13 @@ class CreateNewUser implements CreatesNewUsers
         return DB::transaction(function () use ($input) {
             return tap(User::create([
                 'username' => $input['username'],
-                'first_name' => 'Admin',
-                'last_name' => 'GueMuda',
-                'address' => 'Jl. Duren Tiga Selatan No.4, RW.2, Duren Tiga, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12760',
+                'first_name' => 'Gio',
+                'last_name' => 'Dev-Admin',
+                'address' => 'Jl. Doomo Hayam Wuruk',
                 'city' => 'Jakarta',
                 'job' => 'Administrator',
                 'bio' => 'Admin',
-                'phone_number' => '089668997992',
+                'phone_number' => '08512838492939',
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
                 'roles' => 'common.admin'

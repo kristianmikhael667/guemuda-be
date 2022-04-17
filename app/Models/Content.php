@@ -15,11 +15,12 @@ class Content extends Model
     protected $guarded = ['id'];
     protected $with = ['user'];
 
-    protected $primaryKey = 'uuid';
+    // protected $primaryKey = 'uuid';
     public $incrementing = false;
     // protected $casts = [
     //     'tags_id' => 'integer',
     // ];
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? false, function ($query, $search) {
@@ -44,6 +45,7 @@ class Content extends Model
     {
         return $this->belongsTo(User::class, 'uid_user');
     }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
@@ -61,12 +63,22 @@ class Content extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function tags()
     {
         return $this->belongsTo(Tags::class);
+    }
+
+    public function views()
+    {
+        return $this->hasMany(ContentViews::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 
     public function sluggable(): array

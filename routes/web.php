@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\Analytic;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -32,8 +33,11 @@ Route::get('/debug-sentry', function () {
 // Login Admin Superadmin Editor
 Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/analytic', [Analytic::class, 'index']);
     Route::resource('admin', AdminController::class);
     Route::resource('post', ContentController::class);
+    Route::get('/post/edittitle/{id}', [ContentController::class, 'edittitle']);
+    Route::post('/post/updatetitle', [ContentController::class, 'updatetitle']);
     Route::resource('category-article', CategoryArticle::class);
     Route::resource('tags', TagsController::class);
     Route::get('/media', [MediaController::class, 'index']);

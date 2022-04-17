@@ -18,14 +18,8 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        // $category = Category::all();
-        // if ($category) {
-        //     return ResponseFormatter::success($category, 'Data Category is Complate');
-        // } else {
-        //     return ResponseFormatter::success(null, 'Data Category is empty', 404);
-        // }
         $id = $request->input('id');
-        $limit = $request->input('limit', 10);
+        $limit = $request->input('limit', 12);
         $title = $request->input('title');
         $slug = $request->input('slug');
         $status = $request->input('status');

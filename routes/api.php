@@ -25,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route::get('category', [CategoryController::class, 'index']);
 Route::resource('category', CategoryController::class);
-
+Route::get('categories', [ContentApi::class, 'categories']);
+Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
+Route::get('popular', [ContentApi::class, 'popular']);
+
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);

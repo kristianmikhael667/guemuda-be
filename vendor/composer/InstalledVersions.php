@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f81eed93f38b8f7da337a146f40a19002482378a',
+    'reference' => 'dc4b83a8465b3034f8b25fcca2cb7dc94ac2837b',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -43,6 +43,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '73e5b88775c64ccc0b84fb60836b30dc9d92ac4a',
+    ),
+    'awssat/laravel-visits' => 
+    array (
+      'pretty_version' => '3.0.3',
+      'version' => '3.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7db3b7374c44ebafc7358ac7d603261962c1e8c0',
     ),
     'bacon/bacon-qr-code' => 
     array (
@@ -79,6 +88,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '2611e6081dbbb05837a16ed339c0451923d4046e',
+    ),
+    'composer/ca-bundle' => 
+    array (
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4c679186f2aca4ab6a0f1b0b9cf9252decb44d0b',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -291,6 +309,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
+    ),
+    'hisorange/browser-detect' => 
+    array (
+      'pretty_version' => '4.5.0',
+      'version' => '4.5.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f5749fcbeeeb0130abab15ffaeb2094dc0d561fc',
     ),
     'http-interop/http-factory-guzzle' => 
     array (
@@ -595,7 +622,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f81eed93f38b8f7da337a146f40a19002482378a',
+      'reference' => 'dc4b83a8465b3034f8b25fcca2cb7dc94ac2837b',
     ),
     'laravel/sail' => 
     array (
@@ -660,6 +687,15 @@ private static $installed = array (
       ),
       'reference' => 'aa70e813a6ad3d1558fc927863d47309b4c23e69',
     ),
+    'league/pipeline' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aa14b0e3133121f8be39e9a3b6ddd011fc5bb9a8',
+    ),
     'livewire/livewire' => 
     array (
       'pretty_version' => 'v2.10.4',
@@ -668,6 +704,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '2d68c61a8edf338534fdd8e2b2750dca2e741439',
+    ),
+    'matomo/device-detector' => 
+    array (
+      'pretty_version' => '4.3.1',
+      'version' => '4.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '88e5419ee1448ccb9537e287dd09836ff9d2de3b',
     ),
     'mobiledetect/mobiledetectlib' => 
     array (
@@ -702,6 +747,15 @@ private static $installed = array (
       array (
         0 => '^1.0',
       ),
+    ),
+    'mustangostang/spyc' => 
+    array (
+      'pretty_version' => '0.6.3',
+      'version' => '0.6.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4627c838b16550b666d15aeae1e5289dd5b77da0',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -966,6 +1020,13 @@ private static $installed = array (
       array (
       ),
       'reference' => '1b5856028273bfd855e60a887278857d872ec67a',
+    ),
+    'piwik/device-detector' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '4.3.1',
+      ),
     ),
     'pragmarx/google2fa' => 
     array (
@@ -1313,6 +1374,15 @@ private static $installed = array (
       ),
       'reference' => '183866ec5dc367efe4d5aa22906860e837aa6685',
     ),
+    'spatie/laravel-referer' => 
+    array (
+      'pretty_version' => '1.7.3',
+      'version' => '1.7.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b47db4778a6b7ad35de6efc41dc0af25541a2811',
+    ),
     'swiftmailer/swiftmailer' => 
     array (
       'pretty_version' => 'v6.3.0',
@@ -1648,6 +1718,24 @@ private static $installed = array (
       array (
       ),
       'reference' => 'da444caae6aca7a19c0c140f68c6182e337d5b1c',
+    ),
+    'torann/geoip' => 
+    array (
+      'pretty_version' => '3.0.2',
+      'version' => '3.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f16d5df66ecb6ba4ffaef52abef519fbc19596d3',
+    ),
+    'ua-parser/uap-php' => 
+    array (
+      'pretty_version' => 'v3.9.14',
+      'version' => '3.9.14.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b796c5ea5df588e65aeb4e2c6cce3811dec4fed6',
     ),
     'vlucas/phpdotenv' => 
     array (

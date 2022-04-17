@@ -69,8 +69,10 @@
                                             <th>Author</th>
                                             <th>Category</th>
                                             <th>Tag</th>
+                                            <th>Hit</th>
                                             <th>Status</th>
                                             <th>Created</th>
+                                            <th>Updated</th>
                                             <th class="disableFilterBy">Actions</th>
                                         </tr>
                                     </thead>
@@ -81,21 +83,35 @@
                                         ?>
                                         <tr>
                                             <td><?php echo e($contents->firstItem() + $num); ?></td>
-                                            <td><?php echo e($content->title); ?></td>
+                                            <td><a href="/administrator/post/edittitle/<?php echo e($content->slug); ?>"><?php echo e($content->title); ?></a></td>
                                             <td><?php echo e($content->user->username); ?></td>
                                             <td><?php echo e($content->category['name']); ?></td>
-                                            <td><?php $__currentLoopData = $tages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <td>
+                                                <?php echo e($string = ""); ?>
+
+                                                <?php $__currentLoopData = $tages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php $__currentLoopData = $explode_id; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pok): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php if($pok == $item->id): ?>
-                                                <?php echo e($item->name . ','); ?>
+                                                <?php $string .= $item->name . ', '; ?>
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php echo e(substr($string, 0, strlen($string) - 2)); ?>
+
+                                            </td>
+                                            <td>
+                                                <?php $__currentLoopData = $views; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($view->id == $content->id): ?>
+                                                <?php echo e($view->total_views); ?>
 
                                                 <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?></td>
-                                            <td><span class="text-success"><?php echo e($content->status); ?></span></td>
+                                            </td>
+                                            <td><span class=" text-success"><?php echo e($content->status); ?></span></td>
                                             <td><?php echo e(\Carbon\Carbon::parse($content->created_at)->diffForHumans()); ?>
 
                                             </td>
+                                            <td><?php echo e(\Carbon\Carbon::parse($content->updated_at)->diffForHumans()); ?></td>
                                             <td>
                                                 <a href="/dashboard/posts/<?php echo e($content->slug); ?>" class="badge btn-light">
 
@@ -106,7 +122,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="/dashboard/posts/<?php echo e($content->slug); ?>/edit"
+                                                <a href="<?php echo e(route('post.edit', $content->slug)); ?>"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -138,6 +154,7 @@
                                                 </form>
                                             </td>
                                         </tr>
+
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                         <tr>
                                             <td colspan="8" class="prova">

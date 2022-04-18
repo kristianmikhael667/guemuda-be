@@ -37,16 +37,22 @@ class Analytic extends Controller
             ->get();
 
         $dataBrowser = [];
-        foreach ($user_info as $browser) {
-            $dataBrowser[] = [
-                "browser" => $browser->agent,
-                "y" => floatval($browser->total)
-            ];
+        // foreach ($user_info as $browser) {
+        //     $dataBrowser[] = [
+        //         "browser" => $browser->agent,
+        //         "y" => floatval($browser->total)
+        //     ];
+        // }
+
+        foreach ($user_info as $row) {
+            $data['label'][] = $row->agent;
+            $data['data'][] = (int) $row->total;
         }
+
         return view('admin.analytic', [
             'page' => 'Administrator',
             'viewer' => $top10views,
-            'browsers' => json_encode($dataBrowser)
+            'chart_data' => json_encode($data)
         ]);
     }
 }

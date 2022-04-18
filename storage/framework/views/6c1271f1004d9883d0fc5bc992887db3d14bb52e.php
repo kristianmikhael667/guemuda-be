@@ -64,45 +64,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-4">
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="d-widget">
                                             <div class="d-widget-title">
-                                                <h5>Top Five active</h5>
+                                                <h5>Top Platform</h5>
                                             </div>
-                                            <ul class="top-5">
-                                                <li>
-                                                    <figure><img src="images/resources/user1.jpg" alt=""><span
-                                                            class="status online"></span></figure>
-                                                    <a href="#" title="">Big Boss</a>
-                                                    <span class="user-active-time">23hrs/day</span>
-                                                </li>
-                                                <li>
-                                                    <figure><img src="images/resources/user2.jpg" alt=""><span
-                                                            class="status online"></span></figure>
-                                                    <a href="#" title="">Sarah Jane</a>
-                                                    <span class="user-active-time">22hrs/day</span>
-                                                </li>
-                                                <li>
-                                                    <figure><img src="images/resources/user3.jpg" alt=""><span
-                                                            class="status online"></span></figure>
-                                                    <a href="#" title="">Andrew</a>
-                                                    <span class="user-active-time">20hrs/day</span>
-                                                </li>
-                                                <li>
-                                                    <figure><img src="images/resources/user4.jpg" alt=""><span
-                                                            class="status online"></span></figure>
-                                                    <a href="#" title="">Frank</a>
-                                                    <span class="user-active-time">19hrs/day</span>
-                                                </li>
-                                                <li>
-                                                    <figure><img src="images/resources/user5.jpg" alt=""><span
-                                                            class="status online"></span></figure>
-                                                    <a href="#" title="">Bob Emily</a>
-                                                    <span class="user-active-time">18hrs/day</span>
-                                                </li>
-                                            </ul>
+                                            <div class="panel-body">
+                                                <canvas id="pie-chart-platform"></canvas>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +91,7 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
-                                        <h5>Top 10 Browser</h5>
+                                        <h5>Top Browser</h5>
                                     </div>
                                     <div class="panel-body">
                                         <canvas id="pie-chart"></canvas>
@@ -132,7 +102,7 @@
                         </div>
 
                         <div class="row merged20 mb-4">
-                            <div class="col-lg-12">
+                            <div class="col-lg-8">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
                                         <h5>Manage Users</h5>
@@ -295,136 +265,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row merged20 mb-4">
-                            <div class="col-lg-12">
+                            <div class="col-lg-4 col-md-4">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
-                                        <h5>Latest Transcations</h5>
+                                        <h5>Top Device</h5>
                                     </div>
-                                    <table class="table-default table table-striped table-responsive-md">
-                                        <thead>
-                                            <tr>
-                                                <th>Order#</th>
-                                                <th>Product Name</th>
-                                                <th>Date</th>
-                                                <th>Total</th>
-                                                <th>Status</th>
-                                                <th>Pay Method</th>
-                                                <th>Invoice</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>001</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-1.jpg"
-                                                            alt="">
-                                                        Html Basics Book</a>
-                                                </td>
-                                                <td>17-Oct-20</td>
-                                                <td>$50</td>
-                                                <td>Delivered</td>
-                                                <td>Paypal</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>002</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-2.jpg"
-                                                            alt="">
-                                                        VU.Js script Book</a>
-                                                </td>
-                                                <td>15-Oct-20</td>
-                                                <td>$30</td>
-                                                <td>On Way</td>
-                                                <td>Payoneer</td>
-                                                <td><a href="#" title="">view inoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>003</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-3.jpg"
-                                                            alt="">
-                                                        Online Css3 Course</a>
-                                                </td>
-                                                <td>07-Oct-20</td>
-                                                <td>$20</td>
-                                                <td>Pending</td>
-                                                <td>Visa</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>004</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-4.jpg"
-                                                            alt="">
-                                                        Online Course Basic HTML</a>
-                                                </td>
-                                                <td>02-Oct-20</td>
-                                                <td>$10</td>
-                                                <td>Delivered</td>
-                                                <td>Paypal</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>005</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-5.jpg"
-                                                            alt="">
-                                                        PHP Advance Course</a>
-                                                </td>
-                                                <td>27-Sep-20</td>
-                                                <td>$30</td>
-                                                <td>Delivered</td>
-                                                <td>COD</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>006</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-6.jpg"
-                                                            alt="">
-                                                        Advance Wp Book</a>
-                                                </td>
-                                                <td>25-Sep-20</td>
-                                                <td>$25</td>
-                                                <td>Return</td>
-                                                <td>Bitcoin</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>007</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-2.png"
-                                                            alt="">
-                                                        Online Marketing</a>
-                                                </td>
-                                                <td>24-Sep-20</td>
-                                                <td>$22</td>
-                                                <td>Delivered</td>
-                                                <td>Master Card</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>008</td>
-                                                <td class="productss">
-                                                    <a href="#" title=""><img src="images/resources/course-1.jpg"
-                                                            alt="">
-                                                        Advance PHP Book</a>
-                                                </td>
-                                                <td>20-Sep-20</td>
-                                                <td>$29</td>
-                                                <td>Pending</td>
-                                                <td>Visa</td>
-                                                <td><a href="#" title="">view invoice</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="panel-body">
+                                        <canvas id="pie-chart-device"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>

@@ -35,6 +35,8 @@ class ContentViews extends Model
         $postsViews->user_id = Auth::check() == false ? '-' : Auth::id();
         $postsViews->ip = $ip;
         $postsViews->agent = Browser::browserName();
+        $postsViews->platform = Browser::platformName();
+        $postsViews->device = Browser::deviceFamily();
         $postsViews->save();
     }
 

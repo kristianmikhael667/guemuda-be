@@ -31,28 +31,45 @@ class Analytic extends Controller
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
 
+        // Browser top
         $user_info = DB::table('content_views')
             ->select('agent', DB::raw('count(*) as total'))
             ->groupBy('agent')
             ->get();
-
-        $dataBrowser = [];
-        // foreach ($user_info as $browser) {
-        //     $dataBrowser[] = [
-        //         "browser" => $browser->agent,
-        //         "y" => floatval($browser->total)
-        //     ];
-        // }
 
         foreach ($user_info as $row) {
             $data['label'][] = $row->agent;
             $data['data'][] = (int) $row->total;
         }
 
+        // Platform top
+        $platform = DB::table('content_views')
+            ->select('platform', DB::raw('count(*) as total'))
+            ->groupBy('platform')
+            ->get();
+
+        foreach ($platform as $row) {
+            $datas['label'][] = $row->platform;
+            $datas['data'][] = (int) $row->total;
+        }
+
+        // Device top
+        $device = DB::table('content_views')
+            ->select('device', DB::raw('count(*) as total'))
+            ->groupBy('device')
+            ->get();
+
+        foreach ($device as $row) {
+            $datass['label'][] = $row->device;
+            $datass['data'][] = (int) $row->total;
+        }
+
         return view('admin.analytic', [
             'page' => 'Administrator',
             'viewer' => $top10views,
-            'chart_data' => json_encode($data)
+            'chart_data' => json_encode($data),
+            'platform' => json_encode($datas),
+            'device' => json_encode($datass)
         ]);
     }
 }

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-content">
-                    <h4 class="main-title">Analytic</h4>
+                    <h4 class="main-title">Analytic Article</h4>
 
                     <div class="row merged20 mb-4">
                         <div class="col-lg-8">
@@ -27,51 +27,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($viewer as $key => $item)
                                         <tr>
-                                            <td>1</td>
-                                            <td>Minangkabau</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=minangkabau</td>
-                                            <td>100</td>
+                                            <td>{{ ++$key}}</td>
+                                            <td>{{ $item->title }}</td>
+                                            <td>https://guemuda.com/detailpost/{{ $item->slug }}</td>
+                                            <td>{{ $item->total_views }}</td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Padanag</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=cara-jadi-fullstack</td>
-                                            <td>90</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Bisnis ditahun 2022 sangat menguntungkan</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=bisnis-ditahun-2022-sangat-menguntungkan
-                                            </td>
-                                            <td>80</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Pantang menyerah</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=pantang-menyerah </td>
-                                            <td>56</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Menjadi viewer terbanyak dalam melihat berita ini</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=menjadi-viewer-terbanyak-dalam-melihat-berita-ini
-                                            </td>
-                                            <td>30</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Cara jadi fullstack</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=cara-jadi-fullstack</td>
-                                            <td>22</td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td>Berada di bawah kepalan sayap</td>
-                                            <td>http://127.0.0.1:8000/api/content?slug=berada-di-bawah-kepalan-sayap
-                                            </td>
-                                            <td>5</td>
-                                        </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
@@ -123,8 +86,7 @@
                         </div>
                     </div>
                     <div class="row merged20 mb-4">
-
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
                             <div class="d-widget">
                                 <div class="d-widget-title">
                                     <h5>Hit Statistics</h5>
@@ -132,7 +94,20 @@
                                 <div id="uniqueVisits"></div>
                             </div>
                         </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="d-widget">
+                                <div class="d-widget-title">
+                                    <h5>Top 10 Browser</h5>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="pie-chart"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
@@ -298,6 +273,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">

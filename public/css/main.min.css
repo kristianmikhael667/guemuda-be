@@ -13374,6 +13374,10 @@ a.text-dark:hover {
 }
 
 .icofont-scroll-up:before {
+    content: "\ewebi";
+}
+
+.icofont-scroll-up:before {
     content: "\emed";
 }
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ContentApi;
+use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -29,6 +30,6 @@ Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('popular', [ContentApi::class, 'popular']);
-
+Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);

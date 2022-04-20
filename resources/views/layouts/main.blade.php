@@ -8,7 +8,6 @@
     <meta name="keywords" content="" />
     <title>GueMuda | Page {{ $page }}</title>
     <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
-
     <link rel="stylesheet" href="{{ '/css/main.min.css' }}">
     <link rel="stylesheet" href="{{ '/css/style.css' }}">
     <link rel="stylesheet" href="{{ '/css/color.css' }}">
@@ -53,8 +52,6 @@
             $('.dropify').dropify();
         });
     </script>
-
-
 
     {{-- Tinymce cloud --}}
     <script src="https://cdn.tiny.cloud/1/lb6rntq6y19l4pygkcorm4dqjp8nisxw2lzonalgepcy1mlv/tinymce/5/tinymce.min.js"

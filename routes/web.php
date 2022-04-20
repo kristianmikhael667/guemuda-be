@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Analytic;
+use App\Http\Controllers\Admin\CategoryWebinarController;
+use App\Http\Controllers\Admin\ProgramCatController;
+use App\Http\Controllers\Admin\TagsWebinarsControllers;
+use App\Http\Controllers\Admin\WebinarsControllers;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -36,9 +40,13 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::get('/analytic', [Analytic::class, 'index']);
     Route::resource('admin', AdminController::class);
     Route::resource('post', ContentController::class);
+    Route::resource('webinars', WebinarsControllers::class);
     Route::get('/post/edittitle/{id}', [ContentController::class, 'edittitle']);
     Route::post('/post/updatetitle', [ContentController::class, 'updatetitle']);
+    Route::resource('category-program', ProgramCatController::class);
     Route::resource('category-article', CategoryArticle::class);
+    Route::resource('category-webinars', CategoryWebinarController::class);
     Route::resource('tags', TagsController::class);
+    Route::resource('tagswebinars', TagsWebinarsControllers::class);
     Route::get('/media', [MediaController::class, 'index']);
 });

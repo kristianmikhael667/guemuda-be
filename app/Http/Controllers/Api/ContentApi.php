@@ -43,7 +43,7 @@ class ContentApi extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 12);
+        $limit = $request->input('limit', 9);
         $title = $request->input('title');
         $slug = $request->input('slug');
 

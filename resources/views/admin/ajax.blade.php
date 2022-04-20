@@ -1,15 +1,3 @@
-<script>
-    function yesnoCheck(that) {
-    if (that.value == "on") {
-        document.getElementById("imagepost").style.display = "block";
-        document.getElementById("videopost").style.display = "none";
-    } else {
-        document.getElementById("imagepost").style.display = "none";
-        document.getElementById("videopost").style.display = "block";
-    }
-}
-</script>
-
 {{-- Post Tags --}}
 <script>
     storetags = () => {

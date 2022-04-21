@@ -46,6 +46,8 @@ class ContentController extends Controller
                 ->groupBy("contents.slug")
                 ->groupBy("contents.id")
                 ->groupBy("contents.uid_user")
+                ->groupBy("contents.uid_user_2")
+                ->groupBy("thumbnail")
                 ->groupBy("contents.description")
                 ->groupBy("contents.link")
                 ->groupBy("contents.status")
@@ -98,15 +100,17 @@ class ContentController extends Controller
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-image');
             $validatedData['video'] = '-';
-            $validatedData['voice'] = '-';
+            $validatedData['thumbnail'] = '-';
         }
         if ($request->hasFile('video')) {
             $validatedData['video'] = $request->file('video')->store('post-video');
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
             $validatedData['image'] = '-';
         }
         $slug = SlugService::createSlug(Content::class, 'slug', $request->title);
 
         $validatedData['uid_user'] = auth()->user()->id;
+        $validatedData['uid_user_2'] = "Not Edited";
         $validatedData['slug'] = $slug;
         $validatedData['link'] = '-';
         $validatedData['tags_id'] = implode(",", $validatedData['tags_id']);
@@ -167,7 +171,7 @@ class ContentController extends Controller
             DB::table('contents')->where('slug', $post->slug)->update([
                 'title' => $request->title,
                 'slug' =>  SlugService::createSlug(Content::class, 'slug', $request->title),
-                'uid_user' => auth()->user()->id,
+                'uid_user_2' => auth()->user()->username,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
             return redirect('/administrator/post')->with('success', 'Post has been updated!');

@@ -19,6 +19,8 @@ class ContentApi extends Controller
             ->groupBy("contents.slug")
             ->groupBy("contents.id")
             ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.link")
             ->groupBy("contents.status")

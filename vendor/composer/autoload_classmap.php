@@ -37,6 +37,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\WebinarsControllers' => $baseDir . '/app/Http/Controllers/Admin/WebinarsControllers.php',
     'App\\Http\\Controllers\\Api\\CategoryController' => $baseDir . '/app/Http/Controllers/Api/CategoryController.php',
     'App\\Http\\Controllers\\Api\\ContentApi' => $baseDir . '/app/Http/Controllers/Api/ContentApi.php',
+    'App\\Http\\Controllers\\Api\\WebinarsApi' => $baseDir . '/app/Http/Controllers/Api/WebinarsApi.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\PictureApi' => $baseDir . '/app/Http/Controllers/PictureApi.php',
     'App\\Http\\Controllers\\ProgramController' => $baseDir . '/app/Http/Controllers/ProgramController.php',

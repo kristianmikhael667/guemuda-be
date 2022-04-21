@@ -67,7 +67,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Title</th>
-                                            <th>Author</th>
+                                            <th>Author 1</th>
+                                            <th>Author 2</th>
                                             <th>Category</th>
                                             <th>Tag</th>
                                             <th>Hit</th>
@@ -88,6 +89,8 @@
                                                     $content->title
                                                     }}</a></td>
                                             <td>{{ $content->user->username }}</td>
+                                            <td>{{ $content->uid_user_2 == 0 ? 'Not Edited' : $content->uid_user_2 }}
+                                            </td>
                                             <td>{{ $content->category['name'] }}</td>
                                             <td>
                                                 {{ $string = ""; }}

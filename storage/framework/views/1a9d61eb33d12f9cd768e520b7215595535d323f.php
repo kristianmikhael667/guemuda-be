@@ -66,7 +66,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Title</th>
-                                            <th>Author</th>
+                                            <th>Author 1</th>
+                                            <th>Author 2</th>
                                             <th>Category</th>
                                             <th>Tag</th>
                                             <th>Hit</th>
@@ -85,6 +86,9 @@
                                             <td><?php echo e($contents->firstItem() + $num); ?></td>
                                             <td><a href="/administrator/post/edittitle/<?php echo e($content->slug); ?>"><?php echo e($content->title); ?></a></td>
                                             <td><?php echo e($content->user->username); ?></td>
+                                            <td><?php echo e($content->uid_user_2 == 0 ? 'Not Edited' : $content->uid_user_2); ?>
+
+                                            </td>
                                             <td><?php echo e($content->category['name']); ?></td>
                                             <td>
                                                 <?php echo e($string = ""); ?>

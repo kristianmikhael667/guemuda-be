@@ -777,6 +777,7 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'App\\Http\\Controllers\\Admin\\WebinarsControllers' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WebinarsControllers.php',
         'App\\Http\\Controllers\\Api\\CategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/CategoryController.php',
         'App\\Http\\Controllers\\Api\\ContentApi' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ContentApi.php',
+        'App\\Http\\Controllers\\Api\\WebinarsApi' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/WebinarsApi.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PictureApi' => __DIR__ . '/../..' . '/app/Http/Controllers/PictureApi.php',
         'App\\Http\\Controllers\\ProgramController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramController.php',

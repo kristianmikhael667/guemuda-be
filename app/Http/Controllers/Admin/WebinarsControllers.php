@@ -81,8 +81,8 @@ class WebinarsControllers extends Controller
             'links_maps' => 'required'
         ]);
 
-        if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-image');
+        if ($request->file('avatar')) {
+            $validatedData['avatar'] = $request->file('avatar')->store('post-image');
         }
 
         $slug = SlugService::createSlug(Webinar::class, 'slug', $request->title);

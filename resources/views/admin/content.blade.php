@@ -89,7 +89,7 @@
                                                     $content->title
                                                     }}</a></td>
                                             <td>{{ $content->user->username }}</td>
-                                            <td>{{ $content->uid_user_2 == 0 ? 'Not Edited' : $content->uid_user_2 }}
+                                            <td>{{ $content->uid_user_2}}
                                             </td>
                                             <td>{{ $content->category['name'] }}</td>
                                             <td>

@@ -34,7 +34,7 @@
                     <div class="panel-content">
                         <h4 class="main-title">Analytic Article</h4>
 
-                        <div class="row merged20 mb-4">
+                        <div class="row merged20">
                             <div class="col-lg-8">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
@@ -43,7 +43,7 @@
                                     <table class="table-default table table-striped table-responsive-md">
                                         <thead>
                                             <tr>
-                                                <th class="wd-10p">ID</th>
+                                                <th class="wd-10p">No</th>
                                                 <th class="wd-15p">Title</th>
                                                 <th class="wd-25p">Link</th>
                                                 <th class="wd-25p">Visit</th>
@@ -75,6 +75,34 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row merged20 mb-2">
+                            <div class="col-lg-8">
+                                <div class="d-widget">
+                                    <div class="d-widget-title">
+                                        <h5>Top 10 Authors </h5>
+                                    </div>
+                                    <table class="table-default table table-striped table-responsive-md">
+                                        <thead>
+                                            <tr>
+                                                <th class="wd-10p">ID</th>
+                                                <th class="wd-15p">Name</th>
+                                                <th class="wd-25p">Totals</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $__currentLoopData = $authors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <tr>
+                                                <td><?php echo e(++$key); ?></td>
+                                                <td><?php echo e($item->username); ?></td>
+                                                <td><?php echo e($item->tops); ?></td>
+                                            </tr>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

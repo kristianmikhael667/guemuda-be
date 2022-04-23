@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Content;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,8 @@ class Analytic extends Controller
             ->groupBy("contents.slug")
             ->groupBy("contents.id")
             ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.link")
             ->groupBy("contents.status")
@@ -64,12 +67,44 @@ class Analytic extends Controller
             $datass['data'][] = (int) $row->total;
         }
 
+        // Top Authors
+        $authors = User::join("contents", "contents.uid_user", "=", "users.id")
+            // ->where("users.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->groupBy("users.username")
+            ->groupBy("users.first_name")
+            ->groupBy("users.last_name")
+            ->groupBy("users.address")
+            ->groupBy("users.city")
+            ->groupBy("users.job")
+            ->groupBy("users.bio")
+            ->groupBy("users.phone_number")
+            ->groupBy("users.date_birth")
+            ->groupBy("users.status")
+            ->groupBy("users.email")
+            ->groupBy("users.email_verified_at")
+            ->groupBy("users.password")
+            ->groupBy("users.two_factor_secret")
+            ->groupBy("users.two_factor_recovery_codes")
+            ->groupBy("users.remember_token")
+            ->groupBy("users.current_team_id")
+            ->groupBy("users.avatar")
+            ->groupBy("users.roles")
+            ->groupBy("users.deleted_at")
+            ->groupBy("users.created_at")
+            ->groupBy("users.updated_at")
+            ->groupBy("users.id")
+            ->groupBy("users.userId")
+            ->orderBy(DB::raw('COUNT(users.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(users.id) as tops'), 'users.*'));
+
+
         return view('admin.analytic', [
             'page' => 'Administrator',
             'viewer' => $top10views,
             'chart_data' => json_encode($data),
             'platform' => json_encode($datas),
-            'device' => json_encode($datass)
+            'device' => json_encode($datass),
+            'authors' =>  $authors
         ]);
     }
 }

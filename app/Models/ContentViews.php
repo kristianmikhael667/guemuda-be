@@ -26,6 +26,15 @@ class ContentViews extends Model
                 }
             }
         }
+        // echo json_encode(define('LARAVEL_START', microtime(true)));
+        // die;
+        $browsers = Browser::browserName();
+        $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
+        $browsers_names = str_replace(".", "", $browsers_name);
+
+        $platforms = Browser::platformName();
+        $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
+        $platforms_names = str_replace(".", "", $platforms_name);
 
         $postsViews = new ContentViews();
         $postsViews->id_post = $post->id;
@@ -34,8 +43,8 @@ class ContentViews extends Model
         $postsViews->session_id = '-';
         $postsViews->user_id = Auth::check() == false ? '-' : Auth::id();
         $postsViews->ip = $ip;
-        $postsViews->agent = Browser::browserName();
-        $postsViews->platform = Browser::platformName();
+        $postsViews->agent = $browsers_names;
+        $postsViews->platform = $platforms_names;
         $postsViews->device = Browser::deviceFamily();
         $postsViews->save();
     }

@@ -81,7 +81,21 @@ unset($__errorArgs, $__bag); ?>
                                                                 <input type="file" name="video" id="video">
                                                                 <input class="uk-input uk-form-width-medium" type="text"
                                                                     placeholder="Select file video" disabled>
+
+                                                                
                                                             </div>
+
+                                                        </div>
+                                                        <div class="d-flex">
+
+                                                            <div uk-form-custom="target: true">
+
+                                                                <label for="" class="mr-2 mt-2">Upload
+                                                                    Thumbnails</label>
+                                                                <input type="file" name="thumbnail" id="thumbnail"
+                                                                    class="dropify" data-max-file-size="5M">
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -151,6 +165,18 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <!-- main content -->
+    <script>
+        function yesnoCheck(that) {
+            console.log('apa itu : ', that.value);
+        if (that.value == "on") {
+            document.getElementById("imagepost").style.display = "block";
+            document.getElementById("videopost").style.display = "none";
+        } else {
+            document.getElementById("imagepost").style.display = "none";
+            document.getElementById("videopost").style.display = "block";
+        }
+    }
+    </script>
     
     <?php echo $__env->make('admin.ajax', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

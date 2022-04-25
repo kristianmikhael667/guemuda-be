@@ -91,7 +91,7 @@
                                                     }}</a></td>
                                             <td>{{ $webinar->speaker }}</td>
                                             <td>{{ $webinar->schedule }}</td>
-                                            <td>{{ $webinar->category['name'] }}</td>
+                                            <td>{{ $webinar->category->name }}</td>
                                             <td>
                                                 {{ $string = ""; }}
                                                 @foreach ($tages as $item)

@@ -88,7 +88,7 @@
                                             <td><a href="/administrator/post/edittitle/<?php echo e($webinar->slug); ?>"><?php echo e($webinar->title); ?></a></td>
                                             <td><?php echo e($webinar->speaker); ?></td>
                                             <td><?php echo e($webinar->schedule); ?></td>
-                                            <td><?php echo e($webinar->category['name']); ?></td>
+                                            <td><?php echo e($webinar->category->name); ?></td>
                                             <td>
                                                 <?php echo e($string = ""); ?>
 

@@ -42,7 +42,7 @@ class ContentViews extends Model
         $postsViews->url = request()->url() . '?slug=' . $post->slug;
         $postsViews->session_id = '-';
         $postsViews->user_id = Auth::check() == false ? '-' : Auth::id();
-        $postsViews->ip = $ip;
+        $postsViews->ip = request()->ip();
         $postsViews->agent = $browsers_names;
         $postsViews->platform = $platforms_names;
         $postsViews->device = Browser::deviceFamily();

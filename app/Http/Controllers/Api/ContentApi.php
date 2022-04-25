@@ -52,7 +52,6 @@ class ContentApi extends Controller
         if ($slug) {
             $content = Content::where('slug', $slug)->first();
             ContentViews::createViewLog($content);
-
             if ($content) {
                 return ResponseFormatter::success(
                     $content,

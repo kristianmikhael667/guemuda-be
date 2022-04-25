@@ -40,6 +40,7 @@ class CreateNewUser implements CreatesNewUsers
                 'bio' => 'Admin',
                 'phone_number' => '08512838492939',
                 'email' => $input['email'],
+                'date_birth' => date("Y/m/d"),
                 'password' => Hash::make($input['password']),
                 'roles' => 'common.admin'
             ]), function (User $user) {

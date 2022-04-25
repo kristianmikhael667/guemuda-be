@@ -4,7 +4,7 @@
     'name' => 'Laravel',
     'env' => 'production',
     'debug' => true,
-    'url' => 'http://localhost',
+    'url' => 'http://guemuda.dewanhoster.my.id',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'en',
@@ -363,7 +363,7 @@
       array (
         'driver' => 'local',
         'root' => '/var/www/guemuda.dewanhoster.my.id/storage/app/public',
-        'url' => 'http://localhost/storage',
+        'url' => 'http://guemuda.dewanhoster.my.id/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -672,7 +672,7 @@
       2 => '127.0.0.1',
       3 => '127.0.0.1:8000',
       4 => '::1',
-      5 => 'localhost',
+      5 => 'guemuda.dewanhoster.my.id',
     ),
     'guard' => 
     array (

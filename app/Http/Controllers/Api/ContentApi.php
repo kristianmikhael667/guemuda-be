@@ -9,6 +9,9 @@ use App\Models\Content;
 use App\Models\ContentViews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use hisorange\BrowserDetect\Parser as Browser;
+use Illuminate\Support\Facades\Auth;
+
 
 class ContentApi extends Controller
 {
@@ -51,7 +54,38 @@ class ContentApi extends Controller
 
         if ($slug) {
             $content = Content::where('slug', $slug)->first();
-            ContentViews::createViewLog($content);
+            // ContentViews::createViewLog($content);
+            $browsers = Browser::browserName();
+            $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
+            $browsers_names = str_replace(".", "", $browsers_name);
+    
+            $platforms = Browser::platformName();
+            $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
+            $platforms_names = str_replace(".", "", $platforms_name);
+    
+            $postsViews = new ContentViews();
+            $postsViews->id_post = $content->id;
+            $postsViews->titleslug = $content->slug;
+            $postsViews->url = request()->url() . '?slug=' . $content->slug;
+            $postsViews->session_id = '-';
+            $postsViews->user_id = Auth::check() == false ? '-' : Auth::id();
+            $postsViews->ip = request()->ip();
+            $postsViews->agent = $browsers_names;
+            $postsViews->platform = $platforms_names;
+            $postsViews->device = Browser::deviceFamily();
+
+            ContentViews::create([
+                'id_post' => $content->id,
+                'titleslug' => $content->slug,
+                'url' => request()->url() . '?slug=' . $content->slug,
+                'session_id' => '-',
+                'user_id' => Auth::check() == false ? '-' : Auth::id(),
+                'ip'  => request()->ip(),
+                'agent' => $browsers_names,
+                'platform' =>  $platforms_names,
+                'device' => Browser::deviceFamily()
+            ]);
+            
             if ($content) {
                 return ResponseFormatter::success(
                     $content,

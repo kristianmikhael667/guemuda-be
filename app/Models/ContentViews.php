@@ -46,6 +46,7 @@ class ContentViews extends Model
         $postsViews->agent = $browsers_names;
         $postsViews->platform = $platforms_names;
         $postsViews->device = Browser::deviceFamily();
+       
         $postsViews->save();
     }
 

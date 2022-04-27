@@ -13417,6 +13417,10 @@ a.text-dark:hover {
     content: "\eab6"
 }
 
+.icofont-simple-right-down:before {
+    content: "\eacommu"
+}
+
 .icofont-simple-right-up:before {
     content: "\eab7"
 }

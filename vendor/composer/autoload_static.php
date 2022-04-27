@@ -803,6 +803,7 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'App\\Models\\CategoryWebinar' => __DIR__ . '/../..' . '/app/Models/CategoryWebinar.php',
         'App\\Models\\Comment' => __DIR__ . '/../..' . '/app/Models/Comment.php',
         'App\\Models\\CommunityNews' => __DIR__ . '/../..' . '/app/Models/CommunityNews.php',
+        'App\\Models\\Community_views' => __DIR__ . '/../..' . '/app/Models/Community_views.php',
         'App\\Models\\Content' => __DIR__ . '/../..' . '/app/Models/Content.php',
         'App\\Models\\ContentViews' => __DIR__ . '/../..' . '/app/Models/ContentViews.php',
         'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',

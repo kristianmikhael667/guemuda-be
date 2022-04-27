@@ -9,6 +9,7 @@ use App\Models\TagsCommunity;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CommunityNews extends Controller
 {
@@ -20,13 +21,34 @@ class CommunityNews extends Controller
     public function index()
     {
         if (Auth::user()->roles === 'common.admin') {
-            $community = ModelsCommunityNews::latest()->with(['category','user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+            $community = ModelsCommunityNews::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+            $kinanda = ModelsCommunityNews::join("community_views", "community_views.id_community", "=", "community_news.id")
+                ->where("community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+                ->groupBy("community_news.slug")
+                ->groupBy("community_news.id")
+                ->groupBy("community_news.uid_user")
+                ->groupBy("community_news.uid_user_2")
+                ->groupBy("community_news.description")
+                ->groupBy("community_news.status")
+                ->groupBy("community_news.created_at")
+                ->groupBy("community_news.updated_at")
+                ->groupBy("community_news.title")
+                ->groupBy("community_news.subdesc")
+                ->groupBy("community_news.avatar")
+                ->groupBy("community_news.category_id")
+                ->groupBy("community_news.tags_id")
+                ->orderBy(DB::raw('COUNT(community_news.id)', 'desc'), 'desc')
+                ->get(array(DB::raw('COUNT(community_news.id) as total_views'), 'community_news.*'));
+
             $taggers = TagsCommunity::all();
             return view('admin.communnity-news', [
                 'page' => 'Administrator',
                 'communitys' => $community,
+                'views' => $kinanda,
                 'tages' => $taggers
             ]);
+        }else {
+            return redirect()->back();
         }
     }
 

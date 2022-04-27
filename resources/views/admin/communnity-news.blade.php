@@ -29,7 +29,7 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/community-news" method="get" role="search">
                                                 <div class="input-group">
                                                     @if (request('category'))
                                                     <input type="text" class="form-control" name="search"
@@ -104,7 +104,11 @@
                                                 {{ substr($string, 0, strlen($string) - 2)}}
                                             </td>
                                             <td>
-                                               10
+                                                @foreach ($views as $view)
+                                                @if ($view->id == $community->id)
+                                                {{ $view->total_views }}
+                                                @endif
+                                                @endforeach
                                             </td>
                                             <td><span class="text-success">{{ $community->status }}</span></td>
                                             <td>{{ \Carbon\Carbon::parse($community->created_at)->diffForHumans() }}

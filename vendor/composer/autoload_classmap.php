@@ -63,6 +63,7 @@ return array(
     'App\\Models\\CategoryWebinar' => $baseDir . '/app/Models/CategoryWebinar.php',
     'App\\Models\\Comment' => $baseDir . '/app/Models/Comment.php',
     'App\\Models\\CommunityNews' => $baseDir . '/app/Models/CommunityNews.php',
+    'App\\Models\\Community_views' => $baseDir . '/app/Models/Community_views.php',
     'App\\Models\\Content' => $baseDir . '/app/Models/Content.php',
     'App\\Models\\ContentViews' => $baseDir . '/app/Models/ContentViews.php',
     'App\\Models\\Event' => $baseDir . '/app/Models/Event.php',

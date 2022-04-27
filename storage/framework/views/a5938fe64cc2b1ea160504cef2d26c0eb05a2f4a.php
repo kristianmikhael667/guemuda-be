@@ -28,7 +28,7 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/community-news" method="get" role="search">
                                                 <div class="input-group">
                                                     <?php if(request('category')): ?>
                                                     <input type="text" class="form-control" name="search"
@@ -104,7 +104,12 @@
 
                                             </td>
                                             <td>
-                                               10
+                                                <?php $__currentLoopData = $views; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($view->id == $community->id): ?>
+                                                <?php echo e($view->total_views); ?>
+
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             </td>
                                             <td><span class="text-success"><?php echo e($community->status); ?></span></td>
                                             <td><?php echo e(\Carbon\Carbon::parse($community->created_at)->diffForHumans()); ?>

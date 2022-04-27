@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
@@ -29,7 +30,9 @@ Route::resource('category', CategoryController::class);
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
-Route::get('popular', [ContentApi::class, 'popular']);
+Route::get('community-news', [CommunityNewsApi::class,'all']);
+Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
+Route::get('populararticle', [ContentApi::class, 'popular']);
 Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);

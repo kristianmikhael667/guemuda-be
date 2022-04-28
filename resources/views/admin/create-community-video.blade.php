@@ -57,7 +57,7 @@
                                                 </div>
                                                 <div class="uk-margin">
                                                     <div class="uk-margin" id="imagepost">
-                                                        <input type="file" name="avatar" id="avatar" class="dropify"
+                                                        <input type="file" name="thumbnails" id="thumbnails" class="dropify"
                                                             data-max-file-size="5M">
                                                     </div>
                                                 </div>

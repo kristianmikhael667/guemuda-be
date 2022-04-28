@@ -20,7 +20,7 @@ class CreateCommunityNewsTable extends Migration
             $table->text('tags_id');
             $table->string('slug')->unique();
             $table->uuid('uid_user');
-            $table->string('uid_user_2')->change();
+            $table->string('uid_user_2');
             $table->string('avatar', 2048)->nullable();
             $table->text('description');
             $table->text('subdesc');

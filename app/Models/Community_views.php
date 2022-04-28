@@ -23,6 +23,6 @@ class Community_views extends Model
 
     public function communities()
     {
-        return $this->belongsTo(Content::class, 'id_community');
+        return $this->belongsTo(CommunityNews::class, 'id_community');
     }
 }

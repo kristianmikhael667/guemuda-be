@@ -15,7 +15,7 @@
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
-                                <form method="post" enctype="multipart/form-data" action="/administrator/community-news">
+                                <form method="post" enctype="multipart/form-data" action="/administrator/community-video">
                                     @csrf
                                     <div class="d-widget-title">
                                         <div class="d-flex justify-content-between">

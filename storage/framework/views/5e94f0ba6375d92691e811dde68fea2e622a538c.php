@@ -102,7 +102,7 @@
             </a>
         </li>
 
-        <li class="menu-item-has-children <?php echo e(Request::is('administrator/community-news*') ? 'active' : ''); ?>">
+        <li class="menu-item-has-children <?php echo e(Request::is('administrator/community*') ? 'active' : ''); ?>">
             <a class="" href="#" title="">
                 <i><svg id="commu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -115,6 +115,7 @@
             </a>
             <ul class="submenu">
                 <li><a href="/administrator/community-news" title="">News</a></li>
+                <li><a href="/administrator/community-video" title="">Video</a></li>
                 <li><a href="/administrator/category-program" title="">Group Social Media</a></li>
             </ul>
         </li>

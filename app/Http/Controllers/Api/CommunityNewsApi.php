@@ -43,7 +43,7 @@ class CommunityNewsApi extends Controller
     public function all(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 9);
+        $limit = $request->input('limit', 6);
         $title = $request->input('title');
         $slug = $request->input('slug');
 

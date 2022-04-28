@@ -9,7 +9,7 @@ class VideoCommunityViews extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'community_views';
+    protected $table = 'video_community_views';
 
     public function scopeFilter($query, array $filters)
     {

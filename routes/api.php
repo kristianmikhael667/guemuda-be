@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommunityNewsApi;
+use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
@@ -27,11 +29,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route::get('category', [CategoryController::class, 'index']);
 Route::resource('category', CategoryController::class);
+Route::resource('category-community', CategoryCommunity::class);
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('community-news', [CommunityNewsApi::class,'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
+Route::get('community-video', [CommunityVideoApi::class, 'all']);
+Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);
 Route::get('populararticle', [ContentApi::class, 'popular']);
 Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);

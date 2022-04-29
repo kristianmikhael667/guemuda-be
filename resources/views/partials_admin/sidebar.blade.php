@@ -58,7 +58,7 @@
 
         {{-- Side Bar Admin --}}
         @if(Auth::user()->roles == "common.admin")
-        <li class="{{ Request::is('administrator') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('administrator') ? 'active' : '' }}">
             <a class="" href="/administrator" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
                         stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
@@ -67,15 +67,16 @@
                         <polyline points="9 22 9 12 15 12 15 22" />
                     </svg></i> Dashboard
             </a>
-        </li>
+        </li> --}}
 
-        <li class="{{ Request::is('administrator/analytic*') ? 'active' : '' }}">
-            <a class="" href="/administrator/analytic" title="">
-                <i><svg id="ana" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-activity">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg></i> Analytics
+        <li class="{{ Request::is('administrator') ? 'active' : '' }}">
+            <a class="" href="/administrator" title="">
+                <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
+                    stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                    <polyline points="9 22 9 12 15 12 15 22" />
+                </svg></i> Dashboard
             </a>
         </li>
 

@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 12);
+        $limit = $request->input('limit', 20);
         $title = $request->input('title');
         $slug = $request->input('slug');
         $status = $request->input('status');
@@ -45,6 +45,30 @@ class CategoryController extends Controller
             // $content->paginate($limit),
             'Data Content retrieved successfully'
         );
+    }
+
+    public function subcategories(Request $request)
+    {
+        if($request->sub){
+            $categorys = Category::where('slug', $request->sub)->first();
+            $category = Category::with("parent")->find($categorys->id);
+            $parents = [];
+            $current = $category->parent;
+            while($current!=null){
+                $parent = Category::find($current->id);
+                array_unshift($parents, $parent);
+                $current = $current->parent;
+            }
+            $category["parent"] = $parents;
+            // echo json_encode($category);
+            // die;
+            return ResponseFormatter::success(
+                $category,
+                // $content->paginate($limit),
+                'Data Content retrieved successfully'
+            );
+        }
+        
     }
 
     /**

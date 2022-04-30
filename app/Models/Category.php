@@ -12,10 +12,19 @@ class Category extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
+    protected $with = ["sub_categories"];
 
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function sub_categories(){
+        return $this->hasMany(Category::class, "parent", "id");
+    }
+    
+    public function parent(){
+        return $this->belongsTo(Category::class, "parent", "id");
     }
 
     protected static function boot()

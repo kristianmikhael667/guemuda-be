@@ -37,9 +37,41 @@
                                                     </div>
                                                     @enderror
                                                 </div>
+                                                <div class="uk-margin">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <select class="uk-select" onchange="yesnoCheck(this)">
+                                                                <option disabled="disabled" selected>-- Select Parent
+                                                                    Category --
+                                                                </option>
+                                                                <option value="on">Show Parent Category</option>
+                                                                <option value="off">Non</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-margin">
+                                                    <div class="uk-margin" id="imagepost" style="display: none">
+                                                        <div
+                                                            class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                                            <div class="row">
+                                                                @foreach ($categories as $item)
+                                                                @if ($item->parent == 0)
+                                                                <label class="mr-2"><input class="uk-radio"
+                                                                        name="parent" value="{{ $item->id }}"
+                                                                        type="radio">
+                                                                    {{ $item->name }}</label>
+                                                                @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-margin" id="videopost" style="display: none">
+                                                        {{-- <input type="file" name="image" id="image"> --}}
+                                                    </div>
+                                                </div>
                                             </fieldset>
                                         </div>
-
                                     </div>
                                     <button type="submit" class="btn btn-primary">Save Category Article</button>
                                 </form>

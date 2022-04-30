@@ -40,6 +40,7 @@ class CategoryArticle extends Controller
         if (Auth::user()->roles === 'common.admin') {
             return view('admin.create-category-article', [
                 'page' => 'Administrator',
+                'categories' => Category::all(),
             ]);
         } else {
             return redirect()->back();
@@ -52,12 +53,34 @@ class CategoryArticle extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function subcat(Request $request)
+    {
+        if ($request->parent) {
+            $categorys = Category::where('id', $request->parent)->first();
+            $category = Category::with("parent")->find($categorys->id);
+            $parents = [];
+            $current = $category->parent;
+            while ($current != null) {
+                $parent = Category::find($current->id);
+                array_unshift($parents, $parent);
+                $current = $current->parent;
+            }
+            $category["parent"] = $parents;
+
+            return response()->json([
+                'subcats' => $category,
+                'success' => 'Data is successfully added'
+            ]);
+        }
+       
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required',
         ]);
-        $validatedData['parent'] = 0;
+        $validatedData['parent'] = $request->parent ? $request->parent : 0;
         $slug = SlugService::createSlug(Category::class, 'slug', $request->name);
         $validatedData['slug'] = $slug;
         Category::create($validatedData);

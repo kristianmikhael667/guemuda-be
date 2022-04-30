@@ -61,10 +61,7 @@ class ContentController extends Controller
                 ->groupBy("contents.tags_id")
                 ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
                 ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
-            // foreach ($kinanda as $kinan) {
-            // echo json_encode($kinanda);
-            // die;
-            // }
+
             $taggers = Tags::all();
             return view('admin.content', [
                 'page' => 'Administrator',
@@ -81,7 +78,7 @@ class ContentController extends Controller
     {
         return view('admin.create-post', [
             'page' => 'Administrator',
-            'categories' => Category::all(),
+            'categories' => Category::where("parent", 0)->get(),
             'tags' => Tags::all()
         ]);
     }

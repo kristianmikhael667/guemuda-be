@@ -58,8 +58,7 @@
 
         
         <?php if(Auth::user()->roles == "common.admin"): ?>
-        
-
+    
         <li class="<?php echo e(Request::is('administrator') ? 'active' : ''); ?>">
             <a class="" href="/administrator" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
@@ -127,7 +126,6 @@
             </a>
             <ul class="submenu">
                 <li><a href="/administrator/category-article" title="">Article</a></li>
-                <li><a href="/administrator/category-program" title="">Program</a></li>
                 <li><a href="/administrator/category-community" title="">Comunnity</a></li>
                 <li><a href="/administrator/category-webinars" title="">Webinars</a></li>
             </ul>

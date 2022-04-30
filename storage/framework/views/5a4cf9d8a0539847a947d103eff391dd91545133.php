@@ -115,10 +115,17 @@ unset($__errorArgs, $__bag); ?>
                                                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                                     <div class="row">
                                                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <label class="mr-2"><input class="uk-radio" name="category_id"
+                                                        <label class="mr-2"><input onchange="ganti(this)"
+                                                                class="uk-radio" id="category_id" name="category_id"
                                                                 value="<?php echo e($item->id); ?>" type="radio">
                                                             <?php echo e($item->name); ?></label>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </div>
+                                                    <p>Sub Category ------</p>
+                                                    <div class="row">
+                                                        <div id="subid" name="subid" style="display: none">
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +174,6 @@ unset($__errorArgs, $__bag); ?>
     <!-- main content -->
     <script>
         function yesnoCheck(that) {
-            console.log('apa itu : ', that.value);
         if (that.value == "on") {
             document.getElementById("imagepost").style.display = "block";
             document.getElementById("videopost").style.display = "none";

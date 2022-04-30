@@ -104,10 +104,17 @@
                                                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                                     <div class="row">
                                                         @foreach ($categories as $item)
-                                                        <label class="mr-2"><input class="uk-radio" name="category_id"
+                                                        <label class="mr-2"><input onchange="ganti(this)"
+                                                                class="uk-radio" id="category_id" name="category_id"
                                                                 value="{{ $item->id }}" type="radio">
                                                             {{ $item->name }}</label>
                                                         @endforeach
+                                                    </div>
+                                                    <p>Sub Category ------</p>
+                                                    <div class="row">
+                                                        <div id="subid" name="subid" style="display: none">
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,7 +174,6 @@
     <!-- main content -->
     <script>
         function yesnoCheck(that) {
-            console.log('apa itu : ', that.value);
         if (that.value == "on") {
             document.getElementById("imagepost").style.display = "block";
             document.getElementById("videopost").style.display = "none";

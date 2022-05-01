@@ -19,6 +19,11 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function videoarticle()
+    {
+        return $this->hasMany(VideoArticle::class);
+    }
+
     public function sub_categories(){
         return $this->hasMany(Category::class, "parent", "id");
     }

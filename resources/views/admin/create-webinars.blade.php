@@ -100,6 +100,11 @@
                                                     <input class="uk-input" name="speaker" id="speaker" type="text"
                                                         placeholder="Input Speakers">
                                                 </div>
+
+                                                <div class="uk-card uk-card-hover mt-2">
+                                                    <input class="uk-input" name="speaker2" id="speaker2" type="text"
+                                                        placeholder="Input Speakers 2">
+                                                </div>
                                             </div>
 
                                             <div class="uk-card uk-card-default uk-card-body">

@@ -18,11 +18,11 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h4>Post Management</h4>
+                                            <h4>Article News Management</h4>
                                         </div>
                                         <div>
                                             <a href="/administrator/post/create" id="create-new-post"
-                                                class="btn btn-primary">Create Post</a>
+                                                class="btn btn-primary">Create Article</a>
                                         </div>
                                     </div>
                                 </div>

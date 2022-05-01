@@ -67,6 +67,7 @@
                                             <th>No</th>
                                             <th>Title</th>
                                             <th>Speaker</th>
+                                            <th>Speaker 2</th>
                                             <th>Schedule</th>
                                             <th>Category</th>
                                             <th>Tags</th>
@@ -87,6 +88,7 @@
                                             <td><?php echo e($webinars->firstItem() + $num); ?></td>
                                             <td><a href="/administrator/post/edittitle/<?php echo e($webinar->slug); ?>"><?php echo e($webinar->title); ?></a></td>
                                             <td><?php echo e($webinar->speaker); ?></td>
+                                            <td><?php echo e($webinar->speaker_2); ?></td>
                                             <td><?php echo e($webinar->schedule); ?></td>
                                             <td><?php echo e($webinar->category->name); ?></td>
                                             <td>

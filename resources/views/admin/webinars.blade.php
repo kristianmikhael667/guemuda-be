@@ -68,6 +68,7 @@
                                             <th>No</th>
                                             <th>Title</th>
                                             <th>Speaker</th>
+                                            <th>Speaker 2</th>
                                             <th>Schedule</th>
                                             <th>Category</th>
                                             <th>Tags</th>
@@ -90,6 +91,7 @@
                                                     $webinar->title
                                                     }}</a></td>
                                             <td>{{ $webinar->speaker }}</td>
+                                            <td>{{ $webinar->speaker_2 }}</td>
                                             <td>{{ $webinar->schedule }}</td>
                                             <td>{{ $webinar->category->name }}</td>
                                             <td>

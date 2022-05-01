@@ -71,7 +71,7 @@ class WebinarsControllers extends Controller
             'title' => 'required',
             'tags_event' => 'required',
             'category_event' => 'required',
-            'avatar' => 'image|file|max:1024',
+            'avatar' => 'image|file|max:2024',
             'description' => 'required',
             'speaker' => 'required',
             'schedule' => 'required',
@@ -90,6 +90,7 @@ class WebinarsControllers extends Controller
         $validatedData['slug'] = $slug;
         $validatedData['latitude'] = '1.2';
         $validatedData['longitude'] = '1.2';
+        $validatedData['speaker_2'] = $request->speaker2 ? $request->speaker2 : '-';
         $validatedData['tags_event'] = implode(",", $validatedData['tags_event']);
         $taglessBody = strip_tags($validatedData['description']);
         $validatedData['subdesc'] = $taglessBody;

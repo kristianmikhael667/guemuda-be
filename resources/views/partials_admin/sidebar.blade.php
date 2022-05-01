@@ -70,15 +70,19 @@
             </a>
         </li>
 
-        <li class="{{ Request::is('administrator/post*') ? 'active' : '' }}">
-            <a class="" href="/administrator/post" title="">
+        <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
+            <a class="" href="#" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-airplay">
-                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
-                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
-                    </svg></i> Post
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="feather feather-airplay">
+                    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                    <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                </svg></i> Post
             </a>
+            <ul class="submenu">
+                <li><a href="/administrator/post" title="">Article News</a></li>
+                <li><a href="/administrator/video-article" title="">Video Article</a></li>
+            </ul>
         </li>
 
         <li class="{{ Request::is('administrator/webinars*') ? 'active' : '' }}">

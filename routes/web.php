@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
 use App\Http\Controllers\Admin\TagsCommunity;
 use App\Http\Controllers\Admin\TagsWebinarsControllers;
+use App\Http\Controllers\Admin\VideoArticleController;
 use App\Http\Controllers\Admin\WebinarsControllers;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -43,6 +44,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::get('/analytic', [Analytic::class, 'index']);
     Route::resource('admin', AdminController::class);
     Route::resource('post', ContentController::class);
+    Route::resource('video-article', VideoArticleController::class);
     Route::resource('webinars', WebinarsControllers::class);
     Route::get('/post/edittitle/{id}', [ContentController::class, 'edittitle']);
     Route::post('/post/updatetitle', [ContentController::class, 'updatetitle']);

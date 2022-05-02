@@ -111,7 +111,7 @@
             <ul class="submenu">
                 <li><a href="/administrator/community-news" title="">News</a></li>
                 <li><a href="/administrator/community-video" title="">Video</a></li>
-                <li><a href="/administrator/category-program" title="">Group Social Media</a></li>
+                <li><a href="/administrator/community-group" title="">Group Social Media</a></li>
             </ul>
         </li>
 

@@ -52,6 +52,7 @@
             $('.dropify').dropify();
         });
     </script>
+    <script src="https://use.fontawesome.com/0cd8ce916e.js"></script>
 
     {{-- Tinymce cloud --}}
     <script src="https://cdn.tiny.cloud/1/lb6rntq6y19l4pygkcorm4dqjp8nisxw2lzonalgepcy1mlv/tinymce/5/tinymce.min.js"

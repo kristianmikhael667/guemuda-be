@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Analytic;
 use App\Http\Controllers\Admin\CategoryCommunity;
 use App\Http\Controllers\Admin\CategoryWebinarController;
+use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
 use App\Http\Controllers\Admin\TagsCommunity;
@@ -57,5 +58,6 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('tagscommunity', TagsCommunity::class);
     Route::resource('community-news', CommunityNews::class);
     Route::resource('community-video', CommunityVideoController::class);
+    Route::resource('community-group', CommunityGroupController::class);
     Route::get('/media', [MediaController::class, 'index']);
 });

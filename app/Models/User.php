@@ -66,8 +66,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     // protected $appends = [
     //     'avatar',
-    // ]
-
+    // ];
+  
     protected static function boot()
     {
         parent::boot();

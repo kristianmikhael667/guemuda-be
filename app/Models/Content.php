@@ -39,6 +39,12 @@ class Content extends Model
                 $query->where('slug', $category);
             });
         });
+
+        $query->when($filters['uids'] ?? false, function ($query, $category) {
+            return $query->whereHas('category', function ($query) use ($category) {
+                $query->where('uuid', $category);
+            });
+        });
     }
 
     public function user()

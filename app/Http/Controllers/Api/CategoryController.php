@@ -47,6 +47,14 @@ class CategoryController extends Controller
         );
     }
 
+    public function categoryparent()
+    {
+        return ResponseFormatter::success(
+            Category::where("parent", 0)->get(),
+            'Data Content retrieved successfully'
+        );
+    }
+
     public function subcategories(Request $request)
     {
         if($request->sub){

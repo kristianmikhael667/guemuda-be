@@ -14,10 +14,11 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use SoftDeletes;
+    use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use HasTeams;
@@ -30,10 +31,12 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'username', 'avatar', 'first_name', 'last_name', 'address', 'city', 'job', 'bio', 'phone_number', 'date_birth', 'status', 'email', 'password', 'roles'
+        'username', 'avatar', 'first_name', 'last_name',
+        'address', 'city', 'job', 'bio', 'phone_number', 'date_birth',
+        'status', 'email', 'password', 'roles'
     ];
 
-    public $incrementing = false;
+    // public $incrementing = false;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -64,6 +67,9 @@ class User extends Authenticatable
     // protected $appends = [
     //     'avatar',
     // ];
+    protected $appends = [
+        'avatar',
+    ];
 
     protected static function boot()
     {

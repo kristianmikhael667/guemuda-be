@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AuthAPI;
 use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CommunityGroupAPI;
 use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
+use App\Http\Controllers\Api\RegisterUserAPI;
 use App\Http\Controllers\Api\VideoArticleAPI;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
@@ -48,3 +50,8 @@ Route::get('video-article', [VideoArticleAPI::class,'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);
+
+// User Service
+Route::post('register', [AuthAPI::class, 'register']);
+Route::post('email/verification-notification', [RegisterUserAPI::class,'sendVerificationEmail'])->middleware('auth:sanctum');
+Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class,'verify'])->name('verification.verify')->middleware('auth:sanctum');

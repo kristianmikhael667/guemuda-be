@@ -66,10 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     // protected $appends = [
     //     'avatar',
-    // ];
-    protected $appends = [
-        'avatar',
-    ];
+    // ]
 
     protected static function boot()
     {

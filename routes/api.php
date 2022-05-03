@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('category', [CategoryController::class, 'index']);
 Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
-
+Route::get('category-parent', [CategoryController::class,'categoryparent']);
 Route::resource('category-community', CategoryCommunity::class);
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);

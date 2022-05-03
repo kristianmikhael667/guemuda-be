@@ -17,7 +17,7 @@ class Tags extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Content::class);
     }
 
     protected static function boot()

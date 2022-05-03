@@ -16,7 +16,7 @@ class Category extends Model
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Content::class);
     }
 
     public function videoarticle()
@@ -24,11 +24,13 @@ class Category extends Model
         return $this->hasMany(VideoArticle::class);
     }
 
-    public function sub_categories(){
+    public function sub_categories()
+    {
         return $this->hasMany(Category::class, "parent", "id");
     }
-    
-    public function parent(){
+
+    public function parent()
+    {
         return $this->belongsTo(Category::class, "parent", "id");
     }
 

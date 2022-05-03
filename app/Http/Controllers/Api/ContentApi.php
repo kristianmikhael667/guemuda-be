@@ -114,10 +114,10 @@ class ContentApi extends Controller
 
     public function categories(Request $request)
     {
-        // dd($request->category);
         // var_dump($request->as);
         if ($request->category) {
-            $content = Content::latest()->filter(request(['search', 'uids', 'author']))->paginate(7)->withQueryString();
+            $content = Content::latest()->filter(request(['search', 'category', 'author']))->paginate(7)->withQueryString();
+           
             if ($content) {
                 return ResponseFormatter::success(
                     $content,

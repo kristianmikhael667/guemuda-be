@@ -36,12 +36,6 @@ class Content extends Model
 
         $query->when($filters['category'] ?? false, function ($query, $category) {
             return $query->whereHas('category', function ($query) use ($category) {
-                $query->where('slug', $category);
-            });
-        });
-
-        $query->when($filters['uids'] ?? false, function ($query, $category) {
-            return $query->whereHas('category', function ($query) use ($category) {
                 $query->where('uuid', $category);
             });
         });
@@ -68,6 +62,11 @@ class Content extends Model
     }
 
     public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function categoryuid()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }

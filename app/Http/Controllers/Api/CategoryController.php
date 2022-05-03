@@ -50,7 +50,7 @@ class CategoryController extends Controller
     public function categoryparent()
     {
         return ResponseFormatter::success(
-            Category::where("parent", 0)->get(),
+            Category::where("parent", 0)->with("posts")->get(),
             'Data Content retrieved successfully'
         );
     }
@@ -59,7 +59,8 @@ class CategoryController extends Controller
     {
         if($request->sub){
             $categorys = Category::where('slug', $request->sub)->first();
-            $category = Category::with("parent")->find($categorys->id);
+            
+            $category = Category::with(["parent"])->find($categorys->id);
             $parents = [];
             $current = $category->parent;
             while($current!=null){

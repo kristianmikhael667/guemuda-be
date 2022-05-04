@@ -35,6 +35,7 @@ class ContentApi extends Controller
             ->groupBy("contents.video")
             ->groupBy("contents.category_id")
             ->groupBy("contents.tags_id")
+            ->limit(10)
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
         if ($posts) {
@@ -58,11 +59,11 @@ class ContentApi extends Controller
             $browsers = Browser::browserName();
             $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
             $browsers_names = str_replace(".", "", $browsers_name);
-    
+
             $platforms = Browser::platformName();
             $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
             $platforms_names = str_replace(".", "", $platforms_name);
-    
+
             $postsViews = new ContentViews();
             $postsViews->id_post = $content->id;
             $postsViews->titleslug = $content->slug;
@@ -85,7 +86,7 @@ class ContentApi extends Controller
                 'platform' =>  $platforms_names,
                 'device' => Browser::deviceFamily()
             ]);
-            
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -117,7 +118,7 @@ class ContentApi extends Controller
         // var_dump($request->as);
         if ($request->category) {
             $content = Content::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
-           
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,

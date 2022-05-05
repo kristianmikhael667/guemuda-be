@@ -107,7 +107,7 @@ class ContentApi extends Controller
         }
 
         return ResponseFormatter::success(
-            DB::table('contents')->orderBy('created_at', 'desc')->paginate($limit),
+            DB::table('contents')->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
             // $content->paginate($limit),
             'Data Content retrieved successfully'
         );

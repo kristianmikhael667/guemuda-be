@@ -38,7 +38,7 @@ class AuthAPI extends Controller
                 'job' => $request->job,
                 'bio' => $request->bio,
                 'phone_number' => $request->phone_number,
-
+                'date_birth' => $request->date_birth,
                 // 'phone_number' => $request->phone_number,
                 // 'date_birth' => date("Y/m/d"),
                 'roles' => 'common.user',

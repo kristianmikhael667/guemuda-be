@@ -45,7 +45,7 @@ Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);
 Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);
 Route::get('populararticle', [ContentApi::class, 'popular']);
-Route::get('popularinvestmen', [ContentApi::class, 'popular_investman']);
+Route::get('popularcategory', [ContentApi::class, 'popular_investman']);
 Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);

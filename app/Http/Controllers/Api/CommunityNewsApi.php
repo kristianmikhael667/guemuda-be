@@ -76,6 +76,7 @@ class CommunityNewsApi extends Controller
                 'session_id' => '-',
                 'user_id' => Auth::check() == false ? '-' : Auth::id(),
                 'ip'  => request()->ip(),
+                'category_ids' => $content->category_id,
                 'agent' => $browsers_names,
                 'platform' =>  $platforms_names,
                 'device' => Browser::deviceFamily()

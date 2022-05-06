@@ -34,24 +34,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::get('category', [CategoryController::class, 'index']);
 Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
-Route::get('category-parent', [CategoryController::class,'categoryparent']);
+Route::get('category-parent', [CategoryController::class, 'categoryparent']);
 Route::resource('category-community', CategoryCommunity::class);
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
-Route::get('community-news', [CommunityNewsApi::class,'all']);
+Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
 Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);
 Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);
 Route::get('populararticle', [ContentApi::class, 'popular']);
+Route::get('popularinvestmen', [ContentApi::class, 'popular_investman']);
 Route::get('webinar', [WebinarsApi::class, 'all']);
-Route::get('video-article', [VideoArticleAPI::class,'all']);
+Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);
 
 // User Service
 Route::post('register', [AuthAPI::class, 'register']);
-Route::post('email/verification-notification', [RegisterUserAPI::class,'sendVerificationEmail'])->middleware('auth:sanctum');
-Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class,'verify'])->name('verification.verify')->middleware('auth:sanctum');
+Route::post('email/verification-notification', [RegisterUserAPI::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
+Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');

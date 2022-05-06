@@ -27,9 +27,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-        VerifyEmail::toMailUsing(function($notifiable, $url){
-            $spaUrl = "http://front.dewanhoster.my.id?email_verify_url=".$url;
-            return(new MailMessage)
+        VerifyEmail::toMailUsing(function ($notifiable, $url) {
+            $spaUrl = $url;
+            return (new MailMessage)
                 ->subject('Verify Email Addresss')
                 ->line('Click the button below to verify your email address')
                 ->action('Verify Email Address', $spaUrl);

@@ -39,6 +39,7 @@ Route::resource('category-community', CategoryCommunity::class);
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
+Route::get('today', [ContentApi::class, 'newstoday']);
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
 Route::get('community-video', [CommunityVideoApi::class, 'all']);

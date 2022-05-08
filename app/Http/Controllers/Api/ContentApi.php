@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\ContentViews;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use hisorange\BrowserDetect\Parser as Browser;
@@ -43,6 +44,17 @@ class ContentApi extends Controller
             return ResponseFormatter::success(
                 $posts,
                 'Data Content retrieved successfully'
+            );
+        }
+    }
+
+    public function newstoday()
+    {
+        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate();
+        if ($posts) {
+            return ResponseFormatter::success(
+                $posts,
+                'Data Content Today retrieved successfully'
             );
         }
     }

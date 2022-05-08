@@ -11,7 +11,7 @@ class VideoArticle extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
-    protected $with = ['user'];
+    protected $with = ['user', 'category'];
     public $incrementing = false;
 
     public function user()
@@ -23,7 +23,7 @@ class VideoArticle extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
-    
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;

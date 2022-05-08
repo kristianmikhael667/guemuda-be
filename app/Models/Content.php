@@ -13,7 +13,7 @@ class Content extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['user','category'];
+    protected $with = ['user', 'category'];
 
     // protected $primaryKey = 'uuid';
     public $incrementing = false;
@@ -51,6 +51,11 @@ class Content extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // public function tags_id()
+    // {
+    //     return $this->belongsTo(Tags::class, 'tags_id');
+    // }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
@@ -66,7 +71,7 @@ class Content extends Model
         return Carbon::parse($value)->timestamp;
     }
 
-   
+
 
     public function categoryuid()
     {

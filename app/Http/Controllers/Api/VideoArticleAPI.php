@@ -16,7 +16,7 @@ class VideoArticleAPI extends Controller
     public function popular()
     {
         $posts = VideoArticle::join("view_video_articles", "view_video_articles.id_article", "=", "video_articles.id")
-        ->where("view_video_articles.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->where("view_video_articles.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
             ->groupBy("video_articles.slug")
             ->groupBy("video_articles.slug")
             ->groupBy("video_articles.id")
@@ -55,7 +55,7 @@ class VideoArticleAPI extends Controller
             $browsers = Browser::browserName();
             $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
             $browsers_names = str_replace(".", "", $browsers_name);
-    
+
             $platforms = Browser::platformName();
             $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
             $platforms_names = str_replace(".", "", $platforms_name);
@@ -71,7 +71,7 @@ class VideoArticleAPI extends Controller
                 'platform' =>  $platforms_names,
                 'device' => Browser::deviceFamily()
             ]);
-            
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -91,8 +91,11 @@ class VideoArticleAPI extends Controller
             $content->where('title', 'like', '%' . $title . '%');
         }
 
+
         return ResponseFormatter::success(
-            DB::table('video_articles')->orderBy('created_at', 'desc')->paginate($limit),
+            // DB::table('video_articles')->orderBy('created_at', 'desc')->paginate($limit),
+            $content = VideoArticle::orderBy('created_at', 'desc')->paginate($limit),
+
             // $content->paginate($limit),
             'Data Article retrieved successfully'
         );

@@ -18,6 +18,11 @@ class CategoryCommunity extends Model
         return $this->hasMany(CommunityNews::class);
     }
 
+    public function community_video()
+    {
+        return $this->hasMany(VideoCommunity::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

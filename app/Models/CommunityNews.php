@@ -11,7 +11,7 @@ class CommunityNews extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
-    protected $with = ['user'];
+    protected $with = ['user', 'category'];
     public $incrementing = false;
 
     public function scopeFilter($query, array $filters)

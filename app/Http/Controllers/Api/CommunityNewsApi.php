@@ -53,11 +53,11 @@ class CommunityNewsApi extends Controller
             $browsers = Browser::browserName();
             $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
             $browsers_names = str_replace(".", "", $browsers_name);
-    
+
             $platforms = Browser::platformName();
             $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
             $platforms_names = str_replace(".", "", $platforms_name);
-    
+
             $postsViews = new Community_views();
             $postsViews->id_post = $content->id;
             $postsViews->titleslug = $content->slug;
@@ -81,7 +81,7 @@ class CommunityNewsApi extends Controller
                 'platform' =>  $platforms_names,
                 'device' => Browser::deviceFamily()
             ]);
-            
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -102,7 +102,9 @@ class CommunityNewsApi extends Controller
         }
 
         return ResponseFormatter::success(
-            DB::table('community_news')->orderBy('created_at', 'desc')->paginate($limit),
+            // DB::table('community_news')->orderBy('created_at', 'desc')->paginate($limit),
+            $content = CommunityNews::orderBy('created_at', 'desc')->paginate($limit),
+
             // $content->paginate($limit),
             'Data Community retrieved successfully'
         );

@@ -45,4 +45,13 @@ class WebinarsApi extends Controller
             'Data Content retrieved successfully'
         );
     }
+
+    public function tagswebinar(Request $request)
+    {
+        $tags = DB::table('tags_webinars')->orderBy('created_at', 'desc')->get();
+        return response()->json([
+            'success' => 'Data is successfully added',
+            'data' => $tags
+        ]);
+    }
 }

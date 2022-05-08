@@ -19,7 +19,7 @@ class CommunityGroupAPI extends Controller
 
         if ($slug) {
             $content = CommunityGroup::where('slug', $slug)->first();
-            
+
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -44,5 +44,14 @@ class CommunityGroupAPI extends Controller
             // $content->paginate($limit),
             'Data Community Group retrieved successfully'
         );
+    }
+
+    public function tagscommunity(Request $request)
+    {
+        $tags = DB::table('tags_communities')->orderBy('created_at', 'desc')->get();
+        return response()->json([
+            'success' => 'Data is successfully added',
+            'data' => $tags
+        ]);
     }
 }

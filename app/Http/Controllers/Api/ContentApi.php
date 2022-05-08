@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\ContentViews;
+use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -171,10 +172,10 @@ class ContentApi extends Controller
 
     public function tags(Request $request)
     {
-        $category = DB::table('tags')->orderBy('created_at', 'desc')->get();
+        $tags = DB::table('tags')->orderBy('created_at', 'desc')->get();
         return response()->json([
             'success' => 'Data is successfully added',
-            'data' => $category
+            'data' => $tags
         ]);
     }
 }

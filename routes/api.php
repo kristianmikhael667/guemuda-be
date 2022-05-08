@@ -37,7 +37,6 @@ Route::get('subcategory', [CategoryController::class, 'subcategories']);
 Route::get('category-parent', [CategoryController::class, 'categoryparent']);
 Route::resource('category-community', CategoryCommunity::class);
 Route::get('categories', [ContentApi::class, 'categories']);
-Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('today', [ContentApi::class, 'newstoday']);
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
@@ -52,6 +51,11 @@ Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);
+
+// Tags
+Route::get('tags', [ContentApi::class, 'tags']);
+Route::get('tagscommunity', [CommunityGroupAPI::class, 'tagscommunity']);
+Route::get('tagswebinar', [WebinarsApi::class, 'tagswebinar']);
 
 // User Service
 Route::post('register', [AuthAPI::class, 'register']);

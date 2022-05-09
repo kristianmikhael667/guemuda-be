@@ -55,12 +55,12 @@ class AuthAPI extends Controller
                 'user' => $user
             ], 'Authenticated');
         } catch (Exception $error) {
-            // return ResponseFormatter::error([
-            //     'message' => 'Somethings variable wrong',
-            //     'datas' => $request,
-            //     'error' => $error
-            // ], 'Authentication Failed', 500);
-            dd($error);
+            return ResponseFormatter::error([
+                'message' => 'Somethings variable wrong',
+                'datas' => $request,
+                'error' => $error
+            ], 'Authentication Failed', 500);
+            // dd($error);
         }
 
         // $request->validate([

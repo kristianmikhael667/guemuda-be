@@ -6,9 +6,11 @@ use App\Actions\Fortify\PasswordValidationRules;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -25,7 +27,6 @@ class AuthAPI extends Controller
                 'email' => 'required|string|max:255|unique:users',
                 'phone_number' => 'required',
                 'password' => 'required|confirmed',
-                'address' => 'required'
                 // 'password' => $this->passwordRules()
             ]);
             $users = User::create([
@@ -33,14 +34,12 @@ class AuthAPI extends Controller
                 'last_name' => $request->last_name,
                 'username' => $request->username,
                 'email' => $request->email,
-                'address' => $request->address,
-                'city' => $request->city,
-                'job' => $request->job,
-                'bio' => $request->bio,
+                'address' => $request->address ? $request->address : "-",
+                'city' => $request->city ? $request->city : "-",
+                'job' => $request->job ? $request->job : "-",
+                'bio' => $request->bio ?  $request->bio : "-",
                 'phone_number' => $request->phone_number,
-                'date_birth' => $request->date_birth,
-                // 'phone_number' => $request->phone_number,
-                // 'date_birth' => date("Y/m/d"),
+                'date_birth' => $request->date_birth ? $request->date_birth : Carbon::now(),
                 'roles' => 'common.user',
                 'password' => Hash::make($request->password),
             ]);
@@ -56,12 +55,12 @@ class AuthAPI extends Controller
                 'user' => $user
             ], 'Authenticated');
         } catch (Exception $error) {
-            // return ResponseFormatter::error([
-            //     'message' => 'Somethings variable wrong',
-            //     'datas' => $request,
-            //     'error' => $error
-            // ], 'Authentication Failed', 500);
-            dd($error);
+            return ResponseFormatter::error([
+                'message' => 'Somethings variable wrong',
+                'datas' => $request,
+                'error' => $error
+            ], 'Authentication Failed', 500);
+            // dd($error);
         }
 
         // $request->validate([

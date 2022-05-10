@@ -100,27 +100,14 @@ class ContentApi extends Controller
 
         if ($slug) {
             $content = Content::where('slug', $slug)->first();
-
-            // Cek Browser yang dipakai Chrome, Opera, Safari, Mozilla, Microsoft edge
+            // ContentViews::createViewLog($content);
             $browsers = Browser::browserName();
-            if ($browsers == Browser::isChrome() && $browsers == Browser::isOpera() && $browsers == Browser::isFirefox() && $browsers == Browser::isSafari() && $browsers == Browser::isEdge()) {
-                $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
-                $browsers_names = str_replace(".", "", $browsers_name);
-            }
+            $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
+            $browsers_names = str_replace(".", "", $browsers_name);
 
-            // Cek Perangkat Digunakan Dekstor, Android, IOS
             $platforms = Browser::platformName();
-            if ($platforms == Browser::isDesktop() && $platforms == Browser::isAndroid() && $platforms == Browser::isMac()) {
-                $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
-                $platforms_names = str_replace(".", "", $platforms_name);
-            }
-
-            // Cek Device 
-            $devices = Browser::deviceFamily();
-            if ($devices == "Samsung" && $devices == "Vivo" && $devices == "Apple" && $devices == "Xiaomi" && $devices == "Oppo") {
-                $devices_name = preg_replace('/[0-9]+/', '', $devices);
-                $devices_names = str_replace(".", "", $devices_name);
-            }
+            $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
+            $platforms_names = str_replace(".", "", $platforms_name);
 
             ContentViews::create([
                 'id_post' => $content->id,
@@ -132,7 +119,7 @@ class ContentApi extends Controller
                 'category_ids' => $content->category_id,
                 'agent' => $browsers_names,
                 'platform' =>  $platforms_names,
-                'device' => $devices_names
+                'device' => Browser::deviceFamily()
             ]);
 
             if ($content) {

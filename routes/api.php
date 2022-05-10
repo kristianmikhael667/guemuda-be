@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\RegisterUserAPI;
+use App\Http\Controllers\Api\Test;
 use App\Http\Controllers\Api\VideoArticleAPI;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
@@ -26,8 +27,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum', 'verified')->group(function () {
+    Route::get('/user', [Test::class, 'test']);
 });
 // Route::get('food', [FoodController::class, 'all']);
 
@@ -58,6 +59,7 @@ Route::get('tagscommunity', [CommunityGroupAPI::class, 'tagscommunity']);
 Route::get('tagswebinar', [WebinarsApi::class, 'tagswebinar']);
 
 // User Service
+Route::post('login', [AuthAPI::class, 'login']);
 Route::post('register', [AuthAPI::class, 'register']);
 Route::post('email/verification-notification', [RegisterUserAPI::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
 Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');

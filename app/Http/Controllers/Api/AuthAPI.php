@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Actions\Fortify\PasswordValidationRules;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -94,5 +96,30 @@ class AuthAPI extends Controller
         //         'data' => ['token' => $token->plainTextToken, 'user' => $user]
         //     ]
         // );
+    }
+
+    public function login(LoginRequest $request)
+    {
+        try {
+            $request->authenticate();
+            $token = $request->user()->createToken('authtoken');
+            return ResponseFormatter::success([
+                'access_token' => $token->plainTextToken,
+                'token_type' => 'Bearer',
+                'user' => array(
+                    "first_name" => $request->user()->first_name,
+                    "last_name" => $request->user()->last_name,
+                    "email" => $request->user()->email,
+                    "username" => $request->user()->username,
+                    "phone_number" => $request->user()->phone_number,
+                    "status" => $request->user()->status,
+                )
+            ], 'Authenticated');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'message' => 'Somethings variable wrong',
+                'error' => $error
+            ], 'Authentication Failed', 500);
+        }
     }
 }

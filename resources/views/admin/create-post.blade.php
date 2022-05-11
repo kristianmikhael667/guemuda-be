@@ -29,9 +29,22 @@
 
                                             <fieldset class="uk-fieldset mt-3">
                                                 <div class="uk-margin">
-                                                    <input class="uk-input" name="title" id="title" type="text"
-                                                        placeholder="Title Post">
+                                                    <input class="uk-input" value="{{ old('title') }}" name="title"
+                                                        id="title" type="text" placeholder="Title Post">
                                                     @error('title')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="uk-margin">
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Date Post</span>
+                                                    </div>
+                                                    <input min='1899-01-01' max='2000-13-13' class="uk-input"
+                                                        name="created_at" id="created_at" type="date"
+                                                        placeholder="Date Post">
+                                                    @error('schedule')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -48,44 +61,43 @@
                                                 <div class="uk-margin">
                                                     <div class="uk-margin">
                                                         <select class="uk-select" onchange="yesnoCheck(this)">
-                                                            <option disabled="disabled" selected>-- Choose Type File --
+                                                            <option disabled="disabled" selected>-- Choose Type File
+                                                                Upload --
                                                             </option>
-                                                            <option value="on">File Image</option>
-                                                            <option value="off">File Video</option>
+                                                            <option value="on">Upload Image</option>
+                                                            <option value="off">Embed Video</option>
                                                         </select>
                                                     </div>
                                                     <div class="uk-margin" id="imagepost" style="display: none">
+                                                        <input class="uk-input mb-2" name="captions" id="captions"
+                                                            type="text" placeholder="Caption">
                                                         <input type="file" name="image" id="image" class="dropify"
                                                             data-max-file-size="5M">
                                                     </div>
                                                     <div class="uk-margin" id="videopost" style="display: none">
-                                                        {{-- <input type="file" name="image" id="image"> --}}
-                                                        <div class="d-flex">
-
+                                                        {{-- <input class="uk-input mb-2" name="captions" id="captions"
+                                                            type="text" placeholder="Caption"> --}}
+                                                        <input class="uk-input mb-2" name="caption" id="caption"
+                                                            type="text" placeholder="Input Link Embed">
+                                                        <input type="file" name="thumbnail" id="thumbnail"
+                                                            class="dropify" data-max-file-size="5M">
+                                                        {{-- <div class="d-flex">
                                                             <div uk-form-custom="target: true">
                                                                 <label for="" class="mr-2">Upload Video</label>
                                                                 <input type="file" name="video" id="video">
                                                                 <input class="uk-input uk-form-width-medium" type="text"
                                                                     placeholder="Select file video" disabled>
-
-                                                                {{-- <label for="" class="mr-2">Upload
-                                                                    Thumbnails</label>
-                                                                <input type="file" name="thumbnail" id="thumbnail"
-                                                                    class="dropify" data-max-file-size="5M"> --}}
                                                             </div>
-
                                                         </div>
                                                         <div class="d-flex">
-
                                                             <div uk-form-custom="target: true">
-
                                                                 <label for="" class="mr-2 mt-2">Upload
                                                                     Thumbnails</label>
                                                                 <input type="file" name="thumbnail" id="thumbnail"
                                                                     class="dropify" data-max-file-size="5M">
                                                             </div>
 
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -113,7 +125,7 @@
                                                     <p>Sub Category ------</p>
                                                     <div class="row">
                                                         <div id="subid" name="subid" style="display: none">
-                                                            
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,9 +172,8 @@
                                                 </div>
                                             </div> --}}
                                         </div>
-
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save News</button>
+                                    <button type="submit" class="btn btn-primary">Save Post</button>
                                 </form>
                             </div>
                         </div>

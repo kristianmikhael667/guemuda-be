@@ -53,7 +53,7 @@
             allowedFormats: ["portrait", "square", "landscape"],
             allowedFileExtensions: ["*"],
             messages: {
-                default: "Upload your Image News",
+                default: "Upload your Image",
                 replace: "Drag and drop or click to replace",
                 remove: "Remove",
                 error: "Ooops, something wrong happended.",

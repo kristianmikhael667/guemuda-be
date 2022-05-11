@@ -8,6 +8,7 @@ use App\Models\Content;
 use App\Models\ContentViews;
 use App\Models\Tags;
 use App\Models\User;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,8 @@ class ContentController extends Controller
                 ->groupBy("contents.uid_user_2")
                 ->groupBy("thumbnail")
                 ->groupBy("contents.description")
+                ->groupBy("contents.captions")
+                ->groupBy("contents.type")
                 ->groupBy("contents.link")
                 ->groupBy("contents.status")
                 ->groupBy("contents.created_at")
@@ -94,22 +97,27 @@ class ContentController extends Controller
             'video' => 'mimes:mp4,x-flv,x-mpegURL,MP2T,3gpp,quicktime,x-msvideo,x-ms-wmv',
         ]);
 
+        // make image true 1 and make video false 0
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-image');
             $validatedData['video'] = '-';
             $validatedData['thumbnail'] = '-';
+            $validatedData['type'] = 1;
+            $validatedData['captions'] = $request->captions;
+            $validatedData['link'] = '-';
         }
         if ($request->hasFile('video')) {
             $validatedData['video'] = $request->file('video')->store('post-video');
             $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
             $validatedData['image'] = '-';
+            $validatedData['link'] = $request->link;
         }
         $slug = SlugService::createSlug(Content::class, 'slug', $request->title);
 
         $validatedData['uid_user'] = auth()->user()->id;
         $validatedData['uid_user_2'] = "Not Edited";
         $validatedData['slug'] = $slug;
-        $validatedData['link'] = '-';
+        $validatedData['created_at'] = $request->created_at ? $request->created_at : Carbon::now();
         $validatedData['tags_id'] = implode(",", $validatedData['tags_id']);
         $taglessBody = strip_tags($validatedData['description']);
         $validatedData['subdesc'] = $taglessBody;

@@ -58,32 +58,43 @@
 
         {{-- Side Bar Admin --}}
         @if(Auth::user()->roles == "common.admin")
-    
+
         <li class="{{ Request::is('administrator') ? 'active' : '' }}">
             <a class="" href="/administrator" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
-                    stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                    <polyline points="9 22 9 12 15 12 15 22" />
-                </svg></i> Dashboard
+                        stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg></i> Dashboard
             </a>
         </li>
 
-        <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
+        <li class="{{ Request::is('administrator/post*') ? 'active' : '' }}">
+            <a class="" href="/administrator/post" title="">
+                <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-airplay">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg></i> Post
+            </a>
+        </li>
+
+        {{-- <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="feather feather-airplay">
-                    <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
-                    <polygon points="12 15 17 21 7 21 12 15"></polygon>
-                </svg></i> Post
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-airplay">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg></i> Post
             </a>
             <ul class="submenu">
                 <li><a href="/administrator/post" title="">Article News</a></li>
                 <li><a href="/administrator/video-article" title="">Video Article</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="{{ Request::is('administrator/webinars*') ? 'active' : '' }}">
             <a class="" href="/administrator/webinars" title="">
@@ -99,9 +110,9 @@
 
         <li class="menu-item-has-children {{ Request::is('administrator/community*') ? 'active' : '' }}">
             <a class="" href="#" title="">
-                <i><svg id="commu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-users">
+                <i><svg id="commu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-users">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
                         <circle cx="9" cy="7" r="4"></circle>
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
@@ -115,7 +126,7 @@
             </ul>
         </li>
 
-        <li class="menu-item-has-children {{ Request::is('administrator/category-article*') ? 'active' : '' }}">
+        {{-- <li class="menu-item-has-children {{ Request::is('administrator/category-article*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -133,7 +144,7 @@
                 <li><a href="/administrator/category-community" title="">Comunnity</a></li>
                 <li><a href="/administrator/category-webinars" title="">Webinars</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="{{ Request::is('administrator/media*') ? 'active' : '' }}">
             <a class="" href="/administrator/media" title="">
@@ -178,6 +189,7 @@
                 <li><a href="loaders.html" title="">Admin</a></li>
                 <li><a href="forgot-password.html" title="">Editor</a></li>
                 <li><a href="loaders.html" title="">Contributor</a></li>
+                <li><a href="" title="">Subscriber</a></li>
             </ul>
         </li>
 

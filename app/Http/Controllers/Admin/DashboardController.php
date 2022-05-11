@@ -27,6 +27,8 @@ class DashboardController extends Controller
         ->groupBy("contents.title")
         ->groupBy("contents.subdesc")
         ->groupBy("contents.image")
+        ->groupBy("contents.captions")
+        ->groupBy("contents.type")
         ->groupBy("contents.video")
         ->groupBy("contents.category_id")
         ->groupBy("contents.tags_id")

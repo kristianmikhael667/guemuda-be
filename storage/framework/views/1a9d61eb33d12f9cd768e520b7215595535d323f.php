@@ -18,6 +18,7 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <h4>Article News Management</h4>
+                                            
                                         </div>
                                         <div>
                                             <a href="/administrator/post/create" id="create-new-post"
@@ -85,7 +86,7 @@
                                         <tr>
                                             <td><?php echo e($contents->firstItem() + $num); ?></td>
                                             <td><a href="/administrator/post/edittitle/<?php echo e($content->slug); ?>"><?php echo e($content->title); ?></a></td>
-                                            <td><?php echo e($content->user->username); ?></td>
+                                            <td><?php echo e($content->user['username']); ?></td>
                                             <td><?php echo e($content->uid_user_2); ?>
 
                                             </td>

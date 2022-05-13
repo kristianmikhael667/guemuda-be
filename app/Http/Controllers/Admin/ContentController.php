@@ -15,70 +15,77 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class ContentController extends Controller
 {
+
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
-
-            $search = '';
-            if (request('category')) {
-                // $contents = DB::table('contents')
-                //     ->where('title', 'like', "%" . $search . "%")
-                //     ->paginate();
-
-                // return view('admin.content', [
-                //     'page' => 'Administrator',
-                //     'contents' => $contents
-                // ]);
-                $category = Category::firstWhere('slug', request('category'));
-                $title = ' iner ' . $category->name;
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
             }
-
-            if (request('user')) {
-                $user = User::firstWhere('username', request('user'));
-                $title = ' by ' . $user->username;
-            }
-
-            $contents = Content::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
-            $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
-                ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
-                ->groupBy("contents.slug")
-                ->groupBy("contents.id")
-                ->groupBy("contents.uid_user")
-                ->groupBy("contents.uid_user_2")
-                ->groupBy("thumbnail")
-                ->groupBy("contents.description")
-                ->groupBy("contents.captions")
-                ->groupBy("contents.type")
-                ->groupBy("contents.link")
-                ->groupBy("contents.status")
-                ->groupBy("contents.created_at")
-                ->groupBy("contents.updated_at")
-                ->groupBy("contents.title")
-                ->groupBy("contents.subdesc")
-                ->groupBy("contents.image")
-                ->groupBy("contents.video")
-                ->groupBy("contents.category_id")
-                ->groupBy("contents.tags_id")
-                ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
-                ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
-
-            $taggers = Tags::all();
-            return view('admin.content', [
-                'page' => 'Administrator',
-                'contents' => $contents,
-                'views' => $kinanda,
-                'tages' => $taggers
-            ]);
-        } else {
-            return redirect()->back();
         }
+        $search = '';
+        if (request('category')) {
+            $category = Category::firstWhere('slug', request('category'));
+            $title = ' iner ' . $category->name;
+        }
+
+        if (request('user')) {
+            $user = User::firstWhere('username', request('user'));
+            $title = ' by ' . $user->username;
+        }
+
+        $contents = Content::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+        $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
+            ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
+
+        $taggers = Tags::all();
+        return view('admin.content', [
+            'page' => 'Administrator',
+            'contents' => $contents,
+            'views' => $kinanda,
+            'tages' => $taggers
+        ]);
     }
 
     public function create()
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-create'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
+        $role = User::permission('post-create')->get();
+        foreach ($role as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         return view('admin.create-post', [
             'page' => 'Administrator',
             'categories' => Category::where("parent", 0)->get(),
@@ -88,6 +95,18 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-create'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
+        $role = User::permission('post-create')->get();
+        foreach ($role as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_id' => 'required',
@@ -133,7 +152,12 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        //
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-list'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
     }
 
     /**
@@ -144,6 +168,12 @@ class ContentController extends Controller
      */
     public function edit(Content $post)
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         return view('admin.content-edit', [
             'page' => 'Administrator',
             'contents' => $post
@@ -152,6 +182,12 @@ class ContentController extends Controller
 
     public function edittitle($id)
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-post'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         $title = DB::table('contents')->where('slug', $id)->get();
         $title_data = $title[0]->title;
         $slugs = $title[0]->slug;
@@ -172,6 +208,12 @@ class ContentController extends Controller
 
     public function update(Request $request, Content $post)
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         if ($request->title) {
             DB::table('contents')->where('slug', $post->slug)->update([
                 'title' => $request->title,
@@ -191,6 +233,12 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
+        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
+        foreach ($all_roles_except_a_and_b as $rol) {
+            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
+                abort(403);
+            }
+        }
         if ($content->image) {
             Storage::delete($content->image);
         }

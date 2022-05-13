@@ -110,9 +110,9 @@
                             <x-jet-button class="form__button">
                                 {{ __('Log in') }}
                             </x-jet-button>
-                            <p class="form__text">Don't have an account?
+                            {{-- <p class="form__text">Don't have an account?
                                 <label for="toggle" class="form__link">Sign up!</label>
-                            </p>
+                            </p> --}}
                         </form>
                     </div>
                 </div>

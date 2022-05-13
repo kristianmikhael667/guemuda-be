@@ -18,7 +18,7 @@ class CategoryCommunity extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $category = DB::table('category_communities')->orderBy('created_at', 'desc')->get();
 
             return view('admin.category-community', [
@@ -35,7 +35,7 @@ class CategoryCommunity extends Controller
      */
     public function create()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             return view('admin.create-category-community-news', [
                 'page' => 'Administrator',
             ]);

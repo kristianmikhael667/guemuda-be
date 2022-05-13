@@ -44,6 +44,8 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         '1e298922c3e2134d42dcdb03e6d5f55a' => __DIR__ . '/..' . '/torann/geoip/src/helpers.php',
         'ac4ced6690157c667ba34e00e797e03f' => __DIR__ . '/..' . '/awssat/laravel-visits/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -108,6 +110,7 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Bridge\\PsrHttpMessage\\' => 30,
             'Spatie\\Referer\\' => 15,
+            'Spatie\\Permission\\' => 18,
             'Sentry\\' => 7,
         ),
         'R' => 
@@ -219,6 +222,7 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
             'Cviebrock\\EloquentSluggable\\' => 28,
             'Cron\\' => 5,
             'Composer\\CaBundle\\' => 18,
+            'Collective\\Html\\' => 16,
             'Cocur\\Slugify\\' => 14,
             'Clue\\StreamFilter\\' => 18,
             'Clockwork\\' => 10,
@@ -403,6 +407,10 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'Spatie\\Referer\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-referer/src',
+        ),
+        'Spatie\\Permission\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
         'Sentry\\' => 
         array (
@@ -683,6 +691,10 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
+        'Collective\\Html\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelcollective/html/src',
+        ),
         'Cocur\\Slugify\\' => 
         array (
             0 => __DIR__ . '/..' . '/cocur/slugify/src',
@@ -774,9 +786,11 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'App\\Http\\Controllers\\Admin\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/DashboardController.php',
         'App\\Http\\Controllers\\Admin\\EditorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/EditorController.php',
         'App\\Http\\Controllers\\Admin\\MediaController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/MediaController.php',
+        'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',
         'App\\Http\\Controllers\\Admin\\TagsCommunity' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TagsCommunity.php',
         'App\\Http\\Controllers\\Admin\\TagsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TagsController.php',
         'App\\Http\\Controllers\\Admin\\TagsWebinarsControllers' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/TagsWebinarsControllers.php',
+        'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
         'App\\Http\\Controllers\\Admin\\VideoArticleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/VideoArticleController.php',
         'App\\Http\\Controllers\\Admin\\WebinarsControllers' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/WebinarsControllers.php',
         'App\\Http\\Controllers\\Api\\AuthAPI' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthAPI.php',
@@ -820,6 +834,8 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'App\\Models\\Event' => __DIR__ . '/../..' . '/app/Models/Event.php',
         'App\\Models\\Likomvi' => __DIR__ . '/../..' . '/app/Models/Likomvi.php',
         'App\\Models\\Membership' => __DIR__ . '/../..' . '/app/Models/Membership.php',
+        'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
+        'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'App\\Models\\Tags' => __DIR__ . '/../..' . '/app/Models/Tags.php',
         'App\\Models\\TagsCommunity' => __DIR__ . '/../..' . '/app/Models/TagsCommunity.php',
         'App\\Models\\TagsWebinar' => __DIR__ . '/../..' . '/app/Models/TagsWebinar.php',
@@ -1112,6 +1128,13 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'Cocur\\Slugify\\RuleProvider\\RuleProviderInterface' => __DIR__ . '/..' . '/cocur/slugify/src/RuleProvider/RuleProviderInterface.php',
         'Cocur\\Slugify\\Slugify' => __DIR__ . '/..' . '/cocur/slugify/src/Slugify.php',
         'Cocur\\Slugify\\SlugifyInterface' => __DIR__ . '/..' . '/cocur/slugify/src/SlugifyInterface.php',
+        'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
+        'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+        'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
+        'Collective\\Html\\FormFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/FormFacade.php',
+        'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
+        'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
+        'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
         'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
@@ -1143,7 +1166,9 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'Database\\Factories\\ProgramFactory' => __DIR__ . '/../..' . '/database/factories/ProgramFactory.php',
         'Database\\Factories\\TeamFactory' => __DIR__ . '/../..' . '/database/factories/TeamFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
+        'Database\\Seeders\\CreateAdminUserSeeder' => __DIR__ . '/../..' . '/database/seeders/CreateAdminUserSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\PermissionTableSeeder' => __DIR__ . '/../..' . '/database/seeders/PermissionTableSeeder.php',
         'Database\\Seeders\\ProgramSeeder' => __DIR__ . '/../..' . '/database/seeders/ProgramSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
@@ -5900,6 +5925,33 @@ class ComposerStaticInit9b9ae1564be78921f4ce76e6c29699e9
         'Sentry\\UserDataBag' => __DIR__ . '/..' . '/sentry/sentry/src/UserDataBag.php',
         'Sentry\\Util\\JSON' => __DIR__ . '/..' . '/sentry/sentry/src/Util/JSON.php',
         'Sentry\\Util\\PHPVersion' => __DIR__ . '/..' . '/sentry/sentry/src/Util/PHPVersion.php',
+        'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
+        'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
+        'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',
+        'Spatie\\Permission\\Commands\\Show' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/Show.php',
+        'Spatie\\Permission\\Commands\\UpgradeForTeams' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/UpgradeForTeams.php',
+        'Spatie\\Permission\\Contracts\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Permission.php',
+        'Spatie\\Permission\\Contracts\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Contracts/Role.php',
+        'Spatie\\Permission\\Exceptions\\GuardDoesNotMatch' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/GuardDoesNotMatch.php',
+        'Spatie\\Permission\\Exceptions\\PermissionAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\PermissionDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/PermissionDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\RoleAlreadyExists' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleAlreadyExists.php',
+        'Spatie\\Permission\\Exceptions\\RoleDoesNotExist' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/RoleDoesNotExist.php',
+        'Spatie\\Permission\\Exceptions\\UnauthorizedException' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/UnauthorizedException.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionInvalidArgument' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionInvalidArgument.php',
+        'Spatie\\Permission\\Exceptions\\WildcardPermissionNotProperlyFormatted' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Exceptions/WildcardPermissionNotProperlyFormatted.php',
+        'Spatie\\Permission\\Guard' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Guard.php',
+        'Spatie\\Permission\\Middlewares\\PermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/PermissionMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleMiddleware.php',
+        'Spatie\\Permission\\Middlewares\\RoleOrPermissionMiddleware' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Middlewares/RoleOrPermissionMiddleware.php',
+        'Spatie\\Permission\\Models\\Permission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Permission.php',
+        'Spatie\\Permission\\Models\\Role' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Models/Role.php',
+        'Spatie\\Permission\\PermissionRegistrar' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionRegistrar.php',
+        'Spatie\\Permission\\PermissionServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-permission/src/PermissionServiceProvider.php',
+        'Spatie\\Permission\\Traits\\HasPermissions' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasPermissions.php',
+        'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
+        'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
+        'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
         'Spatie\\Referer\\CaptureReferer' => __DIR__ . '/..' . '/spatie/laravel-referer/src/CaptureReferer.php',
         'Spatie\\Referer\\Exceptions\\InvalidConfiguration' => __DIR__ . '/..' . '/spatie/laravel-referer/src/Exceptions/InvalidConfiguration.php',
         'Spatie\\Referer\\Helpers\\Url' => __DIR__ . '/..' . '/spatie/laravel-referer/src/Helpers/Url.php',

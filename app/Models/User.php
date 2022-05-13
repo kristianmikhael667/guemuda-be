@@ -13,6 +13,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -24,6 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
+
 
     /**
      * The attributes that are mass assignable.
@@ -67,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // protected $appends = [
     //     'avatar',
     // ];
-  
+
     protected static function boot()
     {
         parent::boot();
@@ -76,6 +79,11 @@ class User extends Authenticatable implements MustVerifyEmail
             $model->userId = Str::uuid();
         });
     }
+
+    // public function roles()
+    // {
+    //     return $this->hasOne(Role::class);
+    // }
 
     public function getCreatedAtAttribute($value)
     {

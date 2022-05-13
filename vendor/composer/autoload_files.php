@@ -43,4 +43,6 @@ return array(
     '1e298922c3e2134d42dcdb03e6d5f55a' => $vendorDir . '/torann/geoip/src/helpers.php',
     'ac4ced6690157c667ba34e00e797e03f' => $vendorDir . '/awssat/laravel-visits/src/helpers.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
+    'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
+    '377b22b161c09ed6e5152de788ca020a' => $vendorDir . '/spatie/laravel-permission/src/helpers.php',
 );

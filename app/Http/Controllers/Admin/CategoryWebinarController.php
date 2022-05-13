@@ -18,7 +18,7 @@ class CategoryWebinarController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $category = DB::table('category_webinars')->orderBy('created_at', 'desc')->get();
 
             return view('admin.category-webinar', [
@@ -37,7 +37,7 @@ class CategoryWebinarController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             return view('admin.create-category-webinars', [
                 'page' => 'Administrator',
             ]);

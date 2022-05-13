@@ -78,6 +78,7 @@ class DashboardController extends Controller
         ->groupBy("users.address")
         ->groupBy("users.city")
         ->groupBy("users.job")
+        ->groupBy("users.rolesname")
         ->groupBy("users.bio")
         ->groupBy("users.phone_number")
         ->groupBy("users.date_birth")

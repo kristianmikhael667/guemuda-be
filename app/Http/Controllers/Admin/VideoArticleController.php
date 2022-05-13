@@ -15,7 +15,7 @@ class VideoArticleController extends Controller
 {
     public function index()
     {
-        if(Auth::user()->roles === 'common.admin'){
+        if(Auth::user()->roles === 'common.superadmin'){
             $video = VideoArticle::latest()->with(['category', 'user'])->paginate(10)->withQueryString();
             $kinanda = VideoArticle::join("view_video_articles", "view_video_articles.id_article", "=", "video_articles.id")
             ->where("view_video_articles.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))

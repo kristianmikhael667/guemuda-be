@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagsCommunity;
 use App\Http\Controllers\Admin\TagsWebinarsControllers;
 use App\Http\Controllers\Admin\VideoArticleController;
@@ -53,11 +54,17 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('category-webinars', CategoryWebinarController::class);
     Route::resource('category-community', CategoryCommunity::class);
     Route::resource('tags', TagsController::class);
-    Route::post('/subcat', [CategoryArticle::class,'subcat']);
+    Route::post('/subcat', [CategoryArticle::class, 'subcat']);
     Route::resource('tagswebinars', TagsWebinarsControllers::class);
     Route::resource('tagscommunity', TagsCommunity::class);
     Route::resource('community-news', CommunityNews::class);
     Route::resource('community-video', CommunityVideoController::class);
     Route::resource('community-group', CommunityGroupController::class);
     Route::get('/media', [MediaController::class, 'index']);
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
 });
+
+// Route::group(['middleware' => ['auth']], function () {
+  
+// });

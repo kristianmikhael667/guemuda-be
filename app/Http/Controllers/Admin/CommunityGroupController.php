@@ -17,7 +17,7 @@ class CommunityGroupController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $communitygroup = CommunityGroup::latest()->get();
             return view('admin.community-group',[
                 'page' => 'Administrator',

@@ -19,6 +19,11 @@
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <h4>Article News Management</h4>
+                                            {{-- @role('admin')
+                                            <p>hai min</p>
+                                            @else
+                                            <p>vak</p>
+                                            @endrole --}}
                                         </div>
                                         <div>
                                             <a href="/administrator/post/create" id="create-new-post"
@@ -88,7 +93,7 @@
                                             <td><a href="/administrator/post/edittitle/{{ $content->slug }}">{{
                                                     $content->title
                                                     }}</a></td>
-                                            <td>{{ $content->user->username }}</td>
+                                            <td>{{ $content->user['username'] }}</td>
                                             <td>{{ $content->uid_user_2}}
                                             </td>
                                             <td>{{ $content->category['name'] }}</td>

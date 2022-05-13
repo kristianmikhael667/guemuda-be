@@ -10,10 +10,10 @@ class IsAdmin
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->roles === 'common.superadmin') {
+        if (Auth::user() && Auth::user()->rolesname === 'superadmin') {
             return $next($request);
         }
-        if (Auth::user() && Auth::user()->roles === 'common.admin') {
+        if (Auth::user() && Auth::user()->rolesname === 'admin') {
             return $next($request);
         }
         abort(403);

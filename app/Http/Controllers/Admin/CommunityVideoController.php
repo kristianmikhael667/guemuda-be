@@ -20,7 +20,7 @@ class CommunityVideoController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $community = VideoCommunity::latest()->paginate(10)->withQueryString();
             $kinanda = VideoCommunity::join("video_community_views", "video_community_views.id_community", "=", "video_communities.id")
                 ->where("video_community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))

@@ -19,7 +19,7 @@ class WebinarsControllers extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
 
             $search = '';
             if (request('category')) {

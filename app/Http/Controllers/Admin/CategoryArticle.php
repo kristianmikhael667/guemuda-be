@@ -18,7 +18,7 @@ class CategoryArticle extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $category = DB::table('categories')->orderBy('created_at', 'desc')->get();
 
             return view('admin.category-article', [
@@ -37,7 +37,7 @@ class CategoryArticle extends Controller
      */
     public function create()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             return view('admin.create-category-article', [
                 'page' => 'Administrator',
                 'categories' => Category::all(),

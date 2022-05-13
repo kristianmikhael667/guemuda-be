@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <title>Forbidden | 404</title>
+    <title>Forbidden | 403</title>
     <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
 
-    <link rel="stylesheet" href="css/main.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/color.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ '/css/main.min.css' }}">
+    <link rel="stylesheet" href="{{ '/css/style.css' }}">
+    <link rel="stylesheet" href="{{ '/css/color.css' }}">
+    <link rel="stylesheet" href="{{ '/css/responsive.css' }}">
 
 </head>
 
@@ -46,9 +46,9 @@
                                         <line x1="12" y1="16" x2="12.01" y2="16"></line>
                                     </svg></i>3</h2>
                             <span>FORBIDDEN</span>
-                            <p>Not Authentication</p>
+                            {{-- <p>Not Authentication</p> --}}
                             <div class="error-btn">
-                                <a title="" href="/login" class="primary button circle">Go Back To Home</a>
+                                {{-- <a title="" href="/login" class="primary button circle">Go Back To Home</a> --}}
                             </div>
                         </div>
                     </div>
@@ -179,9 +179,9 @@
         </div><!-- side slide message & popup -->
     </div>
 
-    <script src="js/main.min.js"></script>
-    <script src="js/vivus.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="{{ '/js/main.min.js' }}"></script>
+    <script src="{{ '/js/vivus.min.js' }}"></script>
+    <script src="{{ '/js/script.js' }}"></script>
 
 
 </body>

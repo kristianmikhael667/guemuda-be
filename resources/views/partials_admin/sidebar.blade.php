@@ -1,7 +1,7 @@
 <nav class="sidebar">
     <ul class="menu-slide">
-        {{-- Side Bar Superadmin --}}
-        @if(Auth::user()->roles == "common.superadmin")
+        {{-- Side Bar Admin --}}
+        @if(Auth::user()->rolesname == "admin")
         <li class="{{ Request::is('administrator') ? 'active' : '' }}">
             <a class="" href="/administrator" title="">
                 <i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round"
@@ -10,6 +10,17 @@
                         <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         <polyline points="9 22 9 12 15 12 15 22" />
                     </svg></i> Dashboard
+            </a>
+        </li>
+
+        <li class="{{ Request::is('administrator/post*') ? 'active' : '' }}">
+            <a class="" href="/administrator/post" title="">
+                <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-airplay">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg></i> Post
             </a>
         </li>
 
@@ -56,8 +67,8 @@
         </li>
         @endif
 
-        {{-- Side Bar Admin --}}
-        @if(Auth::user()->roles == "common.admin")
+        {{-- Side Bar Superadmin --}}
+        @if(Auth::user()->rolesname == "superadmin")
 
         <li class="{{ Request::is('administrator') ? 'active' : '' }}">
             <a class="" href="/administrator" title="">
@@ -185,6 +196,7 @@
                     </svg></i> User Management
             </a>
             <ul class="submenu">
+                <li><a href="/administrator/users" title="">All</a></li>
                 <li><a href="loaders.html" title="">Super Admin</a></li>
                 <li><a href="loaders.html" title="">Admin</a></li>
                 <li><a href="forgot-password.html" title="">Editor</a></li>
@@ -193,7 +205,19 @@
             </ul>
         </li>
 
-        <li class="">
+        <li class="{{ Request::is('administrator/roles*') ? 'active' : '' }}">
+            <a class="" href="/administrator/roles" title="">
+                <i class="">
+                    <svg id="main" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-tool">
+                        <path
+                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
+                        </path>
+                    </svg></i>Roles
+            </a>
+        </li>
+        {{-- <li class="">
             <a class="" href="events.html" title=""><i class="">
                     <svg id="set" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -204,19 +228,8 @@
                         </path>
                     </svg></i>Setting
             </a>
-        </li>
-        <li class="">
-            <a class="" href="products.html" title="">
-                <i class="">
-                    <svg id="main" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-tool">
-                        <path
-                            d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
-                        </path>
-                    </svg></i>Maintenance
-            </a>
-        </li>
+        </li> --}}
+
         @endif
     </ul>
 </nav>

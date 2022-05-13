@@ -20,7 +20,7 @@ class CommunityNews extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.admin') {
+        if (Auth::user()->roles === 'common.superadmin') {
             $community = ModelsCommunityNews::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
             $kinanda = ModelsCommunityNews::join("community_views", "community_views.id_community", "=", "community_news.id")
                 ->where("community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))

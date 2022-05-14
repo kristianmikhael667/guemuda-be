@@ -11,7 +11,7 @@ class CommunityNews extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
-    protected $with = ['user', 'category'];
+    protected $with = ['user', 'communitygroup'];
     public $incrementing = false;
 
     public function scopeFilter($query, array $filters)
@@ -27,9 +27,9 @@ class CommunityNews extends Model
             });
         });
 
-        $query->when($filters['category'] ?? false, function ($query, $category) {
-            return $query->whereHas('category', function ($query) use ($category) {
-                $query->where('slug', $category);
+        $query->when($filters['communitygroup'] ?? false, function ($query, $communitygroup) {
+            return $query->whereHas('communitygroup', function ($query) use ($communitygroup) {
+                $query->where('slug', $communitygroup);
             });
         });
     }
@@ -39,9 +39,9 @@ class CommunityNews extends Model
         return $this->belongsTo(User::class, 'uid_user');
     }
 
-    public function category()
+    public function communitygroup()
     {
-        return $this->belongsTo(CategoryCommunity::class, 'category_id');
+        return $this->belongsTo(CommunityGroup::class, 'category_id');
     }
 
     public function getCreatedAtAttribute($value)

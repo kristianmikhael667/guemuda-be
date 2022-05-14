@@ -5,22 +5,28 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Permission as ModelsPermission;
 use App\Models\Role as ModelsRole;
-use App\Models\User;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-list'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][16])) {
+            throw UnauthorizedException::forPermissions($data);
         }
+
         $roles = ModelsRole::orderBy('id', 'DESC')->paginate(5);
 
         return view('admin.role', [
@@ -36,12 +42,17 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-create'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][17])) {
+            throw UnauthorizedException::forPermissions($data);
         }
+
         $permission = ModelsPermission::get();
         return view('admin.create-roles', [
             'page' => 'Administrator',
@@ -57,12 +68,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-create'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][17])) {
+            throw UnauthorizedException::forPermissions($data);
         }
+
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
@@ -83,11 +99,15 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-list'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][16])) {
+            throw UnauthorizedException::forPermissions($data);
         }
     }
 
@@ -99,11 +119,15 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][18])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         $role = ModelsRole::find($id);
         $permission = ModelsPermission::get();
@@ -127,11 +151,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][18])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         $this->validate($request, [
             'name' => 'required',
@@ -156,11 +184,15 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-delete'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][19])) {
+            throw UnauthorizedException::forPermissions($data);
         }
     }
 }

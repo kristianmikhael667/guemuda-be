@@ -27,6 +27,12 @@ class PermissionTableSeeder extends Seeder
             'webinar-create',
             'webinar-edit',
             'webinar-delete',
+            'community-list',
+            'community-create',
+            'community-edit',
+            'community-delete',
+            'approve-comment',
+            'media-list'
         ];
 
         foreach ($permissions as $permission) {

@@ -20,37 +20,33 @@ class CommunityVideoController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.superadmin') {
-            $community = VideoCommunity::latest()->paginate(10)->withQueryString();
-            $kinanda = VideoCommunity::join("video_community_views", "video_community_views.id_community", "=", "video_communities.id")
-                ->where("video_community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
-                ->groupBy("video_communities.slug")
-                ->groupBy("video_communities.id")
-                ->groupBy("video_communities.uid_user")
-                ->groupBy("video_communities.uid_user_2")
-                ->groupBy("video_communities.description")
-                ->groupBy("video_communities.status")
-                ->groupBy("video_communities.created_at")
-                ->groupBy("video_communities.updated_at")
-                ->groupBy("video_communities.title")
-                ->groupBy("video_communities.subdesc")
-                ->groupBy("video_communities.thumbnails")
-                ->groupBy("video_communities.video")
-                ->groupBy("video_communities.link")
-                ->groupBy("video_communities.category_id")
-                ->groupBy("video_communities.tags_id")
-                ->orderBy(DB::raw('COUNT(video_communities.id)', 'desc'), 'desc')
-                ->get(array(DB::raw('COUNT(video_communities.id) as total_views'), 'video_communities.*'));
-            $taggers = TagsCommunity::all();
-            return view('admin.community-video', [
-                'page' => 'Administrator',
-                'communities' => $community,
-                'views' => $kinanda,
-                'tages' => $taggers
-            ]);
-        } else {
-            return redirect()->back();
-        }
+        $community = VideoCommunity::latest()->paginate(10)->withQueryString();
+        $kinanda = VideoCommunity::join("video_community_views", "video_community_views.id_community", "=", "video_communities.id")
+            ->where("video_community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->groupBy("video_communities.slug")
+            ->groupBy("video_communities.id")
+            ->groupBy("video_communities.uid_user")
+            ->groupBy("video_communities.uid_user_2")
+            ->groupBy("video_communities.description")
+            ->groupBy("video_communities.status")
+            ->groupBy("video_communities.created_at")
+            ->groupBy("video_communities.updated_at")
+            ->groupBy("video_communities.title")
+            ->groupBy("video_communities.subdesc")
+            ->groupBy("video_communities.thumbnails")
+            ->groupBy("video_communities.video")
+            ->groupBy("video_communities.link")
+            ->groupBy("video_communities.category_id")
+            ->groupBy("video_communities.tags_id")
+            ->orderBy(DB::raw('COUNT(video_communities.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(video_communities.id) as total_views'), 'video_communities.*'));
+        $taggers = TagsCommunity::all();
+        return view('admin.community-video', [
+            'page' => 'Administrator',
+            'communities' => $community,
+            'views' => $kinanda,
+            'tages' => $taggers
+        ]);
     }
 
     /**

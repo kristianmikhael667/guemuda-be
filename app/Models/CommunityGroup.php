@@ -12,6 +12,11 @@ class CommunityGroup extends Model
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
 
+    public function community()
+    {
+        return $this->hasMany(CommunityNews::class);
+    }
+
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->timestamp;

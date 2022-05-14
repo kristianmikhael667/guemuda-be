@@ -16,17 +16,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class ContentController extends Controller
 {
 
     public function index()
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][20])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         $search = '';
         if (request('category')) {
@@ -74,17 +78,14 @@ class ContentController extends Controller
 
     public function create()
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-create'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
-        }
-        $role = User::permission('post-create')->get();
-        foreach ($role as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][21])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         return view('admin.create-post', [
             'page' => 'Administrator',
@@ -95,17 +96,14 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-create'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
-        }
-        $role = User::permission('post-create')->get();
-        foreach ($role as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][21])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         $validatedData = $request->validate([
             'title' => 'required',
@@ -152,11 +150,14 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-list'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][20])) {
+            throw UnauthorizedException::forPermissions($data);
         }
     }
 
@@ -168,11 +169,14 @@ class ContentController extends Controller
      */
     public function edit(Content $post)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         return view('admin.content-edit', [
             'page' => 'Administrator',
@@ -182,11 +186,14 @@ class ContentController extends Controller
 
     public function edittitle($id)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['role-post'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         $title = DB::table('contents')->where('slug', $id)->get();
         $title_data = $title[0]->title;
@@ -208,11 +215,14 @@ class ContentController extends Controller
 
     public function update(Request $request, Content $post)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         if ($request->title) {
             DB::table('contents')->where('slug', $post->slug)->update([
@@ -233,11 +243,14 @@ class ContentController extends Controller
      */
     public function destroy(Content $content)
     {
-        $all_roles_except_a_and_b = Role::whereNotIn('name', ['post-edit'])->get();
-        foreach ($all_roles_except_a_and_b as $rol) {
-            if ($rol->rolesname != Auth::user()['rolesname'] && $rol->rolesname == Auth::user()['rolesname']) {
-                abort(403);
-            }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][23])) {
+            throw UnauthorizedException::forPermissions($data);
         }
         if ($content->image) {
             Storage::delete($content->image);

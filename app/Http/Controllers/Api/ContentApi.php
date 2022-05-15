@@ -178,4 +178,39 @@ class ContentApi extends Controller
             'data' => $tags
         ]);
     }
+
+    public function article(Request $request)
+    {
+        $id = $request->input('id');
+        $limit = $request->input('limit', 9);
+        $title = $request->input('title');
+        $type = $request->input('type');
+
+        if ($type) {
+            $content = Content::where('type', $type)->get();
+
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data content by slug retrieved successfully'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data Content is empty'
+                );
+            }
+        }
+
+        $content = Content::query();
+
+        if ($title) {
+            $content->where('title', 'like', '%' . $title . '%');
+        }
+
+        return ResponseFormatter::success(
+            $content = Content::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
+            'Data Content retrieved successfully'
+        );
+    }
 }

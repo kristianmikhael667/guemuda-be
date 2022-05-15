@@ -18,16 +18,16 @@ class CategoryArticle extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.superadmin') {
-            $category = DB::table('categories')->orderBy('created_at', 'desc')->get();
+        // if (Auth::user()->roles === 'common.superadmin') {
+        $category = DB::table('categories')->orderBy('created_at', 'desc')->get();
 
-            return view('admin.category-article', [
-                'page' => 'Administrator',
-                'categories' => $category
-            ]);
-        } else {
-            return redirect()->back();
-        }
+        return view('admin.category-article', [
+            'page' => 'Administrator',
+            'categories' => $category
+        ]);
+        // } else {
+        //     return redirect()->back();
+        // }
     }
 
     /**
@@ -37,14 +37,14 @@ class CategoryArticle extends Controller
      */
     public function create()
     {
-        if (Auth::user()->roles === 'common.superadmin') {
-            return view('admin.create-category-article', [
-                'page' => 'Administrator',
-                'categories' => Category::all(),
-            ]);
-        } else {
-            return redirect()->back();
-        }
+        // if (Auth::user()->roles === 'common.superadmin') {
+        return view('admin.create-category-article', [
+            'page' => 'Administrator',
+            'categories' => Category::all(),
+        ]);
+        // } else {
+        //     return redirect()->back();
+        // }
     }
 
     /**
@@ -72,7 +72,6 @@ class CategoryArticle extends Controller
                 'success' => 'Data is successfully added'
             ]);
         }
-       
     }
 
     public function store(Request $request)

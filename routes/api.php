@@ -37,16 +37,20 @@ Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
 Route::get('category-parent', [CategoryController::class, 'categoryparent']);
 Route::resource('category-community', CategoryCommunity::class);
+
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('today', [ContentApi::class, 'newstoday']);
+Route::get('populararticle', [ContentApi::class, 'popular']);
+Route::get('popularcategory', [ContentApi::class, 'popular_investman']);
+Route::get('article', [ContentApi::class, 'article']);
+
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
 Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);
 Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);
-Route::get('populararticle', [ContentApi::class, 'popular']);
-Route::get('popularcategory', [ContentApi::class, 'popular_investman']);
+
 Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);

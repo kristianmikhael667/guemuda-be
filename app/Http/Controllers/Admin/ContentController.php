@@ -53,6 +53,7 @@ class ContentController extends Controller
             ->groupBy("thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.captions")
+            ->groupBy("contents.link_audio")
             ->groupBy("contents.type")
             ->groupBy("contents.link")
             ->groupBy("contents.status")
@@ -114,21 +115,41 @@ class ContentController extends Controller
             'video' => 'mimes:mp4,x-flv,x-mpegURL,MP2T,3gpp,quicktime,x-msvideo,x-ms-wmv',
         ]);
 
-        // make image true 1 and make video false 0
         if ($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('post-image');
             $validatedData['video'] = '-';
             $validatedData['thumbnail'] = '-';
-            $validatedData['type'] = 1;
+            $validatedData['type'] = 'image';
             $validatedData['captions'] = $request->captions;
             $validatedData['link'] = '-';
+            $validatedData['link_audio'] = "-";
         }
-        if ($request->hasFile('video')) {
-            $validatedData['video'] = $request->file('video')->store('post-video');
-            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
+        // if ($request->hasFile('video')) {
+        //     $validatedData['video'] = $request->file('video')->store('post-video');
+        //     $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
+        //     $validatedData['image'] = '-';
+        //     $validatedData['link'] = $request->link;
+        // }
+        if ($request->link) {
+            // $validatedData['video'] = $request->file('video')->store('post-video');
+            $validatedData['thumbnail'] = $request->file('thumbnails')->store('post-image');
             $validatedData['image'] = '-';
+            $validatedData['captions'] = '-';
+            $validatedData['type'] = 'video';
             $validatedData['link'] = $request->link;
+            $validatedData['link_audio'] = "-";
         }
+
+        if ($request->audios) {
+            // $validatedData['video'] = $request->file('video')->store('post-video');
+            $validatedData['thumbnail'] = $request->file('thumbnailt')->store('post-image');
+            $validatedData['image'] = '-';
+            $validatedData['captions'] = '-';
+            $validatedData['type'] = 'audio';
+            $validatedData['link'] = '-';
+            $validatedData['link_audio'] = $request->audios;
+        }
+
         $slug = SlugService::createSlug(Content::class, 'slug', $request->title);
 
         $validatedData['uid_user'] = auth()->user()->id;

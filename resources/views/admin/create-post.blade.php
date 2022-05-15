@@ -66,21 +66,22 @@
                                                             </option>
                                                             <option value="on">Upload Image</option>
                                                             <option value="off">Embed Video</option>
+                                                            <option value="onof">Embed Audio</option>
                                                         </select>
                                                     </div>
                                                     <div class="uk-margin" id="imagepost" style="display: none">
-                                                        <input class="uk-input mb-2" name="captions" id="captions"
-                                                            type="text" placeholder="Caption">
+                                                        <input class="uk-input mb-2 captions" name="captions"
+                                                            id="captions" type="text" placeholder="Caption">
                                                         <input type="file" name="image" id="image" class="dropify"
                                                             data-max-file-size="5M">
                                                     </div>
                                                     <div class="uk-margin" id="videopost" style="display: none">
                                                         {{-- <input class="uk-input mb-2" name="captions" id="captions"
                                                             type="text" placeholder="Caption"> --}}
-                                                        <input class="uk-input mb-2" name="caption" id="caption"
-                                                            type="text" placeholder="Input Link Embed">
-                                                        <input type="file" name="thumbnail" id="thumbnail"
-                                                            class="dropify" data-max-file-size="5M">
+                                                        <input class="uk-input mb-2 captions" name="link" id="link"
+                                                            type="text" placeholder="Input Link Video">
+                                                        <input type="file" name="thumbnails" id="thumbnail"
+                                                            class="dropify" data-max-file-size="2M">
                                                         {{-- <div class="d-flex">
                                                             <div uk-form-custom="target: true">
                                                                 <label for="" class="mr-2">Upload Video</label>
@@ -98,6 +99,12 @@
                                                             </div>
 
                                                         </div> --}}
+                                                    </div>
+                                                    <div class="uk-margin" id="audiopost" style="display: none">
+                                                        <input class="uk-input mb-2 captions" name="audios" id="audios"
+                                                            type="text" placeholder="Input Link Audio">
+                                                        <input type="file" name="thumbnailt" id="thumbnail"
+                                                            class="dropify" data-max-file-size="2M">
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -186,11 +193,21 @@
     <script>
         function yesnoCheck(that) {
         if (that.value == "on") {
+            $(".captions").val(null);
             document.getElementById("imagepost").style.display = "block";
             document.getElementById("videopost").style.display = "none";
-        } else {
+            document.getElementById("audiopost").style.display = "none";
+        } else if (that.value == "off") {
+            $(".captions").val(null);
+            $(".dropify").next(".dropify-clear").trigger("click");
             document.getElementById("imagepost").style.display = "none";
             document.getElementById("videopost").style.display = "block";
+            document.getElementById("audiopost").style.display = "none";
+        } else{
+            $(".captions").val(null);
+            document.getElementById("imagepost").style.display = "none";
+            document.getElementById("videopost").style.display = "none";
+            document.getElementById("audiopost").style.display = "block";
         }
     }
     </script>

@@ -139,7 +139,7 @@ class ContentController extends Controller
             $validatedData['link'] = $request->link;
             $validatedData['link_audio'] = "-";
         }
-
+// Audio
         if ($request->audios) {
             // $validatedData['video'] = $request->file('video')->store('post-video');
             $validatedData['thumbnail'] = $request->file('thumbnailt')->store('post-image');

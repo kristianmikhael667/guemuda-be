@@ -130,6 +130,7 @@ class ContentController extends Controller
         //     $validatedData['image'] = '-';
         //     $validatedData['link'] = $request->link;
         // }
+        // Video
         if ($request->link) {
             // $validatedData['video'] = $request->file('video')->store('post-video');
             $validatedData['thumbnail'] = $request->file('thumbnails')->store('post-image');

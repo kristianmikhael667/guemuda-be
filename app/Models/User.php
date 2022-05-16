@@ -36,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'username', 'avatar', 'first_name', 'last_name',
         'address', 'city', 'job', 'bio', 'phone_number', 'date_birth',
-        'status', 'email', 'password', 'roles'
+        'status', 'email', 'password', 'roles', 'rolesname'
     ];
 
     // public $incrementing = false;

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
+use Spatie\Permission\Models\Role;
 
 class AuthAPI extends Controller
 {
@@ -31,6 +32,7 @@ class AuthAPI extends Controller
                 'password' => 'required|confirmed',
                 // 'password' => $this->passwordRules()
             ]);
+            $role = Role::where(['name' => 'subscribe'])->get();
             $users = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -42,7 +44,8 @@ class AuthAPI extends Controller
                 'bio' => $request->bio ?  $request->bio : "-",
                 'phone_number' => $request->phone_number,
                 'date_birth' => $request->date_birth ? $request->date_birth : Carbon::now(),
-                'roles' => 'common.user',
+                'roles' => $role[0]->id,
+                'rolesname' => $role[0]->name,
                 'password' => Hash::make($request->password),
             ]);
 

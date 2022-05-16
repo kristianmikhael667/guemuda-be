@@ -15,7 +15,8 @@
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
-                                <form method="post" enctype="multipart/form-data" action="/administrator/community-video">
+                                <form method="post" enctype="multipart/form-data"
+                                    action="/administrator/community-news">
                                     @csrf
                                     <div class="d-widget-title">
                                         <div class="d-flex justify-content-between">
@@ -37,6 +38,19 @@
                                                     @enderror
                                                 </div>
                                                 <div class="uk-margin">
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Date Post Community</span>
+                                                    </div>
+                                                    <input min='1899-01-01' max='2000-13-13' class="uk-input"
+                                                        name="created_at" id="created_at" type="date"
+                                                        placeholder="Date Post">
+                                                    @error('schedule')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="uk-margin">
                                                     @error('body')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
@@ -45,9 +59,26 @@
                                                         placeholder="Textarea">{{ old('description') }}</textarea>
                                                 </div>
                                                 <div class="uk-margin">
-                                                    <div class="uk-margin" id="imagepost">
+                                                    <div class="uk-margin">
+                                                        <select class="uk-select" onchange="yesnoCheck(this)">
+                                                            <option disabled="disabled" selected>-- Choose Type File
+                                                                Upload --
+                                                            </option>
+                                                            <option value="on">Upload Image</option>
+                                                            <option value="off">Embed Video</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="uk-margin" id="imagepost" style="display: none">
+                                                        <input class="uk-input mb-2 captions" name="captions"
+                                                            id="captions" type="text" placeholder="Caption Image">
                                                         <input type="file" name="avatar" id="avatar" class="dropify"
-                                                            data-max-file-size="5M">
+                                                            data-max-file-size="2M">
+                                                    </div>
+                                                    <div class="uk-margin" id="videopost" style="display: none">
+                                                        <input class="uk-input mb-2 captions" name="link" id="link"
+                                                            type="text" placeholder="Input Link Video">
+                                                        <input type="file" name="thumbnails" id="thumbnail"
+                                                            class="dropify" data-max-file-size="2M">
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -67,7 +98,7 @@
                                                         @foreach ($categories as $item)
                                                         <label class="mr-2"><input class="uk-radio" name="category_id"
                                                                 value="{{ $item->id }}" type="radio">
-                                                            {{ $item->name }}</label>
+                                                            {{ $item->namegroup }}</label>
                                                         @endforeach
                                                     </div>
                                                 </div>
@@ -101,7 +132,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save News</button>
+                                    <button type="submit" class="btn btn-primary">Save Community</button>
                                 </form>
                             </div>
                         </div>
@@ -111,6 +142,21 @@
         </div>
     </div>
     <!-- main content -->
+
+    <script>
+        function yesnoCheck(that) {
+            console.log(that);
+        if (that.value == "on") {
+            $(".captions").val(null);
+            document.getElementById("imagepost").style.display = "block";
+            document.getElementById("videopost").style.display = "none";
+        } else{
+            $(".captions").val(null);
+            document.getElementById("imagepost").style.display = "none";
+            document.getElementById("videopost").style.display = "block";
+        }
+    }
+    </script>
     {{-- Ajax --}}
     @include('admin.ajax-community')
 

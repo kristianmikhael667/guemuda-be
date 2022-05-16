@@ -71,7 +71,7 @@
                                                     </div>
                                                     <div class="uk-margin" id="imagepost" style="display: none">
                                                         <input class="uk-input mb-2 captions" name="captions"
-                                                            id="captions" type="text" placeholder="Caption">
+                                                            id="captions" type="text" placeholder="Caption Image Post">
                                                         <input type="file" name="image" id="image" class="dropify"
                                                             data-max-file-size="5M">
                                                     </div>

@@ -47,6 +47,8 @@ Route::get('article', [ContentApi::class, 'article']);
 
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
+Route::get('communities', [CommunityNewsApi::class, 'communities']);
+
 Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);
 Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);

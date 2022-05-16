@@ -14,7 +14,8 @@
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
-                                <form method="post" enctype="multipart/form-data" action="/administrator/community-video">
+                                <form method="post" enctype="multipart/form-data"
+                                    action="/administrator/community-news">
                                     <?php echo csrf_field(); ?>
                                     <div class="d-widget-title">
                                         <div class="d-flex justify-content-between">
@@ -44,6 +45,27 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                                 </div>
                                                 <div class="uk-margin">
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Date Post Community</span>
+                                                    </div>
+                                                    <input min='1899-01-01' max='2000-13-13' class="uk-input"
+                                                        name="created_at" id="created_at" type="date"
+                                                        placeholder="Date Post">
+                                                    <?php $__errorArgs = ['schedule'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="invalid-feedback">
+                                                        <?php echo e($message); ?>
+
+                                                    </div>
+                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                </div>
+                                                <div class="uk-margin">
                                                     <?php $__errorArgs = ['body'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -59,9 +81,26 @@ unset($__errorArgs, $__bag); ?>
                                                         placeholder="Textarea"><?php echo e(old('description')); ?></textarea>
                                                 </div>
                                                 <div class="uk-margin">
-                                                    <div class="uk-margin" id="imagepost">
+                                                    <div class="uk-margin">
+                                                        <select class="uk-select" onchange="yesnoCheck(this)">
+                                                            <option disabled="disabled" selected>-- Choose Type File
+                                                                Upload --
+                                                            </option>
+                                                            <option value="on">Upload Image</option>
+                                                            <option value="off">Embed Video</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="uk-margin" id="imagepost" style="display: none">
+                                                        <input class="uk-input mb-2 captions" name="captions"
+                                                            id="captions" type="text" placeholder="Caption Image">
                                                         <input type="file" name="avatar" id="avatar" class="dropify"
-                                                            data-max-file-size="5M">
+                                                            data-max-file-size="2M">
+                                                    </div>
+                                                    <div class="uk-margin" id="videopost" style="display: none">
+                                                        <input class="uk-input mb-2 captions" name="link" id="link"
+                                                            type="text" placeholder="Input Link Video">
+                                                        <input type="file" name="thumbnails" id="thumbnail"
+                                                            class="dropify" data-max-file-size="2M">
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -81,7 +120,7 @@ unset($__errorArgs, $__bag); ?>
                                                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <label class="mr-2"><input class="uk-radio" name="category_id"
                                                                 value="<?php echo e($item->id); ?>" type="radio">
-                                                            <?php echo e($item->name); ?></label>
+                                                            <?php echo e($item->namegroup); ?></label>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>
                                                 </div>
@@ -116,7 +155,7 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save News</button>
+                                    <button type="submit" class="btn btn-primary">Save Community</button>
                                 </form>
                             </div>
                         </div>
@@ -126,6 +165,21 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <!-- main content -->
+
+    <script>
+        function yesnoCheck(that) {
+            console.log(that);
+        if (that.value == "on") {
+            $(".captions").val(null);
+            document.getElementById("imagepost").style.display = "block";
+            document.getElementById("videopost").style.display = "none";
+        } else{
+            $(".captions").val(null);
+            document.getElementById("imagepost").style.display = "none";
+            document.getElementById("videopost").style.display = "block";
+        }
+    }
+    </script>
     
     <?php echo $__env->make('admin.ajax-community', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

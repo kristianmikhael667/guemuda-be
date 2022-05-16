@@ -89,7 +89,7 @@
                                             <td><?php echo e($community->uid_user_2); ?>
 
                                             </td>
-                                            <td><?php echo e($community->category['name']); ?></td>
+                                            <td><?php echo e($community->communitygroup['namegroup']); ?></td>
                                             <td>
                                                 <?php echo e($string = ""); ?>
 

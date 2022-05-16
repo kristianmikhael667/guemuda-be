@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
+use Hashids\Hashids;
 use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class ContentController extends Controller
@@ -23,6 +24,7 @@ class ContentController extends Controller
 
     public function index()
     {
+        $hashids = new Hashids('', 10);
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
@@ -73,7 +75,8 @@ class ContentController extends Controller
             'page' => 'Administrator',
             'contents' => $contents,
             'views' => $kinanda,
-            'tages' => $taggers
+            'tages' => $taggers,
+            'hashids' => $hashids
         ]);
     }
 
@@ -140,7 +143,7 @@ class ContentController extends Controller
             $validatedData['link'] = $request->link;
             $validatedData['link_audio'] = "-";
         }
-// Audio
+        // Audio
         if ($request->audios) {
             // $validatedData['video'] = $request->file('video')->store('post-video');
             $validatedData['thumbnail'] = $request->file('thumbnailt')->store('post-image');

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '13bc9076a805a29e085a0470d3e01c5e2112ee2a',
+    'reference' => '2c5b0fba1d028a85ea785701b038b329b96d4371',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -285,6 +285,15 @@
       array (
       ),
       'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
+    ),
+    'hashids/hashids' => 
+    array (
+      'pretty_version' => '4.1.0',
+      'version' => '4.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8cab111f78e0bd9c76953b082919fc9e251761be',
     ),
     'hisorange/browser-detect' => 
     array (
@@ -598,7 +607,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '13bc9076a805a29e085a0470d3e01c5e2112ee2a',
+      'reference' => '2c5b0fba1d028a85ea785701b038b329b96d4371',
     ),
     'laravel/sail' => 
     array (

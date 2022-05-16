@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CategoryCommunity;
+use App\Models\CommunityGroup;
 use App\Models\CommunityNews as ModelsCommunityNews;
 use App\Models\TagsCommunity;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -42,6 +43,10 @@ class CommunityNews extends Controller
             ->groupBy("community_news.uid_user_2")
             ->groupBy("community_news.description")
             ->groupBy("community_news.status")
+            ->groupBy("community_news.type")
+            ->groupBy("community_news.link_video")
+            ->groupBy("community_news.thumbnail")
+            ->groupBy("community_news.captions")
             ->groupBy("community_news.created_at")
             ->groupBy("community_news.updated_at")
             ->groupBy("community_news.title")
@@ -53,6 +58,7 @@ class CommunityNews extends Controller
             ->get(array(DB::raw('COUNT(community_news.id) as total_views'), 'community_news.*'));
 
         $taggers = TagsCommunity::all();
+
         return view('admin.communnity-news', [
             'page' => 'Administrator',
             'communitys' => $community,
@@ -81,7 +87,7 @@ class CommunityNews extends Controller
         return view('admin.create-community-news', [
             'page' => 'Administrator',
             'tags' => TagsCommunity::all(),
-            'categories' => CategoryCommunity::all()
+            'categories' => CommunityGroup::all()
         ]);
     }
 
@@ -103,6 +109,7 @@ class CommunityNews extends Controller
         if (empty($data['name'][29])) {
             throw UnauthorizedException::forPermissions($data);
         }
+
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_id' => 'required',
@@ -113,6 +120,18 @@ class CommunityNews extends Controller
 
         if ($request->file('avatar')) {
             $validatedData['avatar'] = $request->file('avatar')->store('post-image');
+            $validatedData['link_video'] = "-";
+            $validatedData['thumbnail'] = "-";
+            $validatedData['captions'] = $request->captions;
+        }
+
+        if ($request->link) {
+            // $validatedData['video'] = $request->file('video')->store('post-video');
+            $validatedData['thumbnail'] = $request->file('thumbnails')->store('post-image');
+            $validatedData['avatar'] = '-';
+            $validatedData['captions'] = '-';
+            $validatedData['type'] = 'video';
+            $validatedData['link_video'] = $request->link;
         }
 
         $slug = SlugService::createSlug(ModelsCommunityNews::class, 'slug', $request->title);

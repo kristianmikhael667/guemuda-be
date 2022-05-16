@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Hashids\Hashids;
 
 class RoleController extends Controller
 {
@@ -28,10 +29,12 @@ class RoleController extends Controller
         }
 
         $roles = ModelsRole::orderBy('id', 'DESC')->paginate(5);
+        $hashids = new Hashids('', 10);
 
         return view('admin.role', [
             'page' => 'Administrator',
-            'roles' => $roles
+            'roles' => $roles,
+            'hashids' => $hashids
         ]);
     }
 
@@ -129,9 +132,11 @@ class RoleController extends Controller
         if (empty($data['name'][18])) {
             throw UnauthorizedException::forPermissions($data);
         }
-        $role = ModelsRole::find($id);
+        $hashids = new Hashids('', 10);
+        $id_decode = $hashids->decode($id);
+        $role = ModelsRole::find($id_decode[0]);
         $permission = ModelsPermission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id)
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id_decode[0])
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
         return view('admin.role-edit', [
@@ -165,7 +170,9 @@ class RoleController extends Controller
             'name' => 'required',
             'permission' => 'required',
         ]);
-
+        // $hashids = new Hashids('', 10);
+        // $id_decode = $hashids->decode($id);
+        // dd($id_decode);
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();

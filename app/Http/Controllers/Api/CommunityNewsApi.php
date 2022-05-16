@@ -109,4 +109,39 @@ class CommunityNewsApi extends Controller
             'Data Community retrieved successfully'
         );
     }
+
+    public function communities(Request $request)
+    {
+        $id = $request->input('id');
+        $limit = $request->input('limit', 9);
+        $title = $request->input('title');
+        $type = $request->input('type');
+
+        if ($type) {
+            $content = CommunityNews::where('type', $type)->get();
+
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data Community by Type retrieved successfully'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data Community is empty'
+                );
+            }
+        }
+
+        $content = CommunityNews::query();
+
+        if ($title) {
+            $content->where('title', 'like', '%' . $title . '%');
+        }
+
+        return ResponseFormatter::success(
+            $content = CommunityNews::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
+            'Data Community retrieved successfully'
+        );
+    }
 }

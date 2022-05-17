@@ -116,6 +116,8 @@ class AuthAPI extends Controller
                     "username" => $request->user()->username,
                     "phone_number" => $request->user()->phone_number,
                     "status" => $request->user()->status,
+                    "email_verify" => $request->user()->email_verified_at,
+                    "rolesname" => $request->user()->rolesname
                 )
             ], 'Authenticated');
         } catch (Exception $error) {

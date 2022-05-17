@@ -127,4 +127,10 @@ class AuthAPI extends Controller
             ], 'Authentication Failed', 500);
         }
     }
+
+    public function logout(Request $request)
+    {
+        $token = $request->user()->currentAccessToken()->delete();
+        return ResponseFormatter::success($token, 'Token Revoked');
+    }
 }

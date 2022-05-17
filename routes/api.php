@@ -29,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/user', [Test::class, 'test']);
+    Route::post('logout', [AuthAPI::class, 'logout']);
 });
 // Route::get('food', [FoodController::class, 'all']);
 

@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <title>GueMuda | Adminstrator</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="{{ '/images/guemuda.png' }}" type="image/png" sizes="16x16">
 
     <link rel="stylesheet" href="css/main.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -32,13 +32,15 @@
             <div class="row justify-content-md-center">
                 <div class="col-lg-8">
                     <div class="logo-up">
-                        <figure class="logo"><img alt="" src="images/logo.png"><span>Socimo</span></figure>
+                        {{-- <figure class="logo"><img style="width:200px; height:200px" alt=""
+                                src="{{ '/images/guemuda.png' }}"></figure> --}}
                     </div>
                     <div class="box">
-                        <input type="checkbox" id="toggle" class="box__toggle" hidden>
-                        <img src="images/resources/login-top.jpg" alt="Picture by Autumn Studio" class="box__image">
+                        {{-- <input type="checkbox" id="toggle" class="box__toggle" hidden> --}}
+                        <img style="width:30%; height:50%" src="{{ '/images/guemuda.png' }}"
+                            alt="Picture by Autumn Studio" class="">
                         <form method="POST" action="{{ route('register') }}" class="form form--register">
-                            @csrf
+                            {{-- @csrf
                             <span>
 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -71,7 +73,7 @@
                             <button type="submit" class="form__button">Register</button>
                             <p class="form__text">Already have an account?
                                 <label for="toggle" class="form__link">Sign in!</label>
-                            </p>
+                            </p> --}}
                         </form>
                         @if(session('status'))
                         <div class="alert alert-success mb-3 rounded-0" role="alert">

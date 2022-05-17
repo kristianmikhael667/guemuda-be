@@ -7,7 +7,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <title>GueMuda | Page <?php echo e($page); ?></title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16">
+    <link rel="icon" href="<?php echo e('/images/guemuda.png'); ?>" type="image/png" sizes="16x16">
     <link rel="stylesheet" href="<?php echo e('/css/main.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo e('/css/style.css'); ?>">
     <link rel="stylesheet" href="<?php echo e('/css/color.css'); ?>">

@@ -1,6 +1,6 @@
 <header class="">
     <div class="topbar stick">
-        <div class="logo"><img alt="" src="images/logo.png"><span>Socimo</span></div>
+        <div class="logo"><img alt="" src="{{ '/images/guemuda.png' }}"></div>
         <div class="searches">
             <form method="post">
                 <input type="text" placeholder="Search...">

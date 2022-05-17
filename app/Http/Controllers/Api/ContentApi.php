@@ -51,7 +51,8 @@ class ContentApi extends Controller
 
     public function newstoday()
     {
-        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate();
+        $limit = 6;
+        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate($limit);
         if ($posts) {
             return ResponseFormatter::success(
                 $posts,
@@ -182,12 +183,12 @@ class ContentApi extends Controller
     public function article(Request $request)
     {
         $id = $request->input('id');
-        $limit = $request->input('limit', 9);
+        $limit = $request->input('limit', 6);
         $title = $request->input('title');
         $type = $request->input('type');
 
         if ($type) {
-            $content = Content::where('type', $type)->get();
+            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate($limit);
 
             if ($content) {
                 return ResponseFormatter::success(

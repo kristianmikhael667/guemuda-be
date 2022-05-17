@@ -81,7 +81,7 @@ class ContentApi extends Controller
             ->groupBy("contents.video")
             ->groupBy("contents.category_id")
             ->groupBy("contents.tags_id")
-            ->limit(10)
+            ->limit(6)
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
         if ($posts) {

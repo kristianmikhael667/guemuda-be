@@ -110,6 +110,7 @@ class AuthAPI extends Controller
                 'access_token' => $token->plainTextToken,
                 'token_type' => 'Bearer',
                 'user' => array(
+                    "id" => $request->user()->id,
                     "first_name" => $request->user()->first_name,
                     "last_name" => $request->user()->last_name,
                     "email" => $request->user()->email,

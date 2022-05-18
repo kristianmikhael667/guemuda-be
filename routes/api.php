@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\RegisterUserAPI;
 use App\Http\Controllers\Api\Test;
+use App\Http\Controllers\Api\UsersAPI;
 use App\Http\Controllers\Api\VideoArticleAPI;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
@@ -33,6 +34,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('logout', [AuthAPI::class, 'logout']);
     Route::post('post/comment', [CommentAPI::class, 'store']);
     Route::post('post/reply', [CommentAPI::class, 'reply']);
+    Route::get('users', [UsersAPI::class, 'index']);
 });
 // Route::get('food', [FoodController::class, 'all']);
 

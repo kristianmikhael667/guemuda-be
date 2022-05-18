@@ -38,9 +38,7 @@
                         
                         <img style="width:30%; height:50%" src="<?php echo e('/images/guemuda.png'); ?>"
                             alt="Picture by Autumn Studio" class="">
-                        <form method="POST" action="<?php echo e(route('register')); ?>" class="form form--register">
-                            
-                        </form>
+
                         <?php if(session('status')): ?>
                         <div class="alert alert-success mb-3 rounded-0" role="alert">
                             <?php echo e(session('status')); ?>
@@ -120,7 +118,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <span class="">&copy; Copyright All rights reserved by socimo 2020</span>
+                        <span class="">&copy; Copyright All rights reserved by GueMuda 2022</span>
                     </div>
                 </div>
             </div>

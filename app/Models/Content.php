@@ -13,7 +13,7 @@ class Content extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['user', 'category'];
+    protected $with = ['user', 'category', 'comments'];
 
     // protected $primaryKey = 'uuid';
     public $incrementing = false;
@@ -58,7 +58,8 @@ class Content extends Model
 
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+        return $this->hasMany(Comment::class,'post_id')->whereNull('parent_id');
+        // return $this->morphMany(Comment::class, 'post')->whereNull('parent_id');
     }
 
     public function getCreatedAtAttribute($value)

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthAPI;
 use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CommentAPI;
 use App\Http\Controllers\Api\CommunityGroupAPI;
 use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
@@ -30,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/user', [Test::class, 'test']);
     Route::post('logout', [AuthAPI::class, 'logout']);
+    Route::post('post/comment', [CommentAPI::class, 'store']);
+    Route::post('post/reply', [CommentAPI::class, 'reply']);
 });
 // Route::get('food', [FoodController::class, 'all']);
 

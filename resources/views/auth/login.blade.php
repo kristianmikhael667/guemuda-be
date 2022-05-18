@@ -39,42 +39,7 @@
                         {{-- <input type="checkbox" id="toggle" class="box__toggle" hidden> --}}
                         <img style="width:30%; height:50%" src="{{ '/images/guemuda.png' }}"
                             alt="Picture by Autumn Studio" class="">
-                        <form method="POST" action="{{ route('register') }}" class="form form--register">
-                            {{-- @csrf
-                            <span>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-key">
-                                    <path
-                                        d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4">
-                                    </path>
-                                </svg></span>
-                            <h1 class="form__title">Sign up</h1>
-                            <div class="form__helper">
-                                <input type="text" name="username" id="new-user" placeholder="User"
-                                    class="form__input" />
-                                <label class="form__label" for="new-user">Username</label>
-                            </div>
-                            <div class="form__helper">
-                                <input type="email" name="email" id="email" placeholder="Email" class="form__input" />
-                                <label class="form__label" for="email">Email</label>
-                            </div>
-                            <div class="form__helper">
-                                <input type="password" name="password" id="new-user-password" placeholder="Password"
-                                    class="form__input" />
-                                <label class="form__label" for="new-user-password">Password</label>
-                            </div>
-                            <div class="form__helper">
-                                <input type="password" name="password_confirmation" id="confirm-password"
-                                    Placeholder="Confirm password" class="form__input" />
-                                <label class="form__label" for="confirm-password">Confirm password</label>
-                            </div>
-                            <button type="submit" class="form__button">Register</button>
-                            <p class="form__text">Already have an account?
-                                <label for="toggle" class="form__link">Sign in!</label>
-                            </p> --}}
-                        </form>
                         @if(session('status'))
                         <div class="alert alert-success mb-3 rounded-0" role="alert">
                             {{ session('status') }}
@@ -126,7 +91,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <span class="">&copy; Copyright All rights reserved by socimo 2020</span>
+                        <span class="">&copy; Copyright All rights reserved by GueMuda 2022</span>
                     </div>
                 </div>
             </div>

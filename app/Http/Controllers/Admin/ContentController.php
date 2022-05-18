@@ -45,7 +45,7 @@ class ContentController extends Controller
             $title = ' by ' . $user->username;
         }
 
-        $contents = Content::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
+        $contents = Content::latest()->with(['category', 'user', 'comments'])->filter(request(['search', 'user', 'category', 'comments']))->paginate(10)->withQueryString();
         $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
             ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
             ->groupBy("contents.slug")

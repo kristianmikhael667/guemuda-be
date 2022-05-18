@@ -20,7 +20,7 @@ class UsersAPI extends Controller
         if ($user) {
             return ResponseFormatter::success(
                 User::all(),
-                'Data Users retrieved successfully'
+                'Data Users retrieved successfullys'
             );
         } else {
             return ResponseFormatter::error(

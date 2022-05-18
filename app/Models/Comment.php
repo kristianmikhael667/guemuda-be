@@ -11,10 +11,11 @@ class Comment extends Model
     use HasFactory, SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $fillable = ['user_id', 'post_id', 'parent_id', 'body'];
+    protected $with = ['user'];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function replies()

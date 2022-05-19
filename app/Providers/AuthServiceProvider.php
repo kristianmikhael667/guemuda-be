@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             $spaUrl = "http://front.dewanhoster.my.id/email_verify_url/" . $url;
             // return $this->view('emails.orders.shipped');
+            // bahlul
             return view('admin.verify', [
                 'verifies' => $spaUrl
             ]);

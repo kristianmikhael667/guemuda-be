@@ -33,9 +33,14 @@ class AuthServiceProvider extends ServiceProvider
             $spaUrl = "http://front.dewanhoster.my.id/email_verify_url/" . $url;
             // return $this->view('emails.orders.shipped');
             // bahlul lu
-            return view('admin.verify', [
+            // return view('admin.verify', [
+            //     'verifies' => $spaUrl
+            // ]);
+            $mail = new MailMessage;
+            return $mail->view('admin.verify', [
                 'verifies' => $spaUrl
             ]);
+
             // return (new MailMessage)
             //     ->subject('Verify Email Addresss')
             //     ->line('Click the button below to verify your email address')

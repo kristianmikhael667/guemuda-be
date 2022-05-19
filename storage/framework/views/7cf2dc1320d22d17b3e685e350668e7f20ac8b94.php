@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <style type="text/css">
-        @media screen {
+        @media  screen {
             @font-face {
                 font-family: 'Lato';
                 font-style: normal;
@@ -87,7 +87,7 @@
         }
 
         /* MOBILE STYLES */
-        @media screen and (max-width:600px) {
+        @media  screen and (max-width:600px) {
             h1 {
                 font-size: 32px !important;
                 line-height: 32px !important;
@@ -150,7 +150,7 @@
                                         <table border="0" cellspacing="0" cellpadding="0">
                                             <tr>
                                                 <td align="center" style="border-radius: 3px;" bgcolor="#75b742"><a
-                                                        href="{{ $verifies }}" target="_blank"
+                                                        href="<?php echo e($verifies); ?>" target="_blank"
                                                         style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #75b742; display: inline-block;">Confirm
                                                         Account</a></td>
                                             </tr>
@@ -166,4 +166,4 @@
     </table>
 </body>
 
-</html>
+</html><?php /**PATH /Users/mike/laravel/Gue-Muda/resources/views/admin/verify.blade.php ENDPATH**/ ?>

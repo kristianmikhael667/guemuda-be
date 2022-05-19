@@ -31,10 +31,14 @@ class AuthServiceProvider extends ServiceProvider
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
             $spaUrl = "http://front.dewanhoster.my.id/email_verify_url/" . $url;
-            return (new MailMessage)
-                ->subject('Verify Email Addresss')
-                ->line('Click the button below to verify your email address')
-                ->action('Verify Email Address', $spaUrl);
+            // return $this->view('emails.orders.shipped');
+            return view('admin.verify', [
+                'verifies' => $spaUrl
+            ]);
+            // return (new MailMessage)
+            //     ->subject('Verify Email Addresss')
+            //     ->line('Click the button below to verify your email address')
+            //     ->action('Verify Email Address', $spaUrl);
         });
     }
 }

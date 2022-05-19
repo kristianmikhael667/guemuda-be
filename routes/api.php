@@ -50,6 +50,7 @@ Route::get('today', [ContentApi::class, 'newstoday']);
 Route::get('populararticle', [ContentApi::class, 'popular']);
 Route::get('popularcategory', [ContentApi::class, 'popular_investman']);
 Route::get('article', [ContentApi::class, 'article']);
+Route::get('popularnews', [ContentApi::class, 'popularnews']);
 
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);

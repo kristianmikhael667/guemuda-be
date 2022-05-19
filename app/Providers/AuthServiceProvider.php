@@ -30,7 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            $spaUrl = "http://front.dewanhoster.my.id/email_verify_url/" . $url;
+            $spaUrl = "http://front.dewanhoster.my.id/email_verify_url?verify=" . $url;
             // return $this->view('emails.orders.shipped');
             // bahlul lu
             // return view('admin.verify', [

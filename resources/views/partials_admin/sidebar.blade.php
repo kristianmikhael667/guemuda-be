@@ -246,6 +246,7 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg></i> User Management
             </a>
+        {{-- User --}}
             <ul class="submenu">
                 <li><a href="/administrator/users" title="">All</a></li>
                 <li><a href="/administrator/superadmin" title="">Super Admin</a></li>

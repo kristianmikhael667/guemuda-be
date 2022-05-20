@@ -59,7 +59,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('tagscommunity', TagsCommunity::class);
     Route::resource('community-news', CommunityNews::class);
     Route::resource('community-video', CommunityVideoController::class);
-    Route::resource('community-group', CommunityGroupController::class);
+    Route::resource('communitiesgroup', CommunityGroupController::class);
     Route::get('/media', [MediaController::class, 'index']);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

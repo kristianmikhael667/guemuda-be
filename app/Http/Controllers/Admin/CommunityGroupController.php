@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\CommunityGroup;
+use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CommunityGroupController extends Controller
 {
@@ -17,13 +20,11 @@ class CommunityGroupController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->roles === 'common.superadmin') {
-            $communitygroup = CommunityGroup::latest()->get();
-            return view('admin.community-group',[
-                'page' => 'Administrator',
-                'groups' => $communitygroup
-            ]);
-        }
+        $communitygroup = CommunityGroup::latest()->get();
+        return view('admin.community-group', [
+            'page' => 'Administrator',
+            'groups' => $communitygroup
+        ]);
     }
 
     /**
@@ -85,7 +86,11 @@ class CommunityGroupController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = CommunityGroup::where('slug', $id)->firstOrFail();
+        return view('admin.comunitygroup-edit', [
+            'communities' => $post,
+            'page' => 'Administrator'
+        ]);
     }
 
     /**
@@ -95,9 +100,35 @@ class CommunityGroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $post)
     {
-        //
+        $id = CommunityGroup::where('slug', $post)->firstOrFail();
+
+        $rules = [
+            'namegroup' => 'required|max:255',
+            'linkwa' => 'required',
+            'linktele' => 'required',
+            'linktwit' => 'required',
+            'linkig' => 'required',
+            'desc' => 'required',
+            'profile' => 'image|file|max:1024',
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-image');
+        }
+
+        if ($request->namegroup) {
+            $validatedData['slug'] = SlugService::createSlug(CommunityGroup::class, 'slug', $request->namegroup);
+        }
+        CommunityGroup::where('slug', $id->slug)
+            ->update($validatedData);
+        return redirect('/administrator/communitiesgroup')->with('success', 'Post has been updated!');
     }
 
     /**

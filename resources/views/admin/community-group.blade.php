@@ -20,10 +20,10 @@
                                         <div>
                                             <h4>Community Group</h4>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <a href="/administrator/community-group/create" id="create-new-post"
                                                 class="btn btn-primary">Create Community Group</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="d-widget-title">
@@ -71,7 +71,7 @@
                                             <td>{{ $category->slug }}</td>
                                             <td>{{ \Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
                                             <td>
-                                                <a href="/dashboard/posts/{{ $category->slug }}"
+                                                <a href="/administrator/communitiesgroup/{{ $category->slug }}"
                                                     class="badge btn-light">
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -81,7 +81,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="/dashboard/posts/{{ $category->slug }}/edit"
+                                                <a href="/administrator/communitiesgroup/{{ $category->slug }}/edit"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -93,7 +93,7 @@
                                                             d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                         </path>
                                                     </svg></span></a>
-                                                <form action="/administrator/post/{{ $category->slug }}" method="post"
+                                                <form action="/administrator/communitiesgroup/{{ $category->slug }}" method="post"
                                                     class="d-inline">
                                                     @method('delete')
                                                     @csrf

@@ -106,6 +106,7 @@
             </a>
         </li>
 
+        {{-- Clear --}}
         {{-- <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
             <a class="" href="/administrator/category-premium" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"

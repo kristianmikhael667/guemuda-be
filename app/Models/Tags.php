@@ -20,6 +20,11 @@ class Tags extends Model
         return $this->hasMany(Content::class);
     }
 
+    public function premiumcontents()
+    {
+        return $this->hasMany(PremiumContent::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

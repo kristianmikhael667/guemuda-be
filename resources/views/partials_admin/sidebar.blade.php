@@ -92,6 +92,30 @@
             </a>
         </li>
 
+        <li class="{{ Request::is('administrator/premiumcontent*') ? 'active' : '' }}">
+            <a class="" href="/administrator/premiumcontent" title="">
+                <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-gift">
+                        <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                        <rect x="2" y="7" width="20" height="5"></rect>
+                        <line x1="12" y1="22" x2="12" y2="7"></line>
+                        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                    </svg></i> Premium Content
+            </a>
+        </li>
+
+        <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
+            <a class="" href="/administrator/category-premium" title="">
+                <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-airplay">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg></i> Premium Category
+            </a>
+        </li>
         {{-- <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
@@ -107,7 +131,7 @@
             </ul>
         </li> --}}
 
-        <li class="{{ Request::is('administrator/webinars*') ? 'active' : '' }}">
+        <li class="{{ Request::is('admi∏nistrator/webinars*') ? 'active' : '' }}">
             <a class="" href="/administrator/webinars" title="">
                 <i><svg id="webi" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

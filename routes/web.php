@@ -67,6 +67,11 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::get('/media', [MediaController::class, 'index']);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::get('/superadmin', [UserController::class, 'superadmin']);
+    Route::get('/admin', [UserController::class, 'admin']);
+    Route::get('/editor', [UserController::class, 'editor']);
+    Route::get('/contributor', [UserController::class, 'contributor']);
+    Route::get('/subscriber', [UserController::class, 'subscribes']);
 });
 
 // Route::group(['middleware' => ['auth']], function () {

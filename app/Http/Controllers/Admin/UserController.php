@@ -26,6 +26,51 @@ class UserController extends Controller
         ]);
     }
 
+    public function superadmin()
+    {
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'superadmin')->paginate(10);
+        return view('admin.users-superadmin', [
+            'page' => 'Administrator',
+            'users' => $data
+        ]);
+    }
+
+    public function admin()
+    {
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'admin')->paginate(10);
+        return view('admin.user-admin', [
+            'page' => 'Administrator',
+            'users' => $data
+        ]);
+    }
+
+    public function editor()
+    {
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'editor')->paginate(10);
+        return view('admin.user-editor', [
+            'page' => 'Administrator',
+            'users' => $data
+        ]);
+    }
+
+    public function contributor()
+    {
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'contributor')->paginate(10);
+        return view('admin.users-contributor', [
+            'page' => 'Administrator',
+            'users' => $data
+        ]);
+    }
+
+    public function subscribes()
+    {
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'subscribe')->paginate(10);
+        return view('admin.users-superadmin', [
+            'page' => 'Administrator',
+            'users' => $data
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

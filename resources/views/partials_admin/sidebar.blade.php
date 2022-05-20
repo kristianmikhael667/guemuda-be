@@ -248,11 +248,11 @@
             </a>
             <ul class="submenu">
                 <li><a href="/administrator/users" title="">All</a></li>
-                <li><a href="loaders.html" title="">Super Admin</a></li>
-                <li><a href="loaders.html" title="">Admin</a></li>
-                <li><a href="forgot-password.html" title="">Editor</a></li>
-                <li><a href="loaders.html" title="">Contributor</a></li>
-                <li><a href="" title="">Subscriber</a></li>
+                <li><a href="/administrator/superadmin" title="">Super Admin</a></li>
+                <li><a href="/administrator/admin" title="">Admin</a></li>
+                <li><a href="/administrator/editor" title="">Editor</a></li>
+                <li><a href="/administrator/contributor" title="">Contributor</a></li>
+                <li><a href="/administrator/subscriber" title="">Subscriber</a></li>
             </ul>
         </li>
 

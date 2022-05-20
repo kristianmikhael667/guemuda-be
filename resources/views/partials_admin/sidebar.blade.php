@@ -106,7 +106,7 @@
             </a>
         </li>
 
-        <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
             <a class="" href="/administrator/category-premium" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -115,7 +115,7 @@
                         <polygon points="12 15 17 21 7 21 12 15"></polygon>
                     </svg></i> Premium Category
             </a>
-        </li>
+        </li> --}}
         {{-- <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"

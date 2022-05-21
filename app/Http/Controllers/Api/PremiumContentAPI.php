@@ -60,6 +60,7 @@ class PremiumContentAPI extends Controller
 
     public function popular()
     {
+        // Change
         $posts = PremiumContent::join("premium_views", "premium_views.id_post", "=", "premium_contents.id")
             ->where("premium_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
             ->groupBy("premium_contents.id")
@@ -219,6 +220,7 @@ class PremiumContentAPI extends Controller
         );
     }
 
+    // lupa
     public function popularnews(Request $request)
     {
         $posts = PremiumContent::join("content_views", "content_views.id_post", "=", "contents.id")

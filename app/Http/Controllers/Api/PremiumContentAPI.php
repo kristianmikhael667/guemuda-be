@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\PremiumContent;
+use App\Models\PremiumView;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use hisorange\BrowserDetect\Parser as Browser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PremiumContentAPI extends Controller
@@ -58,36 +60,38 @@ class PremiumContentAPI extends Controller
 
     public function popular()
     {
-        $posts = PremiumContent::join("content_views", "content_views.id_post", "=", "contents.id")
-            ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
-            ->groupBy("contents.slug")
-            ->groupBy("contents.id")
-            ->groupBy("contents.uid_user")
-            ->groupBy("contents.uid_user_2")
-            ->groupBy("contents.thumbnail")
-            ->groupBy("contents.description")
-            ->groupBy("contents.link")
-            ->groupBy("contents.status")
-            ->groupBy("contents.created_at")
-            ->groupBy("contents.updated_at")
-            ->groupBy("contents.title")
-            ->groupBy("contents.subdesc")
-            ->groupBy("contents.image")
-            ->groupBy("contents.video")
-            ->groupBy("contents.category_id")
-            ->groupBy("contents.tags_id")
+        $posts = PremiumContent::join("premium_views", "premium_views.id_post", "=", "premium_contents.id")
+            ->where("premium_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->groupBy("premium_contents.id")
+            ->groupBy("premium_contents.title")
+            ->groupBy("premium_contents.captions")
+            ->groupBy("premium_contents.slug")
+            ->groupBy("premium_contents.uid_user")
+            ->groupBy("premium_contents.uid_user_2")
+            ->groupBy("premium_contents.image")
+            ->groupBy("premium_contents.thumbnail")
+            ->groupBy("premium_contents.category_id")
+            ->groupBy("premium_contents.tags_id")
+            ->groupBy("premium_contents.subdesc")
+            ->groupBy("premium_contents.description")
+            ->groupBy("premium_contents.link_audio")
+            ->groupBy("premium_contents.link")
+            ->groupBy("premium_contents.status")
+            ->groupBy("premium_contents.created_at")
+            ->groupBy("premium_contents.updated_at")
+            ->groupBy("premium_contents.type")
             ->limit(6)
-            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
-            ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
+            ->orderBy(DB::raw('COUNT(premium_contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(premium_contents.id) as total_views'), 'premium_contents.*'));
         if ($posts) {
             return ResponseFormatter::success(
                 $posts,
-                'Data Content retrieved successfully'
+                'Data Premium Content retrieved successfully'
             );
-        }else{
+        } else {
             return ResponseFormatter::error(
                 null,
-                'Data Content not fount'
+                'Data Premium Content not found'
             );
         }
     }
@@ -110,18 +114,18 @@ class PremiumContentAPI extends Controller
             $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
             $platforms_names = str_replace(".", "", $platforms_name);
 
-            // ContentViews::create([
-            //     'id_post' => $content->id,
-            //     'titleslug' => $content->slug,
-            //     'url' => request()->url() . '?slug=' . $content->slug,
-            //     'session_id' => '-',
-            //     'user_id' => Auth::check() == false ? '-' : Auth::id(),
-            //     'ip'  => request()->ip(),
-            //     'category_ids' => $content->category_id,
-            //     'agent' => $browsers_names,
-            //     'platform' =>  $platforms_names,
-            //     'device' => Browser::deviceFamily()
-            // ]);
+            PremiumView::create([
+                'id_post' => $content->id,
+                'titleslug' => $content->slug,
+                'url' => request()->url() . '?slug=' . $content->slug,
+                'session_id' => '-',
+                'user_id' => Auth::check() == false ? '-' : Auth::id(),
+                'ip'  => request()->ip(),
+                'category_ids' => $content->category_id,
+                'agent' => $browsers_names,
+                'platform' =>  $platforms_names,
+                'device' => Browser::deviceFamily()
+            ]);
 
             if ($content) {
                 return ResponseFormatter::success(

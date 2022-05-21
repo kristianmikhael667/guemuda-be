@@ -71,7 +71,7 @@
                                             <th>Author 2</th>
                                             <th>Category</th>
                                             <th>Tag</th>
-                                            
+                                            <th>Hit</th>
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -104,7 +104,14 @@
                                                 <?php echo e(substr($string, 0, strlen($string) - 2)); ?>
 
                                             </td>
-                                            
+                                            <td>
+                                                <?php $__currentLoopData = $views; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($view->id == $content->id): ?>
+                                                <?php echo e($view->total_views); ?>
+
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </td>
                                             <td><span class=" text-success"><?php echo e($content->status); ?></span></td>
                                             <td><?php echo e(\Carbon\Carbon::parse($content->created_at)->diffForHumans()); ?>
 

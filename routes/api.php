@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('post/comment', [CommentAPI::class, 'store']);
     Route::post('post/reply', [CommentAPI::class, 'reply']);
     Route::get('users', [UsersAPI::class, 'index']);
+    Route::get('like', [ContentApi::class, 'likecontent']);
 
     // Premium Content
     Route::get('categoriespremium', [PremiumContentAPI::class, 'categories']);

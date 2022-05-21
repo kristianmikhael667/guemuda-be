@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Hashids\Hashids;
+use Illuminate\Support\Facades\DB;
 
 class PremiumContentController extends Controller
 {
@@ -23,6 +25,7 @@ class PremiumContentController extends Controller
     public function index()
     {
         $search = '';
+        $hashids = new Hashids('', 10);
         if (request('category')) {
             $category = CatPremium::firstWhere('slug', request('category'));
             $title = ' iner ' . $category->name;
@@ -34,37 +37,36 @@ class PremiumContentController extends Controller
         }
 
         $contents = PremiumContent::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
-        // $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
-        //     ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
-        //     ->groupBy("contents.slug")
-        //     ->groupBy("contents.id")
-        //     ->groupBy("contents.uid_user")
-        //     ->groupBy("contents.uid_user_2")
-        //     ->groupBy("thumbnail")
-        //     ->groupBy("contents.description")
-        //     ->groupBy("contents.captions")
-        //     ->groupBy("contents.link_audio")
-        //     ->groupBy("contents.type")
-        //     ->groupBy("contents.link")
-        //     ->groupBy("contents.status")
-        //     ->groupBy("contents.created_at")
-        //     ->groupBy("contents.updated_at")
-        //     ->groupBy("contents.title")
-        //     ->groupBy("contents.subdesc")
-        //     ->groupBy("contents.image")
-        //     ->groupBy("contents.video")
-        //     ->groupBy("contents.category_id")
-        //     ->groupBy("contents.tags_id")
-        //     ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
-        //     ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
+        $kinanda = PremiumContent::join("premium_views", "premium_views.id_post", "=", "premium_contents.id")
+            ->where("premium_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+            ->groupBy("premium_contents.id")
+            ->groupBy("premium_contents.title")
+            ->groupBy("premium_contents.captions")
+            ->groupBy("premium_contents.slug")
+            ->groupBy("premium_contents.uid_user")
+            ->groupBy("premium_contents.uid_user_2")
+            ->groupBy("premium_contents.image")
+            ->groupBy("premium_contents.thumbnail")
+            ->groupBy("premium_contents.category_id")
+            ->groupBy("premium_contents.tags_id")
+            ->groupBy("premium_contents.subdesc")
+            ->groupBy("premium_contents.description")
+            ->groupBy("premium_contents.link_audio")
+            ->groupBy("premium_contents.link")
+            ->groupBy("premium_contents.status")
+            ->groupBy("premium_contents.created_at")
+            ->groupBy("premium_contents.updated_at")
+            ->groupBy("premium_contents.type")
+            ->orderBy(DB::raw('COUNT(premium_contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(premium_contents.id) as total_views'), 'premium_contents.*'));
 
         $taggers = Tags::all();
         return view('admin.premiumcontent', [
             'page' => 'Administrator',
             'contents' => $contents,
-            // 'views' => $kinanda,
+            'views' => $kinanda,
             'tages' => $taggers,
-            // 'hashids' => $hashids
+            'hashids' => $hashids
         ]);
     }
 

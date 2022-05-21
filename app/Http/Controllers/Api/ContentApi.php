@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\ContentViews;
+use App\Models\LikeContent;
 use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -228,8 +229,7 @@ class ContentApi extends Controller
 
     public function popularnews(Request $request)
     {
-        $posts = Content::join("content_views", "content_views.id_post", "=", "contents.id")
-            ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
+        $posts = Content::join("like_contents", "like_contents.id_post", "=", "contents.id")
             ->groupBy("contents.slug")
             ->groupBy("contents.id")
             ->groupBy("contents.uid_user")
@@ -251,12 +251,43 @@ class ContentApi extends Controller
             ->groupBy("contents.tags_id")
             ->limit(6)
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
-            ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
+            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
+
         if ($posts) {
             return ResponseFormatter::success(
                 $posts,
-                'Data Content retrieved successfully'
+                'Data Like Content successfully'
             );
+        } else {
+            return ResponseFormatter::error(
+                null,
+                'Data Like Content Empty'
+            );
+        }
+    }
+
+    public function likecontent(Request $request)
+    {
+        $slug = $request->input('slug');
+        if ($slug) {
+            $content = Content::where('slug', $slug)->first();
+            $like = LikeContent::where('id_post', $content->id)->where('id_users', auth()->user()->id)->first();
+
+            if ($like) {
+                return ResponseFormatter::success(
+                    null,
+                    'Liked'
+                );
+            } else {
+                $likes = LikeContent::create([
+                    'id_post' => $content->id,
+                    'id_users' => auth()->user()->id
+                ]);
+                return ResponseFormatter::success(
+                    $likes,
+                    'Like'
+                );
+            }
         }
     }
 }

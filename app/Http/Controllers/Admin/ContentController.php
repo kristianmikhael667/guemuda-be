@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\ContentViews;
+use App\Models\LikeContent;
 use App\Models\Tags;
 use App\Models\User;
 use Carbon\Carbon;
@@ -46,6 +47,7 @@ class ContentController extends Controller
         }
 
         $contents = Content::latest()->with(['category', 'user', 'comments'])->filter(request(['search', 'user', 'category', 'comments']))->paginate(10)->withQueryString();
+
         $kinanda = Content::join("content_views", "content_views.id_post", "=", "contents.id")
             ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
             ->groupBy("contents.slug")

@@ -76,7 +76,7 @@
                                             <th>Author 2</th>
                                             <th>Category</th>
                                             <th>Tag</th>
-                                            {{-- <th>Hit</th> --}}
+                                            <th>Hit</th>
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -108,13 +108,13 @@
                                                 @endforeach
                                                 {{ substr($string, 0, strlen($string) - 2)}}
                                             </td>
-                                            {{-- <td>
+                                            <td>
                                                 @foreach ($views as $view)
                                                 @if ($view->id == $content->id)
                                                 {{ $view->total_views }}
                                                 @endif
                                                 @endforeach
-                                            </td> --}}
+                                            </td>
                                             <td><span class=" text-success">{{ $content->status }}</span></td>
                                             <td>{{ \Carbon\Carbon::parse($content->created_at)->diffForHumans() }}
                                             </td>

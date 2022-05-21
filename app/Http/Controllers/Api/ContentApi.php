@@ -229,6 +229,7 @@ class ContentApi extends Controller
 
     public function popularnews(Request $request)
     {
+        // gg
         $posts = Content::join("like_contents", "like_contents.id_post", "=", "contents.id")
             ->groupBy("contents.slug")
             ->groupBy("contents.id")

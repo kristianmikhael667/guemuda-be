@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\ContentViews;
-use App\Models\LikeContent;
+use App\Models\LikeContent; //forgot
 use App\Models\Tags;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

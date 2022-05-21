@@ -252,7 +252,7 @@ class ContentApi extends Controller
             ->groupBy("contents.tags_id")
             ->limit(6)
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
-            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
+            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*')); //gg
 
         if ($posts) {
             return ResponseFormatter::success(

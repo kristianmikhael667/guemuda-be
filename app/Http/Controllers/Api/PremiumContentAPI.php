@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\PremiumContent;
-use App\Models\PremiumView;
+use App\Models\PremiumView; //ini
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use hisorange\BrowserDetect\Parser as Browser;

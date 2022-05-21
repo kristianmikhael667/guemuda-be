@@ -266,6 +266,7 @@ class ContentApi extends Controller
         }
     }
 
+    // like
     public function likecontent(Request $request)
     {
         $slug = $request->input('slug');

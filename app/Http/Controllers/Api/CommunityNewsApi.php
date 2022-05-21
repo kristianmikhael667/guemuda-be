@@ -144,4 +144,24 @@ class CommunityNewsApi extends Controller
             'Data Community retrieved successfully'
         );
     }
+
+    public function categories(Request $request)
+    {
+        // var_dump($request->as);
+        if ($request->category) {
+            $content = CommunityNews::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data Community News by slug retrieved successfullysss'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data Community News is empty'
+                );
+            }
+        }
+    }
 }

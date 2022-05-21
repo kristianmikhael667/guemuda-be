@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\CategoryCommunity as ModelsCategoryCommunity;
+use App\Models\CommunityGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,7 @@ class CategoryCommunity extends Controller
         $status = $request->input('status');
 
         if ($slug) {
-            $content = ModelsCategoryCommunity::where('slug', $slug)->first();
+            $content = CommunityGroup::where('slug', $slug)->first();
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -40,7 +41,7 @@ class CategoryCommunity extends Controller
 
 
         return ResponseFormatter::success(
-            DB::table('category_communities')->orderBy('created_at', 'desc')->paginate($limit),
+            DB::table('community_groups')->orderBy('created_at', 'desc')->paginate($limit),
             // $content->paginate($limit),
             'Data Content retrieved successfully'
         );

@@ -3,11 +3,13 @@
 use App\Http\Controllers\Api\AuthAPI;
 use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\CategoryPremiumAPI;
 use App\Http\Controllers\Api\CommentAPI;
 use App\Http\Controllers\Api\CommunityGroupAPI;
 use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
+use App\Http\Controllers\Api\PremiumContentAPI;
 use App\Http\Controllers\Api\RegisterUserAPI;
 use App\Http\Controllers\Api\Test;
 use App\Http\Controllers\Api\UsersAPI; //sa
@@ -34,16 +36,32 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('logout', [AuthAPI::class, 'logout']);
     Route::post('post/comment', [CommentAPI::class, 'store']);
     Route::post('post/reply', [CommentAPI::class, 'reply']);
-    Route::get('users', [UsersAPI::class, 'index']); //sa
-});
-// Route::get('food', [FoodController::class, 'all']);
+    Route::get('users', [UsersAPI::class, 'index']);
 
-// Route::get('category', [CategoryController::class, 'index']);
+    // Premium Content
+    Route::get('categoriespremium', [PremiumContentAPI::class, 'categories']);
+    Route::get('premium-content', [PremiumContentAPI::class, 'all']);
+    Route::get('today-premium', [PremiumContentAPI::class, 'newstoday']);
+    Route::get('popularpremium', [PremiumContentAPI::class, 'popular']);
+    Route::get('popularcategorypremium', [PremiumContentAPI::class, 'popular_cat']);
+    Route::get('article', [PremiumContentAPI::class, 'article']);
+    Route::get('popularnews', [PremiumContentAPI::class, 'popularnews']);
+
+    // Premium Content
+    Route::resource('categoryprem', CategoryPremiumAPI::class);
+    Route::get('subcategoryprem', [CategoryPremiumAPI::class, 'subcategories']);
+    Route::get('category-parent-prem', [CategoryPremiumAPI::class, 'categoryparent']);
+});
+
+// Category Content
 Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
 Route::get('category-parent', [CategoryController::class, 'categoryparent']);
+
+// Category Community
 Route::resource('category-community', CategoryCommunity::class);
 
+// Article
 Route::get('categories', [ContentApi::class, 'categories']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('today', [ContentApi::class, 'newstoday']);
@@ -55,6 +73,7 @@ Route::get('popularnews', [ContentApi::class, 'popularnews']);
 Route::get('community-news', [CommunityNewsApi::class, 'all']);
 Route::get('popularcommunity', [CommunityNewsApi::class, 'popular']);
 Route::get('communities', [CommunityNewsApi::class, 'communities']);
+Route::get('categoriescom', [CommunityNewsApi::class, 'categories']);
 
 Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);

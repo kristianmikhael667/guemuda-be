@@ -29,6 +29,9 @@ class ContentApi extends Controller
             ->groupBy("contents.thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.link")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.link_audio")
             ->groupBy("contents.status")
             ->groupBy("contents.created_at")
             ->groupBy("contents.updated_at")
@@ -45,6 +48,11 @@ class ContentApi extends Controller
             return ResponseFormatter::success(
                 $posts,
                 'Data Content retrieved successfully'
+            );
+        } else {
+            return ResponseFormatter::error(
+                null,
+                'No Content'
             );
         }
     }
@@ -72,6 +80,9 @@ class ContentApi extends Controller
             ->groupBy("contents.thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.link")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
             ->groupBy("contents.status")
             ->groupBy("contents.created_at")
             ->groupBy("contents.updated_at")
@@ -226,6 +237,9 @@ class ContentApi extends Controller
             ->groupBy("contents.thumbnail")
             ->groupBy("contents.description")
             ->groupBy("contents.link")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.link_audio")
             ->groupBy("contents.status")
             ->groupBy("contents.created_at")
             ->groupBy("contents.updated_at")

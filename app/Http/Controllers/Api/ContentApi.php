@@ -113,7 +113,7 @@ class ContentApi extends Controller
 
         if ($slug) {
             $content = Content::where('slug', $slug)->first();
-            $like = LikeContent::where('id_post', $content->id)->count();
+            $like = LikeContent::where('id_post', $content->id)->count(); //kren
             // ContentViews::createViewLog($content);
             $browsers = Browser::browserName();
             $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
@@ -137,10 +137,10 @@ class ContentApi extends Controller
             ]);
 
             if ($content) {
-                return ResponseFormatter::like(
+                return ResponseFormatter::like( //ren
                     $content,
                     'Data content by slug retrieved successfully',
-                    $like
+                    $like //kren
                 );
             } else {
                 return ResponseFormatter::error(

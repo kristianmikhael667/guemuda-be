@@ -104,6 +104,27 @@ class ContentApi extends Controller
         }
     }
 
+    // cek like
+    public function ceklike(Request $request)
+    {
+        $slug = $request->input('slug');
+        if ($slug) {
+            $content = Content::where('slug', $slug)->first();
+            $like = LikeContent::where('id_post', $content->id)->where('id_users', auth()->user()->id)->count();
+            if ($like) {
+                return ResponseFormatter::success(
+                    0,
+                    'Liked'
+                );
+            } else {
+                return ResponseFormatter::success(
+                    $like,
+                    'Liked'
+                );
+            }
+        }
+    }
+
     public function all(Request $request)
     {
         $id = $request->input('id');

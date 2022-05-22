@@ -104,7 +104,6 @@ class ContentApi extends Controller
         }
     }
 
-    // cek like
     public function ceklike(Request $request)
     {
         $slug = $request->input('slug');

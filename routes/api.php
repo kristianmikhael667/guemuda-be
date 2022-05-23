@@ -11,12 +11,13 @@ use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\PremiumContentAPI;
 use App\Http\Controllers\Api\RegisterUserAPI;
+use App\Http\Controllers\api\SurveyQuestion as ApiSurveyQuestion;
+use App\Http\Controllers\api\SurveyAnswers as ApiRegisterWebinar;
 use App\Http\Controllers\Api\Test;
 use App\Http\Controllers\Api\UsersAPI; //sa
 use App\Http\Controllers\Api\VideoArticleAPI;
 use App\Http\Controllers\Api\WebinarsApi;
 use App\Http\Controllers\PictureApi;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -80,11 +81,16 @@ Route::get('community-video', [CommunityVideoApi::class, 'all']);
 Route::get('community-group', [CommunityGroupAPI::class, 'all']);
 Route::get('poppular-community-video', [CommunityVideoApi::class, 'popular']);
 
+// Webinar
 Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);
+Route::get('webinarsurveyquestion', [ApiSurveyQuestion::class, 'index']);
+Route::get('webinarsurveyquestion/{id}', [ApiSurveyQuestion::class, 'question']);
+Route::get('register-webinar-answer', [ApiRegisterWebinar::class, 'index']);
+Route::post('register-webinar-answer', [ApiRegisterWebinar::class, 'registerWebinar']);
 
 // Tags
 Route::get('tags', [ContentApi::class, 'tags']);

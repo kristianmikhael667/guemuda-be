@@ -23,15 +23,15 @@ class CommunityNews extends Controller
     public function index()
     {
         // Permission
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][28])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][28])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
 
         $community = ModelsCommunityNews::latest()->with(['communitygroup', 'user'])->filter(request(['search', 'user', 'communitygroup']))->paginate(10)->withQueryString();
 
@@ -75,15 +75,15 @@ class CommunityNews extends Controller
     public function create()
     {
         // Permission
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][29])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][29])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         return view('admin.create-community-news', [
             'page' => 'Administrator',
             'tags' => TagsCommunity::all(),
@@ -100,15 +100,15 @@ class CommunityNews extends Controller
     public function store(Request $request)
     {
         // Permission
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][29])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][29])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
 
         $validatedData = $request->validate([
             'title' => 'required',

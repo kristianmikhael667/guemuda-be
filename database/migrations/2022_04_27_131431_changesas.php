@@ -14,7 +14,7 @@ class Changesas extends Migration
     public function up()
     {
         Schema::table('community_news', function (Blueprint $table) {
-            $table->string('uid_user_2');
+            // $table->string('uid_user_2');
         });
     }
 

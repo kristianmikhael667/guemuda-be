@@ -21,15 +21,15 @@ class WebinarsControllers extends Controller
      */
     public function index()
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][24])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][24])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         $search = '';
         if (request('category')) {
             // $category = Category::firstWhere('slug', request('category'));
@@ -58,15 +58,15 @@ class WebinarsControllers extends Controller
      */
     public function create()
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][25])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][25])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         return view('admin.create-webinars', [
             'page' => 'Administrator',
             'categories' => CategoryWebinar::all(),
@@ -82,19 +82,20 @@ class WebinarsControllers extends Controller
      */
     public function store(Request $request)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][25])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][25])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_event' => 'required',
-            'category_event' => 'required',
+            'category_event' => 'nullable',
             'avatar' => 'image|file|max:2024',
             'description' => 'required',
             'speaker' => 'required',
@@ -102,19 +103,30 @@ class WebinarsControllers extends Controller
             'organizer' => 'required',
             'moderator' => 'required',
             'address' => 'required',
+            'survey_question1' => 'nullable',
+            'survey_question2' => 'nullable',
+            'survey_question3' => 'nullable',
+            'survey_question4' => 'nullable',
+            'survey_question5' => 'nullable',
+            'survey_question6' => 'nullable',
+            'survey_question7' => 'nullable',
+            'survey_question8' => 'nullable',
+            'survey_question9' => 'nullable',
+            'survey_question10' => 'nullable',
             'links_maps' => 'required'
         ]);
 
         if ($request->file('avatar')) {
             $validatedData['avatar'] = $request->file('avatar')->store('post-image');
         }
+        
 
         $slug = SlugService::createSlug(Webinar::class, 'slug', $request->title);
-
+        $validatedData['typewebinar'] = $request->typewebinar; 
         $validatedData['slug'] = $slug;
         $validatedData['latitude'] = '1.2';
         $validatedData['longitude'] = '1.2';
-        $validatedData['speaker_2'] = $request->speaker2 ? $request->speaker2 : '-';
+        $validatedData['speaker_2'] = $request->speaker2 ? $request->speaker2 : Null;
         $validatedData['tags_event'] = implode(",", $validatedData['tags_event']);
         $taglessBody = strip_tags($validatedData['description']);
         $validatedData['subdesc'] = $taglessBody;
@@ -130,15 +142,15 @@ class WebinarsControllers extends Controller
      */
     public function show($id)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][24])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][24])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
     }
 
     /**
@@ -147,17 +159,24 @@ class WebinarsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Webinar $webinar)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][26])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][26])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+        
+        return view('admin.edit-webinars', [
+            'webinar' => $webinar,
+            'page' => 'Administrator',
+            'categories' => CategoryWebinar::all(),
+            'tages' => TagsWebinar::all()
+        ]);
     }
 
     /**
@@ -167,17 +186,60 @@ class WebinarsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Webinar $webinar)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][26])) {
-            throw UnauthorizedException::forPermissions($data);
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][26])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+        
+        // dd($request);
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'tags_event' => 'required',
+            'category_event',
+            'avatar' => 'image|file|max:2024',
+            'description' => 'required',
+            'speaker' => 'required',
+            'schedule' => 'required',
+            'organizer' => 'required',
+            'moderator' => 'required',
+            'address' => 'required',
+            'survey_question1' => 'nullable',
+            'survey_question2' => 'nullable',
+            'survey_question3' => 'nullable',
+            'survey_question4' => 'nullable',
+            'survey_question5' => 'nullable',
+            'survey_question6' => 'nullable',
+            'survey_question7' => 'nullable',
+            'survey_question8' => 'nullable',
+            'survey_question9' => 'nullable',
+            'survey_question10' => 'nullable',
+            'links_maps' => 'required',
+        ]);
+
+        if ($request->file('avatar')) {
+            $validatedData['avatar'] = $request->file('avatar')->store('post-image');
         }
+     
+        if($request->slug != $webinar->slug ){
+            $validatedData['slug'] = $request->slug;
+        }
+        $validatedData['typewebinar'] = $request->typewebinar;
+        $validatedData['latitude'] = '1.2';
+        $validatedData['longitude'] = '1.2';
+        $validatedData['speaker_2'] = $request->speaker2 ? $request->speaker2 : Null;
+        $validatedData['description'] = $request->description;
+        $taglessBody = strip_tags($validatedData['description']);
+        $validatedData['subdesc'] = $taglessBody;
+        Webinar::where('id', $webinar->id)
+            ->update($validatedData);
+        return redirect('/administrator/webinars')->with('success', 'Webinars has been updated!');
     }
 
     /**
@@ -186,16 +248,19 @@ class WebinarsControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Webinar $webinar)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][27])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][27])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+
+        Webinar::destroy($webinar->id);
+        return redirect('/administrator/webinars')->with('success', 'New webinars has been added!');
     }
 }

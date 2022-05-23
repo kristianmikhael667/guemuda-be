@@ -17,6 +17,8 @@ class AddRoleSeeder extends Seeder
         $permissions = [
             'subscribe',
             'contributor',
+            'admin',
+            'editor',
         ];
 
         foreach ($permissions as $permission) {

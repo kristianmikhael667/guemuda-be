@@ -54,6 +54,28 @@
                                                     @enderror
                                                 </div>
                                                 <div class="uk-margin">
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Type Webinar</span>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="typewebinar" id="typewebinar1" value="0">
+                                                        <label class="form-check-label" for="typewebinar1">
+                                                            Umum
+                                                        </label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="typewebinar" id="typewebinar2" value="1" checked>
+                                                        <label class="form-check-label" for="typewebinar2">
+                                                            Premium
+                                                        </label>
+                                                        </div>
+                                                    @error('typewebinar')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="uk-margin">
                                                     @error('description')
                                                     <p class="text-danger">{{ $message }}</p>
                                                     @enderror
@@ -73,6 +95,141 @@
                                                             data-max-file-size="5M">
                                                     </div>
                                                 </div>
+
+                                                {{-- Question Input --}}
+                                                <div class="uk-margin">
+                                                    <div class="uk-margin">
+                                                        <select class="uk-select" onchange="yesnoCheck(this)">
+                                                            <option disabled="disabled" selected>-- Choose Make Survey Question --
+                                                            </option>
+                                                            <option value="on">Make Survey Questions</option>
+                                                            <option value="off">No Survey Questions</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="uk-margin" id="survey-question" style="display: none">
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 1</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question1" id="question1" type="text"
+                                                            placeholder={{ old('survey_question1') }}>
+                                                            @error('survey_question1')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 2</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question2" id="question2" type="text"
+                                                            placeholder={{ old('survey_question2') }}>
+                                                            @error('survey_question2')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 3</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question3" id="question3" type="text"
+                                                            placeholder={{ old('survey_question3') }}>
+                                                            @error('survey_question3')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 4</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question4" id="question4" type="text"
+                                                            placeholder={{ old('survey_question4') }}>
+                                                            @error('survey_question4')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 5</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question5" id="question5" type="text"
+                                                            placeholder={{ old('survey_question5') }}>
+                                                            @error('survey_question5')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 6</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question6" id="question6" type="text"
+                                                            placeholder={{ old('survey_question6') }}>
+                                                            @error('survey_question6')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 7</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question7" id="question7" type="text"
+                                                            placeholder={{ old('survey_question7') }}>
+                                                            @error('survey_question7')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 8</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question8" id="question8" type="text"
+                                                            placeholder={{ old('survey_question8') }}>
+                                                            @error('survey_question8')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 9</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question9" id="question9" type="text"
+                                                            placeholder={{ old('survey_question9') }}>
+                                                            @error('survey_question9')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 10</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question10" id="question10" type="text"
+                                                            placeholder={{ old('survey_question10') }}>
+                                                            @error('survey_question10')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </fieldset>
 
                                         </div>
@@ -176,7 +333,7 @@
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save News</button>
+                                    <button type="submit" class="btn btn-primary">Save Webinar</button>
                                 </form>
                             </div>
                         </div>
@@ -186,6 +343,27 @@
         </div>
     </div>
     <!-- main content -->
+    <script>
+        function yesnoCheck(that) {
+        if (that.value == "on") {
+            $(".captions").val(null);
+            document.getElementById("survey-question").style.display = "block";
+            // document.getElementById("videopost").style.display = "none";
+            // document.getElementById("audiopost").style.display = "none";
+        } else if (that.value == "off") {
+            $(".captions").val(null);
+            $(".dropify").next(".dropify-clear").trigger("click");
+            document.getElementById("survey-question").style.display = "none";
+            // document.getElementById("videopost").style.display = "block";
+            // document.getElementById("audiopost").style.display = "none";
+        } else{
+            $(".captions").val(null);
+            document.getElementById("survey-question").style.display = "none";
+            // document.getElementById("videopost").style.display = "none";
+            // document.getElementById("audiopost").style.display = "block";
+        }
+    }
+    </script>
     {{-- Ajax --}}
     @include('admin.ajax-webinar')
 

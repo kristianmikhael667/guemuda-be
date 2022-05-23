@@ -26,10 +26,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                @if(session()->has('success'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{session('success')}}
+                                    </div>
+                                @endif
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/webinars" method="get" role="search">
                                                 <div class="input-group">
                                                     @if (request('category'))
                                                     <input type="text" class="form-control" name="search"
@@ -62,108 +67,130 @@
                                     </div>
                                 </div>
                                 <!-- Table start -->
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Title</th>
-                                            <th>Speaker</th>
-                                            <th>Speaker 2</th>
-                                            <th>Schedule</th>
-                                            <th>Category</th>
-                                            <th>Tags</th>
-                                            <th>Moderator</th>
-                                            <th>Organizer</th>
-                                            <th>Status</th>
-                                            <th>Created</th>
-                                            <th>Updated</th>
-                                            <th class="disableFilterBy">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($webinars as $num => $webinar)
-                                        <?php 
-                                        $explode_id = array_map('intval', explode(',', $webinar->tags_event));
-                                        ?>
-                                        <tr>
-                                            <td>{{ $webinars->firstItem() + $num }}</td>
-                                            <td><a href="/administrator/post/edittitle/{{ $webinar->slug }}">{{
-                                                    $webinar->title
-                                                    }}</a></td>
-                                            <td>{{ $webinar->speaker }}</td>
-                                            <td>{{ $webinar->speaker_2 }}</td>
-                                            <td>{{ $webinar->schedule }}</td>
-                                            <td>{{ $webinar->category->name }}</td>
-                                            <td>
-                                                {{ $string = ""; }}
-                                                @foreach ($tages as $item)
-                                                @foreach ($explode_id as $pok)
-                                                @if ($pok == $item->id)
-                                                <?php $string .= $item->name . ', '; ?>
-                                                @endif
-                                                @endforeach
-                                                @endforeach
-                                                {{ substr($string, 0, strlen($string) - 2)}}
-                                            </td>
-                                            <td>{{ $webinar->moderator }}</td>
-                                            <td>{{ $webinar->organizer }}</td>
+                                <div style="overflow-x: auto">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Title</th>
+                                                <th>Speaker</th>
+                                                <th>Speaker 2</th>
+                                                <th>Schedule</th>
+                                                <th>Category</th>
+                                                <th>Tags</th>
+                                                <th>Moderator</th>
+                                                <th>Organizer</th>
+                                                <th>Status</th>
+                                                <th>Question1</th>
+                                                <th>Question2</th>
+                                                <th>Question3</th>
+                                                <th>Question4</th>
+                                                <th>Question5</th>
+                                                <th>Question6</th>
+                                                <th>Question7</th>
+                                                <th>Question8</th>
+                                                <th>Question9</th>
+                                                <th>Question10</th>
+                                                <th>Created</th>
+                                                <th>Updated</th>
+                                                <th class="disableFilterBy">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse ($webinars as $num => $webinar)
+                                            <?php 
+                                            $explode_id = array_map('intval', explode(',', $webinar->tags_event));
+                                            ?>
+                                            <tr>
+                                                <td>{{ $webinars->firstItem() + $num }}</td>
+                                                <td><a href="/administrator/post/edittitle/{{ $webinar->slug }}">{{
+                                                        $webinar->title
+                                                        }}</a></td>
+                                                <td>{{ $webinar->speaker }}</td>
+                                                <td>{{ $webinar->speaker_2 }}</td>
+                                                <td>{{ $webinar->schedule }}</td>
+                                                {{-- <td>{{ $webinar->category->name ? $webinar->category->name : '-'}}</td> --}}
+                                                <td>-</td>
+                                                <td>
+                                                    {{ $string = ""; }}
+                                                    @foreach ($tages as $item)
+                                                    @foreach ($explode_id as $pok)
+                                                    @if ($pok == $item->id)
+                                                    <?php $string .= $item->name . ', '; ?>
+                                                    @endif
+                                                    @endforeach
+                                                    @endforeach
+                                                    {{ substr($string, 0, strlen($string) - 2)}}
+                                                </td>
+                                                <td>{{ $webinar->moderator }}</td>
+                                                <td>{{ $webinar->organizer }}</td>
+                                                <td><span>{{ $webinar->status }}</span></td>
+                                                <td><span>{{$webinar->survey_question1 ? $webinar->survey_question1 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question2 ? $webinar->survey_question2 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question3? $webinar->survey_question3 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question4? $webinar->survey_question4 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question5? $webinar->survey_question5 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question6? $webinar->survey_question6 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question7? $webinar->survey_question7 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question8? $webinar->survey_question8 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question9? $webinar->survey_question9 : '-'}}</span></td>
+                                                <td><span>{{$webinar->survey_question10? $webinar->survey_question10 : '-'}}</span></td>
+                                                <td>{{ \Carbon\Carbon::parse($webinar->created_at)->diffForHumans() }}
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($webinar->updated_at)->diffForHumans() }}</td>
+                                                <td>
+                                                    <a href="/dashboard/webinars/{{ $webinar->slug }}" class="badge btn-light">
 
-                                            <td><span class=" text-success">{{ $webinar->status }}</span></td>
-                                            <td>{{ \Carbon\Carbon::parse($webinar->created_at)->diffForHumans() }}
-                                            </td>
-                                            <td>{{ \Carbon\Carbon::parse($webinar->updated_at)->diffForHumans() }}</td>
-                                            <td>
-                                                <a href="/dashboard/posts/{{ $webinar->slug }}" class="badge btn-light">
-
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                        class="feather feather-eye">
-                                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                        <circle cx="12" cy="12" r="3"></circle>
-                                                    </svg></a>
-                                                <a href="{{ route('post.edit', $webinar->slug) }}"
-                                                    class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" class="feather feather-edit">
-                                                        <path
-                                                            d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
-                                                        </path>
-                                                        <path
-                                                            d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
-                                                        </path>
-                                                    </svg></span></a>
-                                                <form action="/administrator/post/{{ $webinar->slug }}" method="post"
-                                                    class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="badge btn-light border-0"
-                                                        onclick="return confirm('Are you sure ?')"><svg
-                                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-trash-2">
-                                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-eye">
+                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                                            <circle cx="12" cy="12" r="3"></circle>
+                                                        </svg></a>
+                                                    <a href="/administrator/webinars/{{$webinar->slug}}/edit"
+                                                        class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" class="feather feather-edit">
                                                             <path
-                                                                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
                                                             </path>
-                                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                        </svg></button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                            <path
+                                                                d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                            </path>
+                                                        </svg></span></a>
+                                                    <form action="/administrator/webinars/{{ $webinar->slug }}" method="post"
+                                                        class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="badge btn-light border-0"
+                                                            onclick="return confirm('Are you sure ?')"><svg
+                                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                                stroke-width="2" stroke-linecap="round"
+                                                                stroke-linejoin="round" class="feather feather-trash-2">
+                                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                                <path
+                                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                                </path>
+                                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                            </svg></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
 
-                                        @empty
-                                        <tr>
-                                            <td colspan="12" class="prova">
-                                                Data Table Empty
-                                            </td>
-                                        </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
+                                            @empty
+                                            <tr>
+                                                <td colspan="12" class="prova">
+                                                    Data Table Empty
+                                                </td>
+                                            </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="d-flex justify-content-center">
                                     {{ $webinars->links('vendor.pagination.default') }}
                                 </div>

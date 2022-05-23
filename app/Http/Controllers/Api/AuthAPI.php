@@ -32,6 +32,7 @@ class AuthAPI extends Controller
                 'password' => 'required|confirmed',
                 // 'password' => $this->passwordRules()
             ]);
+
             $role = Role::where(['name' => 'subscribe'])->get();
             $users = User::create([
                 'first_name' => $request->first_name,
@@ -67,38 +68,6 @@ class AuthAPI extends Controller
             ], 'Authentication Failed', 500);
             // dd($error);
         }
-
-        // $request->validate([
-        //     'first_name' => 'required|string|max:255',
-        //     'last_name' => 'required|string|max:255',
-        //     'username' => 'required|unique:users',
-        //     'email' => 'required|string|max:255|unique:users',
-        //     'password' => ['required', 'confirmed', Password::defaults()],
-        // ]);
-
-        // $user = User::create([
-        //     'username' => $request->username,
-        //     'email' => $request->email,
-        //     'first_name' => $request->first_name,
-        //     'last_name' => $request->last_name,
-        //     'address' => $request->address,
-        //     'city' => $request->city,
-        //     'job' => $request->job,
-        //     'bio' => $request->bio,
-        //     'phone_number' => $request->phone_number,
-        //     'date_birth' => $request->date_birth,
-        //     'password' => Hash::make($request->password),
-        // ]);
-        // event(new Registered($user));
-
-        // $token = $user->createToken('authtoken');
-
-        // return response()->json(
-        //     [
-        //         'message' => 'User Registered',
-        //         'data' => ['token' => $token->plainTextToken, 'user' => $user]
-        //     ]
-        // );
     }
 
     public function login(LoginRequest $request)

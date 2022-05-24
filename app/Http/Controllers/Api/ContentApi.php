@@ -112,13 +112,13 @@ class ContentApi extends Controller
             $like = LikeContent::where('id_post', $content->id)->where('id_users', auth()->user()->id)->count();
             if ($like) {
                 return ResponseFormatter::success(
-                    0,
+                    $like,
                     'Liked'
                 );
             } else {
                 return ResponseFormatter::success(
                     $like,
-                    'Liked'
+                    'Null'
                 );
             }
         }

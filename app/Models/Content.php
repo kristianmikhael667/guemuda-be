@@ -13,7 +13,7 @@ class Content extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['user', 'category', 'comments'];
+    protected $with = ['user', 'category', 'comments', 'subcat'];
 
     // protected $primaryKey = 'uuid';
     public $incrementing = false;
@@ -49,6 +49,11 @@ class Content extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function subcat()
+    {
+        return $this->hasMany(Category::class, 'parent', 'id');
     }
 
     // public function tags_id()

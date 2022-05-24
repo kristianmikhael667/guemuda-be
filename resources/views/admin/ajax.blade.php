@@ -12,6 +12,7 @@
             processData: false,
             data: fd,
             success: function(data) {
+                console.log(data);
                 document.getElementById("subid").style.display = "block";
 
                 var dropdown = $("#sub");

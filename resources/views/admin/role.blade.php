@@ -20,10 +20,10 @@
                                         <div>
                                             <h4>Roles Management</h4>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <a href="/administrator/roles/create" id="create-new-post"
                                                 class="btn btn-primary">Create New Role</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="d-widget-title">

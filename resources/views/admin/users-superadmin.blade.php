@@ -18,12 +18,12 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h4>Superadmin Management</h4>
+                                            <h4>Subscribe Management</h4>
                                         </div>
-                                        <div>
+                                        {{-- <div>
                                             <a href="/administrator/users/create" id="create-new-post"
                                                 class="btn btn-primary">Create Superadmin</a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="d-widget-title">

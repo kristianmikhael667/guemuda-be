@@ -20,10 +20,10 @@
                                         <div>
                                             <h4>Admin Management</h4>
                                         </div>
-                                        {{-- <div>
-                                            <a href="/administrator/users/create" id="create-new-post"
-                                                class="btn btn-primary">Create Contributor</a>
-                                        </div> --}}
+                                        <div>
+                                            <a href="/administrator/admin/create" id="create-new-post"
+                                                class="btn btn-primary">Create Admin</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-widget-title">

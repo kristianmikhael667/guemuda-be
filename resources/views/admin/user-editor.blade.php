@@ -20,16 +20,16 @@
                                         <div>
                                             <h4>Editor Management</h4>
                                         </div>
-                                        {{-- <div>
-                                            <a href="/administrator/users/create" id="create-new-post"
-                                                class="btn btn-primary">Create Contributor</a>
-                                        </div> --}}
+                                        <div>
+                                            <a href="/administrator/editor/create" id="create-new-post"
+                                                class="btn btn-primary">Create Editor</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/users" method="get" role="search">
+                                            <form action="/administrator/editor" method="get" role="search">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="search"
                                                         placeholder="Search Name ..." value="{{ request('name') }}">

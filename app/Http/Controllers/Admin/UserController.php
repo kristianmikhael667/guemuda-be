@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role as ModelsRole;
 use App\Models\User;
+use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -44,6 +48,41 @@ class UserController extends Controller
         ]);
     }
 
+    public function admincreate()
+    {
+        $data = ModelsRole::orderBy('id', 'DESC')->where('name', 'admin')->get();
+        return view('admin.createadmin', [
+            'page' => 'Administrator',
+            'roles' => $data[0]
+        ]);
+    }
+
+    public function postadmin(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'username' => 'required|unique:users',
+                'email' => 'required|string|max:255|unique:users',
+                'phone_number' => 'required',
+                'password' => 'required|confirmed',
+                'roles' => 'required',
+                'rolesname' => 'required',
+            ]);
+            $validatedData['address'] = '-';
+            $validatedData['address'] = '-';
+            $validatedData['city'] = '-';
+            $validatedData['job'] = '-';
+            $validatedData['bio'] = '-';
+            $validatedData['date_birth'] = Carbon::today();
+            User::create($validatedData);
+            return redirect('/administrator/admin')->with('success', 'Success Create Admin');
+        } catch (Exception $error) {
+            dd($error);
+        }
+    }
+
     public function editor()
     {
         $data = User::orderBy('id', 'DESC')->where('rolesname', 'editor')->paginate(10);
@@ -51,6 +90,41 @@ class UserController extends Controller
             'page' => 'Administrator',
             'users' => $data
         ]);
+    }
+
+    public function editorcreate()
+    {
+        $data = ModelsRole::orderBy('id', 'DESC')->where('name', 'editor')->get();
+        return view('admin.createeditor', [
+            'page' => 'Administrator',
+            'roles' => $data[0]
+        ]);
+    }
+
+    public function posteditor(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'username' => 'required|unique:users',
+                'email' => 'required|string|max:255|unique:users',
+                'phone_number' => 'required',
+                'password' => 'required|confirmed',
+                'roles' => 'required',
+                'rolesname' => 'required',
+            ]);
+            $validatedData['address'] = '-';
+            $validatedData['address'] = '-';
+            $validatedData['city'] = '-';
+            $validatedData['job'] = '-';
+            $validatedData['bio'] = '-';
+            $validatedData['date_birth'] = Carbon::today();
+            User::create($validatedData);
+            return redirect('/administrator/editor')->with('success', 'Success Create Editor');
+        } catch (Exception $error) {
+            dd($error);
+        }
     }
 
     public function contributor()

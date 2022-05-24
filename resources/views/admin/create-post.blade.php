@@ -124,8 +124,8 @@
                                                     <div class="row">
                                                         @foreach ($categories as $item)
                                                         <label class="mr-2"><input onchange="ganti(this)"
-                                                                class="uk-checkbox" id="category_id" name="category_id"
-                                                                value="{{ $item->id }}" type="checkbox">
+                                                                class="uk-radio" id="pas" name="pas"
+                                                                value="{{ $item->id }}" type="radio">
                                                             {{ $item->name }}</label>
                                                         @endforeach
                                                     </div>

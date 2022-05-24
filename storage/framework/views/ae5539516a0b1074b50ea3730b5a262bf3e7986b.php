@@ -129,8 +129,8 @@ unset($__errorArgs, $__bag); ?>
                                                     <div class="row">
                                                         <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                         <label class="mr-2"><input onchange="ganti(this)"
-                                                                class="uk-checkbox" id="category_id" name="category_id"
-                                                                value="<?php echo e($item->id); ?>" type="checkbox">
+                                                                class="uk-radio" id="pas" name="pas"
+                                                                value="<?php echo e($item->id); ?>" type="radio">
                                                             <?php echo e($item->name); ?></label>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                     </div>

@@ -65,6 +65,7 @@ Route::resource('category-community', CategoryCommunity::class);
 
 // Article
 Route::get('categories', [ContentApi::class, 'categories']);
+Route::get('subcategory', [ContentApi::class, 'subcategory']);
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('today', [ContentApi::class, 'newstoday']);
 Route::get('populararticle', [ContentApi::class, 'popular']);

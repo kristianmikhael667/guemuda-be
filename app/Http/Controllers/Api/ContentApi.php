@@ -211,6 +211,24 @@ class ContentApi extends Controller
         }
     }
 
+    public function subcategory(Request $request)
+    {
+        if ($request->category) {
+            $content = Content::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
+            if ($content) {
+                return ResponseFormatter::success(
+                    $content,
+                    'Data category by slug retrieved successfully'
+                );
+            } else {
+                return ResponseFormatter::error(
+                    null,
+                    'Data category is empty'
+                );
+            }
+        }
+    }
+
     public function tags(Request $request)
     {
         $tags = DB::table('tags')->orderBy('created_at', 'desc')->get();

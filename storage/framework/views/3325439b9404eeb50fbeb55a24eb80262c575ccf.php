@@ -50,7 +50,6 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -59,9 +58,10 @@
                                     </thead>
                                     <tbody>
                                         <?php $__empty_1 = true; $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $num => $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-
+                                        <?php if($role->name == "subscribe"): ?>
+                                        <?php continue; ?>
+                                        <?php endif; ?>
                                         <tr>
-                                            <td><?php echo e($roles->firstItem() + $num); ?></td>
                                             <td><?php echo e($role->name); ?></td>
                                             <td><?php echo e(\Carbon\Carbon::parse($role->created_at)->diffForHumans()); ?>
 

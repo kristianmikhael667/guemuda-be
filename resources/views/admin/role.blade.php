@@ -54,7 +54,6 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -63,9 +62,10 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($roles as $num => $role)
-
+                                        @if ($role->name == "subscribe")
+                                        @continue
+                                        @endif
                                         <tr>
-                                            <td>{{ $roles->firstItem() + $num }}</td>
                                             <td>{{ $role->name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($role->created_at)->diffForHumans() }}
                                             </td>

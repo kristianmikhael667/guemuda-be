@@ -21,7 +21,7 @@
                                         </div>
                                         <div>
                                             <a href="/administrator/community-news/create" id="create-new-post"
-                                                class="btn btn-primary">Create Community News</a>
+                                                class="btn btn-primary">Create Group Community</a>
                                         </div>
                                     </div>
                                 </div>

@@ -207,7 +207,7 @@ class ContentApi extends Controller
         }
     }
 
-    public function subcategory(Request $request)
+    public function subcategory(Request $request) //ini
     {
         if ($request->category) {
             $content = Content::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();

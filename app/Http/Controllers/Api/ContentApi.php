@@ -187,12 +187,8 @@ class ContentApi extends Controller
 
     public function categories(Request $request)
     {
-        // var_dump($request->as);
         if ($request->category) {
             $categoris = Category::where('uuid', $request->category)->get();
-            // $content = Content::latest()->filter(request(['search', 'category', 'author']))->paginate(5)->withQueryString();
-            // $invo = Category::where([['parent', '=', $categori[0]->parent]])
-            //     ->with('posts')->has('posts')->get();
             $content = Content::latest()->whereHas('category', function ($q) use ($categoris) {
                 $q->where('parent', $categoris[0]->id);
             })->get();

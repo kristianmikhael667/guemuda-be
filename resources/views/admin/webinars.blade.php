@@ -93,6 +93,7 @@
                                                 <th>Question10</th>
                                                 <th>Created</th>
                                                 <th>Updated</th>
+                                                <th>Regist Result</th>
                                                 <th class="disableFilterBy">Actions</th>
                                             </tr>
                                         </thead>
@@ -110,7 +111,7 @@
                                                 <td>{{ $webinar->speaker_2 }}</td>
                                                 <td>{{ $webinar->schedule }}</td>
                                                 {{-- <td>{{ $webinar->category->name ? $webinar->category->name : '-'}}</td> --}}
-                                                <td>-</td>
+                                                <td>{{$webinar->typewebinar === "1"? "Premium" : "Umum"}}</td>
                                                 <td>
                                                     {{ $string = ""; }}
                                                     @foreach ($tages as $item)
@@ -138,16 +139,9 @@
                                                 <td>{{ \Carbon\Carbon::parse($webinar->created_at)->diffForHumans() }}
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($webinar->updated_at)->diffForHumans() }}</td>
+                                                <td><a href="/api/register-webinar-export/{{$webinar->slug}}" id="create-new-post"
+                                                    class="btn btn-primary">Result</a></td>
                                                 <td>
-                                                    <a href="/dashboard/webinars/{{ $webinar->slug }}" class="badge btn-light">
-
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                            class="feather feather-eye">
-                                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                                            <circle cx="12" cy="12" r="3"></circle>
-                                                        </svg></a>
                                                     <a href="/administrator/webinars/{{$webinar->slug}}/edit"
                                                         class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" viewBox="0 0 24 24" fill="none"

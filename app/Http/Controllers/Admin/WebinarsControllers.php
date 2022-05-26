@@ -94,7 +94,7 @@ class WebinarsControllers extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required',
-            'tags_event' => 'required',
+            'tags_event' => 'nullable',
             'category_event' => 'nullable',
             'avatar' => 'image|file|max:2024',
             'description' => 'required',
@@ -113,7 +113,7 @@ class WebinarsControllers extends Controller
             'survey_question8' => 'nullable',
             'survey_question9' => 'nullable',
             'survey_question10' => 'nullable',
-            'links_maps' => 'required'
+            'links_maps' => 'nullable'
         ]);
 
         if ($request->file('avatar')) {
@@ -201,7 +201,7 @@ class WebinarsControllers extends Controller
         // dd($request);
         $validatedData = $request->validate([
             'title' => 'required',
-            'tags_event' => 'required',
+            'tags_event' => 'nullable',
             'category_event',
             'avatar' => 'image|file|max:2024',
             'description' => 'required',
@@ -220,7 +220,7 @@ class WebinarsControllers extends Controller
             'survey_question8' => 'nullable',
             'survey_question9' => 'nullable',
             'survey_question10' => 'nullable',
-            'links_maps' => 'required',
+            'links_maps' => 'nullable',
         ]);
 
         if ($request->file('avatar')) {

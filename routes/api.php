@@ -91,7 +91,6 @@ Route::get('video/{filename}', [PictureApi::class, 'video']);
 Route::get('webinarsurveyquestion', [ApiSurveyQuestion::class, 'index']);
 Route::get('webinarsurveyquestion/{id}', [ApiSurveyQuestion::class, 'question']);
 Route::get('register-webinar-answer', [ApiRegisterWebinar::class, 'index']);
-Route::get('register-webinar-export/{webinar_slug}', [ApiRegisterWebinar::class, 'registerWebinarExport'])->name('exportregisterwebinar');
 Route::post('register-webinar-answer', [ApiRegisterWebinar::class, 'registerWebinar']);
 
 // Tags

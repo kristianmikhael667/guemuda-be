@@ -2,17 +2,10 @@
 
 namespace App\Http\Controllers\api;
 use Exception;
-use App\Exports\RegisterWebinarExport;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Helpers\ResponseFormatter;
 use App\Actions\Fortify\PasswordValidationRules;
-use Carbon\Carbon;
-use App\Models\SurveyAnswers as RegisterWebinar;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\Hash;
+use App\Models\SurveyAnswers as RegisterWebinar;;
 class SurveyAnswers extends Controller
 {
     use PasswordValidationRules;
@@ -32,10 +25,6 @@ class SurveyAnswers extends Controller
                 'status' => '400',
             ], 400);    
         }
-    }
-
-    public function registerWebinarExport($webinar_slug){
-        return Excel::download(new RegisterWebinarExport($webinar_slug), 'dataPendaftarWebinar.xlsx');
     }
 
     public function registerWebinar(Request $request){

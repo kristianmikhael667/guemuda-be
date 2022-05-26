@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\TagsCommunity;
 use App\Http\Controllers\Admin\TagsWebinarsControllers;
 use App\Http\Controllers\Admin\VideoArticleController;
 use App\Http\Controllers\Admin\WebinarsControllers;
+use App\Http\Controllers\Admin\RegisterWebinarResult;
 use App\Http\Controllers\Admin\PremiumContentController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -51,6 +52,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('premiumcontent', PremiumContentController::class);
     Route::resource('video-article', VideoArticleController::class);
     Route::resource('webinars', WebinarsControllers::class);
+    Route::get('register-webinar-export/{webinar_slug}', [RegisterWebinarResult::class, 'registerWebinarExport'])->name('exportregisterwebinar');
     Route::get('/post/edittitle/{id}', [ContentController::class, 'edittitle']);
     Route::post('/post/updatetitle', [ContentController::class, 'updatetitle']);
     Route::get('/premiumcontent/edittitle/{id}', [PremiumContentController::class, 'edittitle']);

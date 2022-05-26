@@ -63,6 +63,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('tagswebinars', TagsWebinarsControllers::class);
     Route::resource('tagscommunity', TagsCommunity::class);
     Route::resource('community-news', CommunityNews::class);
+    Route::get('/community-news/edittitle/{id}', [CommunityNews::class, 'edittitle']);
     Route::resource('community-video', CommunityVideoController::class);
     Route::resource('communitiesgroup', CommunityGroupController::class);
     Route::get('/media', [MediaController::class, 'index']);

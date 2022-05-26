@@ -84,7 +84,8 @@
                                         ?>
                                         <tr>
                                             <td><?php echo e($communitys->firstItem() + $num); ?></td>
-                                            <td><a href="/administrator/post/edittitle/<?php echo e($community->slug); ?>"><?php echo e($community->title); ?></a></td>
+                                            <td><a
+                                                    href="/administrator/community-news/edittitle/<?php echo e($community->slug); ?>"><?php echo e($community->title); ?></a></td>
                                             <td><?php echo e($community->user->username); ?></td>
                                             <td><?php echo e($community->uid_user_2); ?>
 
@@ -129,7 +130,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="<?php echo e(route('post.edit', $community->slug)); ?>"
+                                                <a href="<?php echo e(route('community-news.edit', $community->slug)); ?>"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"

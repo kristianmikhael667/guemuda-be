@@ -85,7 +85,8 @@
                                         ?>
                                         <tr>
                                             <td>{{ $communitys->firstItem() + $num }}</td>
-                                            <td><a href="/administrator/post/edittitle/{{ $community->slug }}">{{
+                                            <td><a
+                                                    href="/administrator/community-news/edittitle/{{ $community->slug }}">{{
                                                     $community->title
                                                     }}</a></td>
                                             <td>{{ $community->user->username }}</td>
@@ -126,7 +127,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="{{ route('post.edit', $community->slug) }}"
+                                                <a href="{{ route('community-news.edit', $community->slug) }}"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"

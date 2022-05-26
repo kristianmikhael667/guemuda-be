@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+use Illuminate\Support\Facades\Storage;
 
 class CommunityNews extends Controller
 {
@@ -175,15 +176,56 @@ class CommunityNews extends Controller
     public function edit($id)
     {
         // Permission
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][30])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][30])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+
+        $editid = DB::table('community_news')->where('slug', $id)->get();
+
+        $teg = array_map('intval', explode(',', $editid[0]->tags_id));
+
+        $category = CommunityGroup::where('id', '=', $editid[0]->category_id)->get();
+
+        $idparentarr = array_map('intval', explode(',', $category[0]->id));
+
+        $images = substr($editid[0]->avatar, 11);
+        return view('admin.community-edit', [
+            'page' => 'Administrator',
+            'categories' => CommunityGroup::all(),
+            'tags' => TagsCommunity::all(),
+            'tagsme' => $teg,
+            'contents' => $editid[0],
+            'category' => $category,
+            'parents' => $idparentarr,
+            'images' => $images
+        ]);
+    }
+
+    public function edittitle($id)
+    {
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][30])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+        $title = DB::table('community_news')->where('slug', $id)->get();
+        $title_data = $title[0]->title;
+        $slugs = $title[0]->slug;
+        return view('admin.community-title', [
+            'page' => 'Administrator',
+            'contents' => $title_data,
+            'slugs' => $slugs
+        ]);
     }
 
     /**
@@ -196,15 +238,55 @@ class CommunityNews extends Controller
     public function update(Request $request, $id)
     {
         // Permission
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][30])) {
-            throw UnauthorizedException::forPermissions($data);
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][30])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
+        if ($request->title) {
+            DB::table('community_news')->where('slug', $id)->update([
+                'title' => $request->title,
+                'slug' =>  SlugService::createSlug(ModelsCommunityNews::class, 'slug', $request->title),
+                'uid_user_2' => auth()->user()->username,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            return redirect('/administrator/community-news')->with('success', 'Title Community News has been updated!');
         }
+
+        // Full edit without title
+        $validatedData = $request->validate([
+            'avatar' => 'image|file|max:2024',
+        ]);
+
+        if ($request->file('avatar')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['avatar'] = $request->file('avatar')->store('post-image');
+        }
+        // $time = strtotime($request->created_at);
+        // $newformat = date('Y-m-d', $time);
+        // dd($id);
+        DB::table('community_news')->where('slug', $id)->update([
+            // 'created_at' => $newformat,
+            'updated_at' => date('Y-m-d H:i:s'),
+            'category_id' => $request->category_id,
+            'description' =>  $request->description,
+            'subdesc' => strip_tags($request->description),
+            'uid_user_2' => auth()->user()->uid_user,
+            'tags_id' => implode(",", $request->tags_id),
+            'captions' => $request->captions,
+            'uid_user_2' => 'Not Edited'
+        ]);
+        $validatedData['uid_user'] = auth()->user()->id;
+
+        ModelsCommunityNews::where('slug', $id)
+            ->update($validatedData);
+        return redirect('/administrator/community-news')->with('success', 'Community News has been updated!');
     }
 
     /**

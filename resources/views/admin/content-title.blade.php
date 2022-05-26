@@ -22,7 +22,7 @@
                                     <div class="d-widget-title">
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <h4>Edit Content Article</h4>
+                                                <h4>Edit Title Post</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -42,7 +42,7 @@
                                         </div>
 
                                     </div>
-                                    <button type="submit" class="btn btn-primary">Save Category Article</button>
+                                    <button type="submit" class="btn btn-primary">Save Title Post</button>
                                 </form>
                             </div>
                         </div>

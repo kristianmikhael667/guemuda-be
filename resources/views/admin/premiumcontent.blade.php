@@ -90,7 +90,7 @@
                                         ?>
                                         <tr>
                                             <td>{{ $contents->firstItem() + $num }}</td>
-                                            <td><a href="/administrator/post/edittitle/{{ $content->slug }}">{{
+                                            <td><a href="/administrator/premiumcontent/edittitle/{{ $content->slug }}">{{
                                                     $content->title
                                                     }}</a></td>
                                             <td>{{ $content->user['username'] }}</td>
@@ -129,7 +129,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="{{ route('post.edit', $content->slug) }}"
+                                                <a href="{{ route('premiumcontent.edit', $content->slug) }}"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"

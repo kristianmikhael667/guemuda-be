@@ -85,7 +85,7 @@
                                         ?>
                                         <tr>
                                             <td><?php echo e($contents->firstItem() + $num); ?></td>
-                                            <td><a href="/administrator/post/edittitle/<?php echo e($content->slug); ?>"><?php echo e($content->title); ?></a></td>
+                                            <td><a href="/administrator/premiumcontent/edittitle/<?php echo e($content->slug); ?>"><?php echo e($content->title); ?></a></td>
                                             <td><?php echo e($content->user['username']); ?></td>
                                             <td><?php echo e($content->uid_user_2); ?>
 
@@ -127,7 +127,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="<?php echo e(route('post.edit', $content->slug)); ?>"
+                                                <a href="<?php echo e(route('premiumcontent.edit', $content->slug)); ?>"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"

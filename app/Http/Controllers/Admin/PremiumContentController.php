@@ -13,7 +13,10 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Hashids\Hashids;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Exceptions\UnauthorizedException;
+use Illuminate\Support\Facades\Storage;
 
 class PremiumContentController extends Controller
 {
@@ -165,9 +168,33 @@ class PremiumContentController extends Controller
      * @param  \App\Models\PremiumContent  $premiumContent
      * @return \Illuminate\Http\Response
      */
-    public function edit(PremiumContent $premiumContent)
+    public function edit(PremiumContent $premiumcontent)
     {
-        //
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
+        $teg = array_map('intval', explode(',', $premiumcontent->tags_id));
+
+        $category = CatPremium::where('id', '=', $premiumcontent->category_id)->get();
+        $idparentarr = array_map('intval', explode(',', $category[0]->id));
+        $images = substr($premiumcontent->image, 11);
+        return view('admin.premium-edit', [
+            'page' => 'Administrator',
+            'categories' => CatPremium::where("parent", 0)->get(),
+            'tags' => Tags::all(),
+            'tagsme' => $teg,
+            'contents' => $premiumcontent,
+            'category' => $category,
+            'parents' => $idparentarr,
+            'images' => $images
+        ]);
     }
 
     /**
@@ -177,9 +204,79 @@ class PremiumContentController extends Controller
      * @param  \App\Models\PremiumContent  $premiumContent
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePremiumContentRequest $request, PremiumContent $premiumContent)
+
+    public function edittitle($id)
     {
-        //
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $title = DB::table('premium_contents')->where('slug', $id)->get();
+        $title_data = $title[0]->title;
+        $slugs = $title[0]->slug;
+        return view('admin.premium-title', [
+            'page' => 'Administrator',
+            'contents' => $title_data,
+            'slugs' => $slugs
+        ]);
+    }
+
+    public function update(Request $request, PremiumContent $premiumcontent)
+    {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][22])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
+        if ($request->title) {
+            DB::table('premium_contents')->where('slug', $premiumcontent->slug)->update([
+                'title' => $request->title,
+                'slug' =>  SlugService::createSlug(PremiumContent::class, 'slug', $request->title),
+                'uid_user_2' => auth()->user()->username,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            return redirect('/administrator/premiumcontent')->with('success', 'Title Premium Content has been updated!');
+        }
+
+        // Full edit without title
+        $validatedData = $request->validate([
+            'image' => 'image|file|max:2024',
+        ]);
+
+        if ($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('post-image');
+        }
+        $time = strtotime($request->created_at);
+        $newformat = date('Y-m-d', $time);
+        DB::table('premium_contents')->where('slug', $premiumcontent->slug)->update([
+            'created_at' => $newformat,
+            'updated_at' => date('Y-m-d H:i:s'),
+            'category_id' => $request->category_id ? $request->category_id : $premiumcontent->category_id,
+            'description' =>  $request->description ? $request->description : $premiumcontent->description,
+            'subdesc' => $request->description ? strip_tags($request->description) : strip_tags($premiumcontent->description),
+            'uid_user_2' => auth()->user()->uid_user,
+            'tags_id' => $request->tags_id ? implode(",", $request->tags_id) : implode(",", $premiumcontent->tags_id),
+            'captions' => $request->captions ? $request->captions : $premiumcontent->captions,
+            'uid_user_2' => 'Not Edited'
+        ]);
+        $validatedData['uid_user'] = auth()->user()->id;
+
+        PremiumContent::where('slug', $premiumcontent->slug)
+            ->update($validatedData);
+        return redirect('/administrator/premiumcontent')->with('success', 'Premium Content has been updated!');
     }
 
     /**

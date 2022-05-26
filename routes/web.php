@@ -53,6 +53,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('webinars', WebinarsControllers::class);
     Route::get('/post/edittitle/{id}', [ContentController::class, 'edittitle']);
     Route::post('/post/updatetitle', [ContentController::class, 'updatetitle']);
+    Route::get('/premiumcontent/edittitle/{id}', [PremiumContentController::class, 'edittitle']);
     Route::resource('category-article', CategoryArticle::class);
     Route::resource('category-premium', CatPremiumController::class);
     Route::resource('category-webinars', CategoryWebinarController::class);

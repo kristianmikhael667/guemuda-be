@@ -141,7 +141,11 @@
 
                                                 </td>
                                                 <td><?php echo e(\Carbon\Carbon::parse($webinar->updated_at)->diffForHumans()); ?></td>
+<<<<<<< HEAD
+                                                <td><a href="/administrator/register-webinar-export/<?php echo e($webinar->slug); ?>" id="create-new-post"
+=======
                                                 <td><a href="/api/register-webinar-export/<?php echo e($webinar->slug); ?>" id="create-new-post"
+>>>>>>> main
                                                     class="btn btn-primary">Result</a></td>
                                                 <td>
                                                     <a href="/administrator/webinars/<?php echo e($webinar->slug); ?>/edit"

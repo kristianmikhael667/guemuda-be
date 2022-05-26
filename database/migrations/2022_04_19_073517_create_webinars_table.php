@@ -20,14 +20,17 @@ class CreateWebinarsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('speaker');
+            $table->string('speaker_2');
             $table->date('schedule');
             $table->string('category_event')->nullable();
-            $table->string('tags_event');
+            $table->string('tags_event')->nullable();
             $table->string('organizer');
             $table->string('moderator');
+            $table->text('subdesc');
             $table->enum('status', ['active', 'non'])->default('active');
             $table->string('typewebinar');
             $table->string('address');
+            $table->string('links_maps')->nullable();
             $table->decimal('latitude', 11, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->text('survey_question1')->nullable();

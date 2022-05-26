@@ -213,6 +213,7 @@ class ContentController extends Controller
         $idparent = Category::where('id', '=', $category[0]->parent)->get();
         $idparentarr = array_map('intval', explode(',', $idparent[0]->id));
         $images = substr($post->image, 11);
+        $thumbnail = substr($post->thumbnail, 11);
         return view('admin.content-edit', [
             'page' => 'Administrator',
             'categories' => Category::where("parent", 0)->get(),
@@ -221,7 +222,8 @@ class ContentController extends Controller
             'contents' => $post,
             'category' => $category,
             'parents' => $idparentarr,
-            'images' => $images
+            'images' => $images,
+            'thumbnail' => $thumbnail
         ]);
     }
 
@@ -278,6 +280,7 @@ class ContentController extends Controller
         // Full edit without title
         $validatedData = $request->validate([
             'image' => 'image|file|max:2024',
+            'thumbnail' => 'image|file|max:2024'
         ]);
 
         if ($request->file('image')) {
@@ -286,6 +289,14 @@ class ContentController extends Controller
             }
             $validatedData['image'] = $request->file('image')->store('post-image');
         }
+
+        if ($request->file('thumbnail')) {
+            if ($request->oldThumbnail) {
+                Storage::delete($request->oldThumbnail);
+            }
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
+        }
+
         $time = strtotime($request->created_at);
         $newformat = date('Y-m-d', $time);
 
@@ -299,6 +310,8 @@ class ContentController extends Controller
             'uid_user_2' => auth()->user()->uid_user,
             'tags_id' => $request->tags_id ? implode(",", $request->tags_id) : implode(",", $post->tags_id),
             'captions' => $request->captions ? $request->captions : $post->captions,
+            'link' => $request->link ? $request->link : $post->link,
+            'link_audio' => $request->link_audio ? $request->link_audio : $post->link_audio,
             'uid_user_2' => 'Not Edited'
         ]);
         $validatedData['uid_user'] = auth()->user()->id;

@@ -43,7 +43,7 @@
                                                     <div class="d-flex justify-content-between mb-1">
                                                         <span>Date Post</span>
                                                     </div>
-                                                    <input value="{{old('created_at', date("m/d/Y",
+                                                    <input value="{{old('created_at', date(" m/d/Y",
                                                         $contents->created_at))
                                                     }}" class="uk-input" name="created_at"
                                                     id="created_at" type="text" placeholder="Date Post">
@@ -95,11 +95,71 @@
                                                     </div>
                                                     @enderror
                                                     @endif
+
                                                     @if ($contents->type == "video")
-                                                    <p>ini video</p>
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Link Embed</span>
+                                                    </div>
+                                                    <input class="uk-input mb-2"
+                                                        value="{{ old('link', $contents->link) }}" name="link" id="link"
+                                                        type="text" placeholder="Link Post">
+                                                    @error('link')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Thumbnail</span>
+                                                    </div>
+                                                    <input type="hidden" name="oldThumbnail"
+                                                        value="{{ $contents->thumbnail }}">
+                                                    @if ($contents->thumbnail)
+                                                    <img src="{{ url('/api/image/' . $thumbnail) }}"
+                                                        class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                                    @else
+                                                    <img class="img-preview img-fluid mb-3 col-sm-5">
                                                     @endif
-                                                    @if ($contents->type == "voice")
-                                                    <p>ini voice</p>
+                                                    <input class="form-control @error('image') is-invalid @enderror"
+                                                        type="file" id="thumbnail" name="thumbnail"
+                                                        onchange="previewThumbnail()">
+                                                    @error('image')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                    @endif
+
+                                                    @if ($contents->type == "audio")
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Link Audio Embed</span>
+                                                    </div>
+                                                    <input class="uk-input mb-2"
+                                                        value="{{ old('link_audio', $contents->link_audio) }}" name="link_audio" id="link_audio"
+                                                        type="text" placeholder="Link Audio Post">
+                                                    @error('link_audio')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Thumbnail</span>
+                                                    </div>
+                                                    <input type="hidden" name="oldThumbnail"
+                                                        value="{{ $contents->thumbnail }}">
+                                                    @if ($contents->thumbnail)
+                                                    <img src="{{ url('/api/image/' . $thumbnail) }}"
+                                                        class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                                    @else
+                                                    <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                    @endif
+                                                    <input class="form-control @error('image') is-invalid @enderror"
+                                                        type="file" id="thumbnail" name="thumbnail"
+                                                        onchange="previewThumbnail()">
+                                                    @error('image')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
                                                     @endif
                                                 </div>
                                             </fieldset>
@@ -189,6 +249,22 @@
             imgPreview.src = oFReader.target.result;
         }
     }
+    </script>
+
+    <script>
+        function previewThumbnail(){
+            const image = document.querySelector('#thumbnail');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function (oFReader){
+                imgPreview.src = oFReader.target.result;
+            }
+        }
     </script>
     {{-- Ajax --}}
     @include('admin.ajax')

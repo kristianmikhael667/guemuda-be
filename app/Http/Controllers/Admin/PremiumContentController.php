@@ -185,6 +185,7 @@ class PremiumContentController extends Controller
         $category = CatPremium::where('id', '=', $premiumcontent->category_id)->get();
         $idparentarr = array_map('intval', explode(',', $category[0]->id));
         $images = substr($premiumcontent->image, 11);
+        $thumbnail = substr($premiumcontent->thumbnail, 11);
         return view('admin.premium-edit', [
             'page' => 'Administrator',
             'categories' => CatPremium::where("parent", 0)->get(),
@@ -193,7 +194,8 @@ class PremiumContentController extends Controller
             'contents' => $premiumcontent,
             'category' => $category,
             'parents' => $idparentarr,
-            'images' => $images
+            'images' => $images,
+            'thumbnail' => $thumbnail
         ]);
     }
 
@@ -251,6 +253,7 @@ class PremiumContentController extends Controller
         // Full edit without title
         $validatedData = $request->validate([
             'image' => 'image|file|max:2024',
+            'thumbnail' => 'image|file|max:2024'
         ]);
 
         if ($request->file('image')) {
@@ -259,6 +262,14 @@ class PremiumContentController extends Controller
             }
             $validatedData['image'] = $request->file('image')->store('post-image');
         }
+
+        if ($request->file('thumbnail')) {
+            if ($request->oldThumbnail) {
+                Storage::delete($request->oldThumbnail);
+            }
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
+        }
+
         $time = strtotime($request->created_at);
         $newformat = date('Y-m-d', $time);
         DB::table('premium_contents')->where('slug', $premiumcontent->slug)->update([
@@ -270,6 +281,8 @@ class PremiumContentController extends Controller
             'uid_user_2' => auth()->user()->uid_user,
             'tags_id' => $request->tags_id ? implode(",", $request->tags_id) : implode(",", $premiumcontent->tags_id),
             'captions' => $request->captions ? $request->captions : $premiumcontent->captions,
+            'link' => $request->link ? $request->link : $premiumcontent->link,
+            'link_audio' => $request->link_audio ? $request->link_audio : $premiumcontent->link_audio,
             'uid_user_2' => 'Not Edited'
         ]);
         $validatedData['uid_user'] = auth()->user()->id;

@@ -195,6 +195,8 @@ class CommunityNews extends Controller
         $idparentarr = array_map('intval', explode(',', $category[0]->id));
 
         $images = substr($editid[0]->avatar, 11);
+        $thumbnail = substr($editid[0]->thumbnail, 11);
+
         return view('admin.community-edit', [
             'page' => 'Administrator',
             'categories' => CommunityGroup::all(),
@@ -203,7 +205,8 @@ class CommunityNews extends Controller
             'contents' => $editid[0],
             'category' => $category,
             'parents' => $idparentarr,
-            'images' => $images
+            'images' => $images,
+            'thumbnail' => $thumbnail
         ]);
     }
 
@@ -260,6 +263,7 @@ class CommunityNews extends Controller
         // Full edit without title
         $validatedData = $request->validate([
             'avatar' => 'image|file|max:2024',
+            'thumbnail' => 'image|file|max:2024'
         ]);
 
         if ($request->file('avatar')) {
@@ -267,6 +271,13 @@ class CommunityNews extends Controller
                 Storage::delete($request->oldImage);
             }
             $validatedData['avatar'] = $request->file('avatar')->store('post-image');
+        }
+
+        if ($request->file('thumbnail')) {
+            if ($request->oldThumbnail) {
+                Storage::delete($request->oldThumbnail);
+            }
+            $validatedData['thumbnail'] = $request->file('thumbnail')->store('post-image');
         }
         // $time = strtotime($request->created_at);
         // $newformat = date('Y-m-d', $time);
@@ -280,7 +291,9 @@ class CommunityNews extends Controller
             'uid_user_2' => auth()->user()->uid_user,
             'tags_id' => implode(",", $request->tags_id),
             'captions' => $request->captions,
-            'uid_user_2' => 'Not Edited'
+            'uid_user_2' => 'Not Edited',
+            'link_video' => $request->link_video ? $request->link_video : '-',
+            'captions' => $request->captions ? $request->captions : '-'
         ]);
         $validatedData['uid_user'] = auth()->user()->id;
 

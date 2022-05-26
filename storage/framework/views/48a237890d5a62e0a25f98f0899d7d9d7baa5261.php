@@ -105,7 +105,59 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                                     <?php endif; ?>
                                                     <?php if($contents->type == "video"): ?>
-                                                    <p>ini video</p>
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Link Embed</span>
+                                                    </div>
+                                                    <input class="uk-input mb-2"
+                                                        value="<?php echo e(old('link', $contents->link_video)); ?>" name="link_video" id="link_video"
+                                                        type="text" placeholder="Link video Post">
+                                                    <?php $__errorArgs = ['link_video'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="invalid-feedback">
+                                                        <?php echo e($message); ?>
+
+                                                    </div>
+                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                                    <div class="d-flex justify-content-between mb-1">
+                                                        <span>Thumbnail</span>
+                                                    </div>
+                                                    <input type="hidden" name="oldThumbnail"
+                                                        value="<?php echo e($contents->thumbnail); ?>">
+                                                    <?php if($contents->thumbnail): ?>
+                                                    <img src="<?php echo e(url('/api/image/' . $thumbnail)); ?>"
+                                                        class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                                                    <?php else: ?>
+                                                    <img class="img-preview img-fluid mb-3 col-sm-5">
+                                                    <?php endif; ?>
+                                                    <input class="form-control <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                        type="file" id="thumbnail" name="thumbnail"
+                                                        onchange="previewThumbnail()">
+                                                    <?php $__errorArgs = ['image'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                    <div class="invalid-feedback">
+                                                        <?php echo e($message); ?>
+
+                                                    </div>
+                                                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                                                     <?php endif; ?>
                                                 </div>
                                             </fieldset>
@@ -187,6 +239,22 @@ unset($__errorArgs, $__bag); ?>
             imgPreview.src = oFReader.target.result;
         }
     }
+    </script>
+
+    <script>
+        function previewThumbnail(){
+            const image = document.querySelector('#thumbnail');
+            const imgPreview = document.querySelector('.img-preview');
+
+            imgPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(image.files[0]);
+
+            oFReader.onload = function (oFReader){
+                imgPreview.src = oFReader.target.result;
+            }
+        }
     </script>
     
     <?php echo $__env->make('admin.ajax', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

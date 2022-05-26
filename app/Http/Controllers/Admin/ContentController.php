@@ -26,15 +26,15 @@ class ContentController extends Controller
     public function index()
     {
         $hashids = new Hashids('', 10);
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][20])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][20])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         $search = '';
         if (request('category')) {
             $category = Category::firstWhere('slug', request('category'));
@@ -85,15 +85,15 @@ class ContentController extends Controller
     public function create()
     {
         /* Note */
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][21])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][21])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         return view('admin.create-post', [
             'page' => 'Administrator',
             'categories' => Category::where("parent", 0)->get(),
@@ -103,15 +103,15 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-            ->all();
-        $data = array(
-            "name" => $rolePermissions
-        );
-        if (empty($data['name'][21])) {
-            throw UnauthorizedException::forPermissions($data);
-        }
+        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+        //     ->all();
+        // $data = array(
+        //     "name" => $rolePermissions
+        // );
+        // if (empty($data['name'][21])) {
+        //     throw UnauthorizedException::forPermissions($data);
+        // }
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_id' => 'required',

@@ -36,7 +36,7 @@ class SocialAPI extends Controller
                 //     'user' => $finduser
                 // ], 'Authenticated');
                 // http://front.dewanhoster.my.id/email_verify_url?verify=
-                return Redirect::to('http://front.dewanhoster.my.id/google?user='.$finduser.'&'.'token='.$tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
+                return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $finduser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
 
                 // return redirect()->intended('dashboard');
             } else {
@@ -50,7 +50,7 @@ class SocialAPI extends Controller
                     'city' => "-",
                     'job' => "-",
                     'bio' => "-",
-                    'phone_number' => '-',
+                    'phone_number' => mt_rand(0, 0x3fff),
                     'date_birth' => Carbon::now(),
                     'roles' => $role[0]->id,
                     'rolesname' => $role[0]->name,

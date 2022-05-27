@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Helpers\ResponseFormatter;
+use Illuminate\Support\Facades\Redirect;
 
 class SocialAPI extends Controller
 {
@@ -29,11 +30,14 @@ class SocialAPI extends Controller
             if ($finduser) {
                 // Auth::login($finduser);
                 $tokenResult = $finduser->createToken('authToken')->plainTextToken;
-                return ResponseFormatter::success([
-                    'access_token' => $tokenResult,
-                    'token_type' => 'Bearer',
-                    'user' => $finduser
-                ], 'Authenticated');
+                // return ResponseFormatter::success([
+                //     'access_token' => $tokenResult,
+                //     'token_type' => 'Bearer',
+                //     'user' => $finduser
+                // ], 'Authenticated');
+                // http://front.dewanhoster.my.id/email_verify_url?verify=
+                return Redirect::to('http://front.dewanhoster.my.id/google?user='.$finduser.'&'.'token='.$tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
+
                 // return redirect()->intended('dashboard');
             } else {
                 $role = Role::where(['name' => 'subscribe'])->get();

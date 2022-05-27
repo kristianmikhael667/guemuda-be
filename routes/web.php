@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\VideoArticleController;
 use App\Http\Controllers\Admin\WebinarsControllers;
 use App\Http\Controllers\Admin\RegisterWebinarResult;
 use App\Http\Controllers\Admin\PremiumContentController;
+use App\Http\Controllers\Api\SocialAPI;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -42,6 +43,9 @@ Route::get('/', function () {
 Route::get('/debug-sentry', function () {
     throw new Exception('My first Sentry error!');
 });
+
+Route::get('auth/google', [SocialAPI::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [SocialAPI::class, 'handleGoogleCallback']);
 
 // Login Admin Superadmin Editor
 Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(function () {

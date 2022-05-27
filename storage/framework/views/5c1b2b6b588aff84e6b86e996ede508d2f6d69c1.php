@@ -150,212 +150,224 @@ unset($__errorArgs, $__bag); ?>
 
                                                 
                                                 <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 1</span>
+                                                    <div class="uk-margin">
+                                                        <select class="uk-select" onchange="yesnoCheck(this)">
+                                                            <option disabled="disabled" selected>-- Choose Make Survey Question --
+                                                            </option>
+                                                            <option value="on">Make Survey Questions</option>
+                                                            <option value="off">No Survey Questions</option>
+                                                        </select>
                                                     </div>
-                                                    <input class="uk-input" name="survey_question1" id="question1" type="text" value="<?php echo e(old('question1', $webinar->survey_question1)); ?>"/>
-                                                    <?php $__errorArgs = ['survey_question1'];
+                                                    <div class="uk-margin" id="survey-question" style="display: none">
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 1</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question1" id="question1" type="text" value="<?php echo e(old('question1', $webinar->survey_question1)); ?>"/>
+                                                            <?php $__errorArgs = ['survey_question1'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 2</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question2" id="question2" type="text" value="<?php echo e(old('question2', $webinar->survey_question2)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 2</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question2" id="question2" type="text" value="<?php echo e(old('question2', $webinar->survey_question2)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question2'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question2'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 3</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question3" id="question3" type="text" value="<?php echo e(old('question3', $webinar->survey_question3)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 3</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question3" id="question3" type="text" value="<?php echo e(old('question3', $webinar->survey_question3)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question3'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question3'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 4</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question4" id="question4" type="text" value="<?php echo e(old('question4', $webinar->survey_question4)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 4</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question4" id="question4" type="text" value="<?php echo e(old('question4', $webinar->survey_question4)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question4'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question4'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 5</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question5" id="question5" type="text" value="<?php echo e(old('question5', $webinar->survey_question5)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 5</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question5" id="question5" type="text" value="<?php echo e(old('question5', $webinar->survey_question5)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question5'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question5'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 6</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question6" id="question6" type="text" value="<?php echo e(old('question6', $webinar->survey_question6)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 6</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question6" id="question6" type="text" value="<?php echo e(old('question6', $webinar->survey_question6)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question6'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question6'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 7</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question7" id="question7" type="text" value="<?php echo e(old('question7', $webinar->survey_question7)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 7</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question7" id="question7" type="text" value="<?php echo e(old('question7', $webinar->survey_question7)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question7'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question7'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 8</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question8" id="question8" type="text" value="<?php echo e(old('question8', $webinar->survey_question8)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 8</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question8" id="question8" type="text" value="<?php echo e(old('question8', $webinar->survey_question8)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question8'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question8'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 9</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question9" id="question9" type="text" value="<?php echo e(old('question9', $webinar->survey_question9)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 9</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question9" id="question9" type="text" value="<?php echo e(old('question9', $webinar->survey_question9)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question9'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question9'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                                                </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Survey Question 10</span>
-                                                    </div>
-                                                    <input class="uk-input" name="survey_question10" id="question10" type="text" value="<?php echo e(old('question10', $webinar->survey_question10)); ?>
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 10</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question10" id="question10" type="text" value="<?php echo e(old('question10', $webinar->survey_question10)); ?>
 
-                                                    ">
-                                                    <?php $__errorArgs = ['survey_question10'];
+                                                            ">
+                                                            <?php $__errorArgs = ['survey_question10'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                                    <div class="invalid-feedback">
-                                                        <?php echo e($message); ?>
+                                                            <div class="invalid-feedback">
+                                                                <?php echo e($message); ?>
 
-                                                    </div>
-                                                    <?php unset($message);
+                                                            </div>
+                                                            <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </fieldset>
 
@@ -471,6 +483,27 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
     <!-- main content -->
+    <script>
+        function yesnoCheck(that) {
+        if (that.value == "on") {
+            $(".captions").val(null);
+            document.getElementById("survey-question").style.display = "block";
+            // document.getElementById("videopost").style.display = "none";
+            // document.getElementById("audiopost").style.display = "none";
+        } else if (that.value == "off") {
+            $(".captions").val(null);
+            $(".dropify").next(".dropify-clear").trigger("click");
+            document.getElementById("survey-question").style.display = "none";
+            // document.getElementById("videopost").style.display = "block";
+            // document.getElementById("audiopost").style.display = "none";
+        } else{
+            $(".captions").val(null);
+            document.getElementById("survey-question").style.display = "none";
+            // document.getElementById("videopost").style.display = "none";
+            // document.getElementById("audiopost").style.display = "block";
+        }
+    }
+    </script>
     
     <?php echo $__env->make('admin.ajax-webinar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 

@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Role;
+use Carbon\Carbon;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use App\Helpers\ResponseFormatter;
 
 class SocialAPI extends Controller
 {
@@ -22,35 +24,47 @@ class SocialAPI extends Controller
         try {
 
             $user = Socialite::driver('google')->user();
-            $finduser = User::where('google_id', $user->id)->first();
-
+            $finduser = User::where('google_id', $user['id'])->first();
 
             if ($finduser) {
-                Auth::login($finduser);
-                return redirect()->intended('dashboard');
+                // Auth::login($finduser);
+                $tokenResult = $finduser->createToken('authToken')->plainTextToken;
+                return ResponseFormatter::success([
+                    'access_token' => $tokenResult,
+                    'token_type' => 'Bearer',
+                    'user' => $finduser
+                ], 'Authenticated');
+                // return redirect()->intended('dashboard');
             } else {
                 $role = Role::where(['name' => 'subscribe'])->get();
 
                 $newUser = User::create([
-                    'first_name' => $user->first_name,
-                    'last_name' => $user->last_name,
-                    'username' => $user->username,
-                    'address' => $user->address ? $user->address : "-",
-                    'city' => $user->city ? $user->city : "-",
-                    'job' => $user->job ? $user->job : "-",
-                    'bio' => $user->bio ?  $user->bio : "-",
-                    'phone_number' => $user->phone_number,
-                    'date_birth' => $user->job,
+                    'first_name' => $user['given_name'],
+                    'last_name' => $user['family_name'],
+                    'username' => 'noname',
+                    'address' => "-",
+                    'city' => "-",
+                    'job' => "-",
+                    'bio' => "-",
+                    'phone_number' => '-',
+                    'date_birth' => Carbon::now(),
                     'roles' => $role[0]->id,
                     'rolesname' => $role[0]->name,
-                    'email' => $user->email,
-                    'google_id' => $user->id,
+                    'email' => $user['email'],
+                    'google_id' => $user['id'],
                     'password' => encrypt('123456dummy')
                 ]);
 
-                Auth::login($newUser);
+                $tokenResult = $newUser->createToken('authToken')->plainTextToken;
+                return ResponseFormatter::success([
+                    'access_token' => $tokenResult,
+                    'token_type' => 'Bearer',
+                    'user' => $newUser
+                ], 'New Authenticated');
 
-                return redirect()->intended('dashboard');
+                // Auth::login($newUser);
+
+                // return redirect()->intended('dashboard');
             }
         } catch (Exception $e) {
             dd($e->getMessage());

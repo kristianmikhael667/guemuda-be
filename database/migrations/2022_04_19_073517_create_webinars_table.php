@@ -30,7 +30,7 @@ class CreateWebinarsTable extends Migration
             $table->enum('status', ['active', 'non'])->default('active');
             $table->string('typewebinar');
             $table->string('address');
-            $table->string('links_maps')->nullable();
+            $table->text('links_maps')->nullable();
             $table->decimal('latitude', 11, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->text('survey_question1')->nullable();

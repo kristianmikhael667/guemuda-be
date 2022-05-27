@@ -46,7 +46,7 @@ class SocialAPI extends Controller
                     'city' => "-",
                     'job' => "-",
                     'bio' => "-",
-                    'phone_number' => mt_rand(0, 0x3fff),
+                    'phone_number' => '-',
                     'date_birth' => Carbon::now(),
                     'roles' => $role[0]->id,
                     'rolesname' => $role[0]->name,

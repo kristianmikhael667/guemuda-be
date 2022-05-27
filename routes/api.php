@@ -11,9 +11,9 @@ use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
 use App\Http\Controllers\Api\PremiumContentAPI;
 use App\Http\Controllers\Api\RegisterUserAPI;
-use App\Http\Controllers\api\SocialAPI;
-use App\Http\Controllers\api\SurveyQuestion as ApiSurveyQuestion;
-use App\Http\Controllers\api\SurveyAnswers as ApiRegisterWebinar;
+use App\Http\Controllers\Api\SocialAPI;
+use App\Http\Controllers\Api\SurveyQuestion as ApiSurveyQuestion;
+use App\Http\Controllers\Api\SurveyAnswers as ApiRegisterWebinar;
 use App\Http\Controllers\Api\Test;
 use App\Http\Controllers\Api\UsersAPI; //sa
 use App\Http\Controllers\Api\VideoArticleAPI;

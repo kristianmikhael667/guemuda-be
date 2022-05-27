@@ -41,7 +41,7 @@ class SocialAPI extends Controller
                 $newUser = User::create([
                     'first_name' => $user['given_name'],
                     'last_name' => $user['family_name'],
-                    'username' => 'noname',
+                    'username' => mt_rand(0, 0x3fff),
                     'address' => "-",
                     'city' => "-",
                     'job' => "-",

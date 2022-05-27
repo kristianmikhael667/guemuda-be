@@ -107,6 +107,8 @@ class DashboardController extends Controller
             ->groupBy("users.remember_token")
             ->groupBy("users.current_team_id")
             ->groupBy("users.avatar")
+            ->groupBy("users.google_id")
+            ->groupBy("users.facebook_id")
             ->groupBy("users.roles")
             ->groupBy("users.deleted_at")
             ->groupBy("users.created_at")

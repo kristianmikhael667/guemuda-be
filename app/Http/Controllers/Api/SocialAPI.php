@@ -61,11 +61,12 @@ class SocialAPI extends Controller
                 ]);
 
                 $tokenResult = $newUser->createToken('authToken')->plainTextToken;
-                return ResponseFormatter::success([
-                    'access_token' => $tokenResult,
-                    'token_type' => 'Bearer',
-                    'user' => $newUser
-                ], 'New Authenticated');
+                // return ResponseFormatter::success([
+                //     'access_token' => $tokenResult,
+                //     'token_type' => 'Bearer',
+                //     'user' => $newUser
+                // ], 'New Authenticated');
+                return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $newUser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
 
                 // Auth::login($newUser);
 

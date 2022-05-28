@@ -56,7 +56,8 @@ class SocialAPI extends Controller
                     'rolesname' => $role[0]->name,
                     'email' => $user['email'],
                     'google_id' => $user['id'],
-                    'email_verified_at' => Carbon::today(),
+                    'email_verified_at' => now(),
+                    'status' => 'accept',
                     'password' => encrypt('123456dummy')
                 ]);
 

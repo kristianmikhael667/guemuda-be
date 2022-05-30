@@ -34,7 +34,7 @@ class CommunityNews extends Controller
         //     throw UnauthorizedException::forPermissions($data);
         // }
 
-        $community = ModelsCommunityNews::latest()->with(['communitygroup', 'user'])->filter(request(['search', 'user', 'communitygroup']))->paginate(10)->withQueryString();
+        $community = ModelsCommunityNews::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
 
         $kinanda = ModelsCommunityNews::join("community_views", "community_views.id_community", "=", "community_news.id")
             ->where("community_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))

@@ -92,7 +92,7 @@
                                             <td>{{ $community->user->username }}</td>
                                             <td>{{ $community->uid_user_2}}
                                             </td>
-                                            <td>{{ $community->communitygroup['namegroup'] }}</td>
+                                            <td>{{ $community->category['namegroup'] }}</td>
                                             <td>
                                                 {{ $string = ""; }}
                                                 @foreach ($tages as $item)

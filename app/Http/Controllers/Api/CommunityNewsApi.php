@@ -103,7 +103,7 @@ class CommunityNewsApi extends Controller
 
         return ResponseFormatter::success(
             // DB::table('community_news')->orderBy('created_at', 'desc')->paginate($limit),
-            $content = CommunityNews::orderBy('created_at', 'desc')->paginate($limit),
+            $content = CommunityNews::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
 
             // $content->paginate($limit),
             'Data Community retrieved successfully'

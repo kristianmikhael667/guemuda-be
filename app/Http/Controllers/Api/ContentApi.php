@@ -61,7 +61,7 @@ class ContentApi extends Controller
     public function newstoday()
     {
         $limit = 6;
-        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate($limit);
+        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1);
         if ($posts) {
             return ResponseFormatter::success(
                 $posts,

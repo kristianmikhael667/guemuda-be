@@ -63,7 +63,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('category-article', CategoryArticle::class);
     Route::resource('category-premium', CatPremiumController::class);
     Route::resource('category-webinars', CategoryWebinarController::class);
-    Route::resource('category-community', CategoryCommunity::class);
+    Route::resource('categorycommunity', CategoryCommunity::class); //diganti-
     Route::resource('tags', TagsController::class);
     Route::post('/subcat', [CategoryArticle::class, 'subcat']);
     Route::resource('tagswebinars', TagsWebinarsControllers::class);

@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use hisorange\BrowserDetect\Parser as Browser;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Cache;
 
 class ContentApi extends Controller
 {
@@ -132,7 +132,11 @@ class ContentApi extends Controller
         $slug = $request->input('slug');
 
         if ($slug) {
-            $content = Content::where('slug', $slug)->first();
+            Cache::put('key', 'value', $seconds = 30);
+            $content = Cache::remember('contentsod', $seconds, function () use ($slug) {
+                return Content::where('slug', $slug)->first();
+            });
+            
             $like = LikeContent::where('id_post', $content->id)->count(); //kren
             // ContentViews::createViewLog($content);
             $browsers = Browser::browserName();
@@ -242,7 +246,10 @@ class ContentApi extends Controller
         $type = $request->input('type');
 
         if ($type) {
-            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1);
+            Cache::put('key', 'value', $seconds = 30);
+            $content = Cache::remember('contents', $seconds, function () use ($type, $limit) {
+                return Content::where('type', $type)->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1);
+            });
 
             if ($content) {
                 return ResponseFormatter::success(

@@ -242,7 +242,7 @@ class ContentApi extends Controller
         $type = $request->input('type');
 
         if ($type) {
-            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate($limit);
+            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1);
 
             if ($content) {
                 return ResponseFormatter::success(

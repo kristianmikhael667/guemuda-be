@@ -246,10 +246,7 @@ class ContentApi extends Controller
         $type = $request->input('type');
 
         if ($type) {
-            Cache::put('key', 'value', $seconds = 30);
-            $content = Cache::remember('contents', $seconds, function () use ($type) {
-                return Content::where('type', $type)->orderBy('created_at', 'desc')->paginate(6)->onEachSide(1);
-            });
+            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate(6)->onEachSide(1);
             if ($content) {
                 return ResponseFormatter::success(
                     $content,

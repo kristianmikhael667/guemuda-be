@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use App\Helpers\ResponseFormatter;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class SocialAPI extends Controller
 {
@@ -39,6 +40,14 @@ class SocialAPI extends Controller
                 return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $finduser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
 
                 // return redirect()->intended('dashboard');
+            } else if ($user['email']) {
+                $updated = DB::table('users')->where('email', $user['email'])->update([
+                    'google_id' => $user['id'],
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+                $cekuser = User::where('email', $user['email'])->first();
+                $tokenResult = $cekuser->createToken('authToken')->plainTextToken;
+                return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $cekuser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
             } else {
                 $role = Role::where(['name' => 'subscribe'])->get();
 

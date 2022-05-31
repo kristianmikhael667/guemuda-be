@@ -298,8 +298,23 @@ class PremiumContentController extends Controller
      * @param  \App\Models\PremiumContent  $premiumContent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PremiumContent $premiumContent)
+    public function destroy(PremiumContent $premiumcontent)
     {
-        //
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][23])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+       
+        if ($premiumcontent->image) {
+            Storage::delete($premiumcontent->image);
+        }
+
+        PremiumContent::destroy($premiumcontent->id);
+        return redirect('/administrator/premiumcontent')->with('success', 'Premium Content has been deleted!');
     }
 }

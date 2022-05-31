@@ -327,7 +327,7 @@ class ContentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Content $content)
+    public function destroy(Content $post)
     {
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
@@ -338,10 +338,11 @@ class ContentController extends Controller
         if (empty($data['name'][23])) {
             throw UnauthorizedException::forPermissions($data);
         }
-        if ($content->image) {
-            Storage::delete($content->image);
+        if ($post->image) {
+            Storage::delete($post->image);
         }
-        Content::destroy($content->id);
-        return redirect('/administrator/post')->with('success', 'New post has been deleted!');
+    
+        Content::destroy($post->id);
+        return redirect('/administrator/post')->with('success', 'Post has been deleted!');
     }
 }

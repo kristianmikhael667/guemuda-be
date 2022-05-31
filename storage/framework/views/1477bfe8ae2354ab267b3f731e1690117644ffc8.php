@@ -120,7 +120,7 @@
 
                                             </td>
                                             <td>
-                                                <a href="/dashboard/posts/<?php echo e($community->slug); ?>"
+                                                <a href="/administrator/community-news/<?php echo e($community->slug); ?>"
                                                     class="badge btn-light">
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -142,8 +142,8 @@
                                                             d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                         </path>
                                                     </svg></span></a>
-                                                <form action="/administrator/post/<?php echo e($community->slug); ?>" method="post"
-                                                    class="d-inline">
+                                                <form action="/administrator/community-news/<?php echo e($community->slug); ?>"
+                                                    method="post" class="d-inline">
                                                     <?php echo method_field('delete'); ?>
                                                     <?php echo csrf_field(); ?>
                                                     <button class="badge btn-light border-0"

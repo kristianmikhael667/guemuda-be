@@ -320,5 +320,16 @@ class CommunityNews extends Controller
         if (empty($data['name'][31])) {
             throw UnauthorizedException::forPermissions($data);
         }
+        $post = DB::table('community_news')->where('slug', $id)->get();
+
+        if ($post[0]->avatar) {
+            Storage::delete($post[0]->avatar);
+        }
+        if ($post[0]->thumbnail) {
+            Storage::delete($post[0]->thumbnail);
+        }
+
+        DB::table('community_news')->where('slug', $id)->delete();
+        return redirect('/administrator/community-news')->with('success', 'Community News has been deleted!');
     }
 }

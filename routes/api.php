@@ -70,7 +70,7 @@ Route::get('subcategory', [ContentApi::class, 'subcategory']); //ini
 Route::get('content', [ContentApi::class, 'all']);
 Route::get('today', [ContentApi::class, 'newstoday']);
 Route::get('populararticle', [ContentApi::class, 'popular']);
-Route::get('popularcategory', [ContentApi::class, 'popular_investman']);
+Route::get('popularcategory', [ContentApi::class, 'popular_category']);
 Route::get('article', [ContentApi::class, 'article']);
 Route::get('popularnews', [ContentApi::class, 'popularnews']);
 

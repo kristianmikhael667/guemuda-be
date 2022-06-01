@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Cache;
 
 class ContentApi extends Controller
 {
-    public function popular_investman(Request $request)
+    public function popular_category()
     {
-        $category_ids = $request->input('category_id');
         $posts = Content::join("content_views", "content_views.id_post", "=", "contents.id")
-            ->where("content_views.category_ids", "=", $category_ids)
+            ->whereHas('category', function ($q) {
+                $q->where('parent', '=', 1)->orWhere('parent', '=', 2)->orWhere('parent', '=', 3)->orWhere('parent', '=', 4)->orWhere('parent', '=', 5);
+            })
             ->groupBy("contents.slug")
             ->groupBy("contents.id")
             ->groupBy("contents.uid_user")
@@ -136,7 +137,7 @@ class ContentApi extends Controller
             $content = Cache::remember('contentsod', $seconds, function () use ($slug) {
                 return Content::where('slug', $slug)->first();
             });
-            
+
             $like = LikeContent::where('id_post', $content->id)->count(); //kren
             // ContentViews::createViewLog($content);
             $browsers = Browser::browserName();

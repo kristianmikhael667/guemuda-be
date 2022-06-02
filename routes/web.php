@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Analytic;
 use App\Http\Controllers\Admin\CategoryCommunity;
 use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CatPremiumController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
@@ -93,6 +94,9 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
 
     // Route Subscribe
     Route::get('/subscriber', [UserController::class, 'subscribes']);
+
+    // Route Comment
+    Route::resource('comment', CommentController::class);
 });
 
 // Route::group(['middleware' => ['auth']], function () {

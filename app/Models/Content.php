@@ -63,7 +63,7 @@ class Content extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'post_id')->whereNull('parent_id')->orderBy('id', 'DESC');
+        return $this->hasMany(Comment::class, 'post_id')->whereNull('parent_id')->where('status', 'accept')->orderBy('id', 'DESC');
         // return $this->morphMany(Comment::class, 'post')->whereNull('parent_id');
     }
 

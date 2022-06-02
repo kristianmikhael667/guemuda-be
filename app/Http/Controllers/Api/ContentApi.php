@@ -133,11 +133,11 @@ class ContentApi extends Controller
         $slug = $request->input('slug');
 
         if ($slug) {
-            Cache::put('key', 'value', $seconds = 30);
-            $content = Cache::remember('contentsod', $seconds, function () use ($slug) {
-                return Content::where('slug', $slug)->first();
-            });
-
+            // Cache::put('key', 'value', $seconds = 30);
+            // $content = Cache::remember('contentsod', $seconds, function () use ($slug) {
+            //     return Content::where('slug', $slug)->first();
+            // });
+            $content = Content::where('slug', $slug)->first();
             $like = LikeContent::where('id_post', $content->id)->count(); //kren
             // ContentViews::createViewLog($content);
             $browsers = Browser::browserName();

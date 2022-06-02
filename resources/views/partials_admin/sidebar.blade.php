@@ -221,8 +221,8 @@
         </li>
 
 
-        <li class="">
-            <a class="" href="/administrator" title="">
+        <li class="{{ Request::is('administrator/comment*') ? 'active' : '' }}">
+            <a class="" href="/administrator/comment" title="">
                 <i><svg id="kom" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="feather feather-file-text">
@@ -246,14 +246,14 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg></i> User Management
             </a>
-        {{-- User --}}
+            {{-- User --}}
             <ul class="submenu">
-                <li><a href="/administrator/users" title="">All</a></li> 
-                <li><a href="/administrator/superadmin" title="">Super Admin</a></li> 
-                <li><a href="/administrator/admin" title="">Admin</a></li> 
-                <li><a href="/administrator/editor" title="">Editor</a></li> 
-                <li><a href="/administrator/contributor" title="">Contributor</a></li> 
-                <li><a href="/administrator/subscriber" title="">Subscriber</a></li> 
+                <li><a href="/administrator/users" title="">All</a></li>
+                <li><a href="/administrator/superadmin" title="">Super Admin</a></li>
+                <li><a href="/administrator/admin" title="">Admin</a></li>
+                <li><a href="/administrator/editor" title="">Editor</a></li>
+                <li><a href="/administrator/contributor" title="">Contributor</a></li>
+                <li><a href="/administrator/subscriber" title="">Subscriber</a></li>
             </ul>
         </li>
 

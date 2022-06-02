@@ -19,6 +19,7 @@ class Createcomment extends Migration
             $table->integer('post_id')->unsigned();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->text('body');
+            $table->enum('status', ['accept', 'pending', 'reject'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

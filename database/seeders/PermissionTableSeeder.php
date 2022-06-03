@@ -23,6 +23,10 @@ class PermissionTableSeeder extends Seeder
             'post-create',
             'post-edit',
             'post-delete',
+            'premium-list',
+            'premium-create',
+            'premium-edit',
+            'premium-delete',
             'webinar-list',
             'webinar-create',
             'webinar-edit',
@@ -32,6 +36,7 @@ class PermissionTableSeeder extends Seeder
             'community-edit',
             'community-delete',
             'approve-comment',
+            'approve-comment-com',
             'media-list'
         ];
 

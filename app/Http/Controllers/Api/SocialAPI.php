@@ -27,6 +27,7 @@ class SocialAPI extends Controller
 
             $user = Socialite::driver('google')->user();
             $finduser = User::where('google_id', $user['id'])->first();
+            $findemail = User::where('email', $user['email'])->first();
 
             if ($finduser) {
                 // Auth::login($finduser);
@@ -40,7 +41,7 @@ class SocialAPI extends Controller
                 return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $finduser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
 
                 // return redirect()->intended('dashboard');
-            } else if ($user['email']) {
+            } else if ($findemail && $finduser == null) {
                 $updated = DB::table('users')->where('email', $user['email'])->update([
                     'google_id' => $user['id'],
                     'updated_at' => date('Y-m-d H:i:s')

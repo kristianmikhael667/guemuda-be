@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendGlobalNotification;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryArticle;
 use App\Http\Controllers\Admin\ContentController;
@@ -99,6 +100,10 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::resource('comment', CommentController::class);
 });
 
+// Route::get('send-notif/{name}', function ($name) {
+//     event(new SendGlobalNotification($name));
+//     return "Event has been sent!";
+// });
 // Route::group(['middleware' => ['auth']], function () {
   
 // });

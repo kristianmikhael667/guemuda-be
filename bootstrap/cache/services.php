@@ -51,10 +51,11 @@
     47 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     48 => 'App\\Providers\\AppServiceProvider',
     49 => 'App\\Providers\\AuthServiceProvider',
-    50 => 'App\\Providers\\EventServiceProvider',
-    51 => 'App\\Providers\\RouteServiceProvider',
-    52 => 'App\\Providers\\FortifyServiceProvider',
-    53 => 'App\\Providers\\JetstreamServiceProvider',
+    50 => 'App\\Providers\\BroadcastServiceProvider',
+    51 => 'App\\Providers\\EventServiceProvider',
+    52 => 'App\\Providers\\RouteServiceProvider',
+    53 => 'App\\Providers\\FortifyServiceProvider',
+    54 => 'App\\Providers\\JetstreamServiceProvider',
   ),
   'eager' => 
   array (
@@ -92,10 +93,11 @@
     31 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     32 => 'App\\Providers\\AppServiceProvider',
     33 => 'App\\Providers\\AuthServiceProvider',
-    34 => 'App\\Providers\\EventServiceProvider',
-    35 => 'App\\Providers\\RouteServiceProvider',
-    36 => 'App\\Providers\\FortifyServiceProvider',
-    37 => 'App\\Providers\\JetstreamServiceProvider',
+    34 => 'App\\Providers\\BroadcastServiceProvider',
+    35 => 'App\\Providers\\EventServiceProvider',
+    36 => 'App\\Providers\\RouteServiceProvider',
+    37 => 'App\\Providers\\FortifyServiceProvider',
+    38 => 'App\\Providers\\JetstreamServiceProvider',
   ),
   'deferred' => 
   array (

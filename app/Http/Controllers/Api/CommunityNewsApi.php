@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Community_views;
 use App\Models\CommunityNews;
+use App\Models\LikeCommunity;
 use hisorange\BrowserDetect\Parser as Browser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -162,6 +163,57 @@ class CommunityNewsApi extends Controller
                     'Data Community News is empty'
                 );
             }
+        }
+    }
+
+    public function ceklike(Request $request)
+    {
+        $slug = $request->input('slug');
+        if ($slug) {
+            $content = CommunityNews::where('slug', $slug)->first();
+            $like = LikeCommunity::where('id_community', $content->id)->where('id_users', auth()->user()->id)->count();
+            if ($like) {
+                return ResponseFormatter::success(
+                    $like,
+                    'Liked'
+                );
+            } else {
+                return ResponseFormatter::success(
+                    $like,
+                    'Null'
+                );
+            }
+        }
+    }
+
+    // like
+    public function likecontent(Request $request)
+    {
+        $slug = $request->input('slug');
+        if ($slug) {
+            $community = CommunityNews::where('slug', $slug)->first();
+            $like = LikeCommunity::where('id_community', $community->id)->where('id_users', auth()->user()->id)->first();
+
+            if ($like) {
+                return ResponseFormatter::success(
+                    null,
+                    'Liked'
+                );
+            } else {
+                $likes = LikeCommunity::create([
+                    'id_community' => $community->id,
+                    'id_users' => auth()->user()->id
+                ]);
+                return ResponseFormatter::success(
+                    $likes,
+                    'Like'
+                );
+            }
+        } else {
+            return ResponseFormatter::error(
+                'Not Found',
+                '404'
+            );
         }
     }
 }

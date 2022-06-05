@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CategoryPremiumAPI;
 use App\Http\Controllers\Api\CommentAPI;
+use App\Http\Controllers\Api\CommentComAPI;
 use App\Http\Controllers\Api\CommunityGroupAPI;
 use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
@@ -39,8 +40,13 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::post('post/comment', [CommentAPI::class, 'store']);
     Route::post('post/reply', [CommentAPI::class, 'reply']);
     Route::get('users', [UsersAPI::class, 'index']);
-    Route::get('like', [ContentApi::class, 'likecontent']); //like
-    Route::get('ceklike', [ContentApi::class, 'ceklike']); //ini
+    Route::get('like', [ContentApi::class, 'likecontent']);
+    Route::get('ceklike', [ContentApi::class, 'ceklike']);
+
+    Route::post('post/commentcom', [CommentComAPI::class, 'store']);
+    Route::post('post/replycom', [CommentComAPI::class, 'reply']);
+    Route::get('likecom', [CommunityNewsApi::class, 'likecontent']);
+    Route::get('ceklikecome', [CommunityNewsApi::class, 'ceklike']);
     // Premium Content
     Route::get('categoriespremium', [PremiumContentAPI::class, 'categories']);
     Route::get('premium-content', [PremiumContentAPI::class, 'all']);

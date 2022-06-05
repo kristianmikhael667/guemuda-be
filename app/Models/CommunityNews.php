@@ -11,7 +11,7 @@ class CommunityNews extends Model
 {
     use HasFactory, Sluggable;
     protected $guarded = ['id'];
-    protected $with = ['user', 'category'];
+    protected $with = ['user', 'category', 'comments'];
     public $incrementing = false;
 
     public function scopeFilter($query, array $filters)
@@ -42,6 +42,12 @@ class CommunityNews extends Model
     public function category()
     {
         return $this->belongsTo(CommunityGroup::class, 'category_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(CommentCom::class, 'post_id')->whereNull('parent_id')->where('status', 'accept')->orderBy('created_at', 'DESC');
+        // return $this->morphMany(Comment::class, 'post')->whereNull('parent_id');
     }
 
     public function getCreatedAtAttribute($value)

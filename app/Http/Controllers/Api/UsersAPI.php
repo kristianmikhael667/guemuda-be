@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class UsersAPI extends Controller
 {
@@ -27,6 +31,47 @@ class UsersAPI extends Controller
                 null,
                 'Data Users Not Found'
             );
+        }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $update = DB::table('users')->where('userId', $user->userId)->update([
+            'first_name' => $request->first_name ? $request->first_name : $user->first_name,
+            'last_name' => $request->last_name ? $request->last_name : $user->last_name,
+            'address' => $request->address ? $request->address : '-',
+            'city' => $request->city ? $request->city : '-',
+            'job' => $request->job ? $request->job : '-',
+            'bio' => $request->bio ? $request->bio : '-',
+            'date_birth' => $request->date_birth ? $request->date_birth : Carbon::now()
+        ]);
+
+        return ResponseFormatter::success($update, 'Profile Updated');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|image|max:2048'
+        ]);
+
+        if ($validator->fails()) {
+            return ResponseFormatter::error([
+                'error' => $validator->errors()
+            ], 'Update photo fails', 401);
+        }
+
+        if ($request->file('file')) {
+            $file = $request->file->store('user-image');
+
+            $user = Auth::user();
+
+            DB::table('users')->where('userId', $user->userId)->update([
+                'avatar' => $file,
+            ]);
+            return ResponseFormatter::success([$file], 'File successfully uploaded');
         }
     }
 

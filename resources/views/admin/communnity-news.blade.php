@@ -72,6 +72,7 @@
                                             <th>Category</th>
                                             <th>Tag</th>
                                             <th>Hit</th>
+                                            <th>Like</th>
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -108,6 +109,13 @@
                                                 @foreach ($views as $view)
                                                 @if ($view->id == $community->id)
                                                 {{ $view->total_views }}
+                                                @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @foreach ($likes as $like)
+                                                @if ($like->id == $community->id)
+                                                {{ $like->total_like }}
                                                 @endif
                                                 @endforeach
                                             </td>

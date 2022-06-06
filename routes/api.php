@@ -36,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/user', [Test::class, 'test']);
+    Route::post('user/profile', [UsersAPI::class, 'updateProfile']);
+    Route::post('user/photo', [UsersAPI::class, 'updatePhoto']);
+
     Route::post('logout', [AuthAPI::class, 'logout']);
     Route::post('post/comment', [CommentAPI::class, 'store']);
     Route::post('post/reply', [CommentAPI::class, 'reply']);
@@ -94,6 +97,7 @@ Route::get('webinar', [WebinarsApi::class, 'all']);
 Route::get('video-article', [VideoArticleAPI::class, 'all']);
 Route::get('popularvideoarticle', [VideoArticleAPI::class, 'popular']);
 Route::get('image/{filename}', [PictureApi::class, 'image']);
+Route::get('imageuser/{filename}', [PictureApi::class, 'imageuser']);
 Route::get('video/{filename}', [PictureApi::class, 'video']);
 Route::get('webinarsurveyquestion', [ApiSurveyQuestion::class, 'index']);
 Route::get('webinarsurveyquestion/{id}', [ApiSurveyQuestion::class, 'question']);

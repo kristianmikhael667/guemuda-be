@@ -72,6 +72,7 @@
                                             <th>Category</th>
                                             <th>Tag</th>
                                             <th>Hit</th>
+                                            <th>Like</th>
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th>Updated</th>
@@ -108,6 +109,14 @@
                                                 <?php $__currentLoopData = $views; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $view): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <?php if($view->id == $content->id): ?>
                                                 <?php echo e($view->total_views); ?>
+
+                                                <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </td>
+                                            <td>
+                                                <?php $__currentLoopData = $likes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $like): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <?php if($like->id == $content->id): ?>
+                                                <?php echo e($like->total_like); ?>
 
                                                 <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -58,11 +58,33 @@ class CommunityNews extends Controller
             ->orderBy(DB::raw('COUNT(community_news.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(community_news.id) as total_views'), 'community_news.*'));
 
+        $likes = ModelsCommunityNews::join("like_communities", "like_communities.id_community", "=", "community_news.id")
+            ->groupBy("community_news.slug")
+            ->groupBy("community_news.id")
+            ->groupBy("community_news.uid_user")
+            ->groupBy("community_news.uid_user_2")
+            ->groupBy("community_news.description")
+            ->groupBy("community_news.status")
+            ->groupBy("community_news.type")
+            ->groupBy("community_news.link_video")
+            ->groupBy("community_news.thumbnail")
+            ->groupBy("community_news.captions")
+            ->groupBy("community_news.created_at")
+            ->groupBy("community_news.updated_at")
+            ->groupBy("community_news.title")
+            ->groupBy("community_news.subdesc")
+            ->groupBy("community_news.avatar")
+            ->groupBy("community_news.category_id")
+            ->groupBy("community_news.tags_id")
+            ->orderBy(DB::raw('COUNT(community_news.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(community_news.id) as total_like'), 'community_news.*'));
+
         $taggers = TagsCommunity::all();
 
         return view('admin.communnity-news', [
             'page' => 'Administrator',
             'communitys' => $community,
+            'likes' => $likes,
             'views' => $kinanda,
             'tages' => $taggers
         ]);

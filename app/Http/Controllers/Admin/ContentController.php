@@ -72,10 +72,34 @@ class ContentController extends Controller
             ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(contents.id) as total_views'), 'contents.*'));
 
+        $likes = Content::join("like_contents", "like_contents.id_post", "=", "contents.id")
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.type")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
+
         $taggers = Tags::all();
         return view('admin.content', [
             'page' => 'Administrator',
             'contents' => $contents,
+            'likes' => $likes,
             'views' => $kinanda,
             'tages' => $taggers,
             'hashids' => $hashids
@@ -341,7 +365,7 @@ class ContentController extends Controller
         if ($post->image) {
             Storage::delete($post->image);
         }
-    
+
         Content::destroy($post->id);
         return redirect('/administrator/post')->with('success', 'Post has been deleted!');
     }

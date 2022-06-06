@@ -58,7 +58,7 @@ class CommentComController extends Controller
     public function show($id)
     {
         $checks = CommunityNews::where('slug', $id)->first();
-        $comments = CommentCom::where('post_id', $checks->id)->paginate(10)->orderBy('created_at', 'DESC')->withQueryString();
+        $comments = CommentCom::where('post_id', $checks->id)->paginate(10)->withQueryString();
 
         return view('admin.commentcom-detail', [
             'page' => 'Administrator',

@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\Analytic;
 use App\Http\Controllers\Admin\CategoryCommunity;
 use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CatPremiumController;
-use App\Http\Controllers\admin\CommentComController;
+use App\Http\Controllers\Admin\CommentComController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;

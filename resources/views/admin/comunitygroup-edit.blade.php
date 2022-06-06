@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="uk-width-1-2@m">
+                                        <div class="uk-width-1-2@m">
                                             <div class="uk-card uk-card-default uk-card-body">
                                                 <div class="d-widget-title">
                                                     <div class="d-flex justify-content-between">
@@ -133,12 +133,12 @@
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
                                                     <input type="file"
-                                                        data-default-file="{{ storage_path('app/' . $communities->profile); }}"
+                                                        data-default-file="{{ url('/api/image/' . $images); }}"
                                                         name="profile" id="profile" class="dropify"
                                                         data-max-file-size="2M">
                                                 </div>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Edit Community Group</button>
                                 </form>

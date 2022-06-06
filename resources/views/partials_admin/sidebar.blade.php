@@ -157,18 +157,16 @@
             </a>
         </li>
 
-        {{-- <li class="{{ Request::is('administrator/communitiesgroup*') ? 'active' : '' }}">
+        <li class="{{ Request::is('administrator/communitiesgroup*') ? 'active' : '' }}">
             <a class="" href="/administrator/communitiesgroup" title="">
-                <i><svg id="commu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                <i><svg id="readmore" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-users">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg></i> Category Community
+                        stroke-linejoin="round" class="feather feather-book">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg></i> Read More Community
             </a>
-        </li> --}}
+        </li>
 
         {{-- <li class="menu-item-has-children {{ Request::is('administrator/community*') ? 'active' : '' }}">
             <a class="" href="#" title="">
@@ -220,9 +218,8 @@
             </a>
         </li>
 
-
-        <li class="{{ Request::is('administrator/comment*') ? 'active' : '' }}">
-            <a class="" href="/administrator/comment" title="">
+        <li class="menu-item-has-children {{ Request::is('administrator/comment*') ? 'active' : '' }}">
+            <a class="" href="#" title="">
                 <i><svg id="kom" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="feather feather-file-text">
@@ -233,6 +230,11 @@
                         <polyline points="10 9 9 9 8 9"></polyline>
                     </svg></i> Comment
             </a>
+            {{-- User --}}
+            <ul class="submenu">
+                <li><a href="/administrator/comment" title="">Comment Article</a></li>
+                <li><a href="/administrator/commentcom" title="">Comment Community News</a></li>
+            </ul>
         </li>
 
         <li class="menu-item-has-children {{ Request::is('administrator/users*') ? 'active' : '' }}">

@@ -87,8 +87,10 @@ class CommunityGroupController extends Controller
     public function edit($id)
     {
         $post = CommunityGroup::where('slug', $id)->firstOrFail();
+        $images = substr($post->profile, 11);
         return view('admin.comunitygroup-edit', [
             'communities' => $post,
+            'images' => $images,
             'page' => 'Administrator'
         ]);
     }
@@ -116,11 +118,11 @@ class CommunityGroupController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if ($request->file('image')) {
-            if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+        if ($request->file('profile')) {
+            if ($request->profile) {
+                Storage::delete($request->profile);
             }
-            $validatedData['image'] = $request->file('image')->store('post-image');
+            $validatedData['profile'] = $request->file('profile')->store('post-image');
         }
 
         if ($request->namegroup) {

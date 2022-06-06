@@ -99,7 +99,7 @@ class CommentController extends Controller
             'field' => $comment->body
         ];
 
-        event(new SendGlobalNotification($json));
+        // event(new SendGlobalNotification($json));
 
         return Redirect::back()->with('success', 'Comment status has been updated!');
     }

@@ -79,9 +79,7 @@
                                         ?>
                                         <tr>
                                             <td>{{ $contents->firstItem() + $num }}</td>
-                                            <td><a href="/administrator/post/edittitle/{{ $content->slug }}">{{
-                                                    $content->title
-                                                    }}</a></td>
+                                            <td>{{ $content->title }}</td>
                                             <td>{{ $content->user['username'] }}</td>
                                             <td>{{ $content->uid_user_2}}
                                             </td>

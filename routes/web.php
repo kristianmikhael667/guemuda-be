@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Analytic;
 use App\Http\Controllers\Admin\CategoryCommunity;
 use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CatPremiumController;
+use App\Http\Controllers\admin\CommentComController;
 use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
@@ -98,6 +99,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
 
     // Route Comment
     Route::resource('comment', CommentController::class);
+    Route::resource('commentcom', CommentComController::class);
 });
 
 // Route::get('send-notif/{name}', function ($name) {

@@ -135,7 +135,16 @@
             </a>
         </li>
 
-        
+        <li class="<?php echo e(Request::is('administrator/communitiesgroup*') ? 'active' : ''); ?>">
+            <a class="" href="/administrator/communitiesgroup" title="">
+                <i><svg id="readmore" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-book">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg></i> Read More Community
+            </a>
+        </li>
 
         
 
@@ -153,9 +162,8 @@
             </a>
         </li>
 
-
-        <li class="<?php echo e(Request::is('administrator/comment*') ? 'active' : ''); ?>">
-            <a class="" href="/administrator/comment" title="">
+        <li class="menu-item-has-children <?php echo e(Request::is('administrator/comment*') ? 'active' : ''); ?>">
+            <a class="" href="#" title="">
                 <i><svg id="kom" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="feather feather-file-text">
@@ -166,6 +174,11 @@
                         <polyline points="10 9 9 9 8 9"></polyline>
                     </svg></i> Comment
             </a>
+            
+            <ul class="submenu">
+                <li><a href="/administrator/comment" title="">Comment Article</a></li>
+                <li><a href="/administrator/commentcom" title="">Comment Community News</a></li>
+            </ul>
         </li>
 
         <li class="menu-item-has-children <?php echo e(Request::is('administrator/users*') ? 'active' : ''); ?>">

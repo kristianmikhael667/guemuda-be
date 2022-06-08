@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -85,6 +86,7 @@ class DashboardController extends Controller
             $datass['data'][] = 'Empty';
         }
 
+        $roleuser = Auth::user()->rolesname;
         // Top Authors
         $authors = User::join("contents", "contents.uid_user", "=", "users.id")
             // ->where("users.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
@@ -119,7 +121,7 @@ class DashboardController extends Controller
             ->get(array(DB::raw('COUNT(users.id) as tops'), 'users.*'));
 
         return view('admin.analytic', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'viewer' => $top10views,
             'chart_data' => json_encode($data),
             'platform' => json_encode($datas),

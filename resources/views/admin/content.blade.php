@@ -48,7 +48,7 @@
                                                     @endif
                                                     <input type="text" class="form-control" name="search"
                                                         placeholder="Search Title Post ..."
-                                                        value="{{ request('title') }}">
+                                                        value="{{ request('search') }}">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

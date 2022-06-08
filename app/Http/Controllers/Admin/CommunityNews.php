@@ -24,15 +24,15 @@ class CommunityNews extends Controller
     public function index()
     {
         // Permission
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][28])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][13])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
 
         $community = ModelsCommunityNews::latest()->with(['category', 'user'])->filter(request(['search', 'user', 'category']))->paginate(10)->withQueryString();
 
@@ -80,9 +80,10 @@ class CommunityNews extends Controller
             ->get(array(DB::raw('COUNT(community_news.id) as total_like'), 'community_news.*'));
 
         $taggers = TagsCommunity::all();
+        $roleuser = Auth::user()->rolesname;
 
         return view('admin.communnity-news', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'communitys' => $community,
             'likes' => $likes,
             'views' => $kinanda,
@@ -98,17 +99,18 @@ class CommunityNews extends Controller
     public function create()
     {
         // Permission
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][29])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][14])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         return view('admin.create-community-news', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'tags' => TagsCommunity::all(),
             'categories' => CommunityGroup::all()
         ]);
@@ -123,15 +125,15 @@ class CommunityNews extends Controller
     public function store(Request $request)
     {
         // Permission
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][29])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][14])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
 
         $validatedData = $request->validate([
             'title' => 'required',
@@ -184,7 +186,7 @@ class CommunityNews extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][28])) {
+        if (empty($data['name'][13])) {
             throw UnauthorizedException::forPermissions($data);
         }
     }
@@ -198,15 +200,15 @@ class CommunityNews extends Controller
     public function edit($id)
     {
         // Permission
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][30])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][15])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
 
         $editid = DB::table('community_news')->where('slug', $id)->get();
 
@@ -218,9 +220,10 @@ class CommunityNews extends Controller
 
         $images = substr($editid[0]->avatar, 11);
         $thumbnail = substr($editid[0]->thumbnail, 11);
+        $roleuser = Auth::user()->rolesname;
 
         return view('admin.community-edit', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'categories' => CommunityGroup::all(),
             'tags' => TagsCommunity::all(),
             'tagsme' => $teg,
@@ -234,20 +237,22 @@ class CommunityNews extends Controller
 
     public function edittitle($id)
     {
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][30])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][15])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
         $title = DB::table('community_news')->where('slug', $id)->get();
         $title_data = $title[0]->title;
         $slugs = $title[0]->slug;
+        $roleuser = Auth::user()->rolesname;
         return view('admin.community-title', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $title_data,
             'slugs' => $slugs
         ]);
@@ -263,15 +268,16 @@ class CommunityNews extends Controller
     public function update(Request $request, $id)
     {
         // Permission
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][30])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][15])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
         if ($request->title) {
             DB::table('community_news')->where('slug', $id)->update([
                 'title' => $request->title,
@@ -339,7 +345,7 @@ class CommunityNews extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][31])) {
+        if (empty($data['name'][16])) {
             throw UnauthorizedException::forPermissions($data);
         }
         $post = DB::table('community_news')->where('slug', $id)->get();

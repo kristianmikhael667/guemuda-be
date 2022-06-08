@@ -80,10 +80,13 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    // public function roles()
-    // {
-    //     return $this->hasOne(Role::class);
-    // }
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query->where('first_name', 'like', '%' . $search . '%')
+                ->orWhere('last_name', 'like', '%' . $search . '%');
+        });
+    }
 
     public function getCreatedAtAttribute($value)
     {

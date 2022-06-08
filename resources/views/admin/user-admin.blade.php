@@ -29,10 +29,10 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/users" method="get" role="search">
+                                            <form action="/administrator/admin" method="get" role="search">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Name ..." value="{{ request('name') }}">
+                                                        placeholder="Search Name ..." value="{{ request('search') }}">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -61,7 +61,7 @@
                                             <th>Status</th>
                                             <th>Created</th>
                                             <th>Updated</th>
-                                            <th class="disableFilterBy">Actions</th>
+                                            {{-- <th class="disableFilterBy">Actions</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -77,7 +77,7 @@
                                             <td>{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}
                                             </td>
                                             <td>{{ \Carbon\Carbon::parse($user->updated_at)->diffForHumans() }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <a href="/dashboard/posts/{{ $user->id }}" class="badge btn-light">
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -116,7 +116,7 @@
                                                             <line x1="14" y1="11" x2="14" y2="17"></line>
                                                         </svg></button>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
 
                                         @empty

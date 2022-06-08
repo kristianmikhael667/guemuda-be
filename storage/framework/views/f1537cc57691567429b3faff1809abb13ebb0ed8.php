@@ -24,21 +24,21 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/commentcom" method="get" role="search">
                                                 <div class="input-group">
                                                     <?php if(request('category')): ?>
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Title Post ..."
+                                                        placeholder="Search Comment Community ..."
                                                         value="<?php echo e(request('category')); ?>">
                                                     <?php endif; ?>
                                                     <?php if(request('user')): ?>
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Title Post ..."
+                                                        placeholder="Search Comment Community ..."
                                                         value="<?php echo e(request('user')); ?>">
                                                     <?php endif; ?>
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Title Post ..."
-                                                        value="<?php echo e(request('title')); ?>">
+                                                        placeholder="Search Comment Community ..."
+                                                        value="<?php echo e(request('search')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

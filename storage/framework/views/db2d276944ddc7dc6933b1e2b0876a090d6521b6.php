@@ -13,15 +13,10 @@
                         </svg></i>
                 </div>
                 <div class="page-title">
-                    <h4>Dashboard</h4>
+                    <h4><?php echo e($page); ?></h4>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <ul class="breadcrumb">
-                    <li><a href="#" title="">Home</a></li>
-                    <li><a href="#" title="">Dashboard</a></li>
-                </ul>
-            </div>
+            
         </div>
     </div>
 </div>

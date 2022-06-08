@@ -43,7 +43,7 @@
                                                     <?php endif; ?>
                                                     <input type="text" class="form-control" name="search"
                                                         placeholder="Search Title Post ..."
-                                                        value="<?php echo e(request('title')); ?>">
+                                                        value="<?php echo e(request('search')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

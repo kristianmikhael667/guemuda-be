@@ -24,15 +24,16 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][16])) {
+        if (empty($data['name'][1])) {
             throw UnauthorizedException::forPermissions($data);
         }
 
-        $roles = ModelsRole::orderBy('id', 'DESC')->paginate(5);
+        $roles = ModelsRole::orderBy('id', 'DESC')->filter(request(['search']))->paginate(5);
         $hashids = new Hashids('', 10);
+        $roleuser = Auth::user()->rolesname;
 
         return view('admin.role', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'roles' => $roles,
             'hashids' => $hashids
         ]);
@@ -52,13 +53,14 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][17])) {
+        if (empty($data['name'][2])) {
             throw UnauthorizedException::forPermissions($data);
         }
+        $roleuser = Auth::user()->rolesname;
 
         $permission = ModelsPermission::get();
         return view('admin.create-roles', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'permissions' => $permission
         ]);
     }
@@ -78,7 +80,7 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][17])) {
+        if (empty($data['name'][2])) {
             throw UnauthorizedException::forPermissions($data);
         }
 
@@ -89,8 +91,10 @@ class RoleController extends Controller
 
         $role = ModelsRole::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
+        $roleuser = Auth::user()->rolesname;
+
         return view('admin.role', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
         ]);
     }
 
@@ -109,7 +113,7 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][16])) {
+        if (empty($data['name'][1])) {
             throw UnauthorizedException::forPermissions($data);
         }
     }
@@ -129,7 +133,7 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][18])) {
+        if (empty($data['name'][3])) {
             throw UnauthorizedException::forPermissions($data);
         }
         $hashids = new Hashids('', 10);
@@ -139,8 +143,10 @@ class RoleController extends Controller
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", $id_decode[0])
             ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
             ->all();
+        $roleuser = Auth::user()->rolesname;
+
         return view('admin.role-edit', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'role' => $role,
             'permission' => $permission,
             'rolePermissions' => $rolePermissions
@@ -163,7 +169,7 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][18])) {
+        if (empty($data['name'][3])) {
             throw UnauthorizedException::forPermissions($data);
         }
         $this->validate($request, [
@@ -198,7 +204,7 @@ class RoleController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][19])) {
+        if (empty($data['name'][4])) {
             throw UnauthorizedException::forPermissions($data);
         }
     }

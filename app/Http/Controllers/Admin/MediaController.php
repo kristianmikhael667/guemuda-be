@@ -21,13 +21,14 @@ class MediaController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][33])) {
+        if (empty($data['name'][18])) {
             throw UnauthorizedException::forPermissions($data);
         }
         $path = storage_path('app/post-image');
         $files = scandir($path);
+        $roleuser = Auth::user()->rolesname;
         return view('admin/media', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'files' => $files
         ]);
     }

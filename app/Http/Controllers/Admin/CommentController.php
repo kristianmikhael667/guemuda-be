@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class CommentController extends Controller
 {
@@ -21,9 +22,20 @@ class CommentController extends Controller
      */
     public function index()
     {
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][17])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         $contents = Content::latest()->with(['category', 'user', 'comments'])->filter(request(['search', 'user', 'category', 'comments']))->paginate(10)->withQueryString();
         return view('admin.comment', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $contents,
         ]);
     }
@@ -57,12 +69,24 @@ class CommentController extends Controller
      */
     public function show($id)
     {
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][17])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         $checks = Content::where('slug', $id)->first();
-        $comments = Comment::where('post_id', $checks->id)->paginate(10)->withQueryString();
+        $comments = Comment::where('post_id', $checks->id)->filter(request(['search']))->orderBy('created_at', 'DESC')->paginate(10)->withQueryString();
+        $roleuser = Auth::user()->rolesname;
 
         return view('admin.comment-detail', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'title' =>  $checks,
+            'slug' => $id,
             'comments' => $comments,
         ]);
     }
@@ -87,6 +111,17 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Permission
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][17])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        
         $comment = Comment::where('id', $id)->first();
         DB::table('comments')->where('id', $id)->update([
             'updated_at' => date('Y-m-d H:i:s'),

@@ -26,10 +26,10 @@
                                     </div>
                                 </div>
                                 <?php if(session()->has('success')): ?>
-                                    <div class="alert alert-success" role="alert">
-                                        <?php echo e(session('success')); ?>
+                                <div class="alert alert-success" role="alert">
+                                    <?php echo e(session('success')); ?>
 
-                                    </div>
+                                </div>
                                 <?php endif; ?>
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
@@ -48,7 +48,7 @@
                                                     <?php endif; ?>
                                                     <input type="text" class="form-control" name="search"
                                                         placeholder="Search Title Webinars ..."
-                                                        value="<?php echo e(request('title')); ?>">
+                                                        value="<?php echo e(request('search')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -126,28 +126,41 @@
                                                 <td><?php echo e($webinar->moderator); ?></td>
                                                 <td><?php echo e($webinar->organizer); ?></td>
                                                 <td><span><?php echo e($webinar->status); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question1 ? $webinar->survey_question1 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question2 ? $webinar->survey_question2 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question3? $webinar->survey_question3 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question4? $webinar->survey_question4 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question5? $webinar->survey_question5 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question6? $webinar->survey_question6 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question7? $webinar->survey_question7 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question8? $webinar->survey_question8 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question9? $webinar->survey_question9 : '-'); ?></span></td>
-                                                <td><span><?php echo e($webinar->survey_question10? $webinar->survey_question10 : '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question1 ? $webinar->survey_question1 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question2 ? $webinar->survey_question2 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question3? $webinar->survey_question3 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question4? $webinar->survey_question4 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question5? $webinar->survey_question5 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question6? $webinar->survey_question6 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question7? $webinar->survey_question7 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question8? $webinar->survey_question8 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question9? $webinar->survey_question9 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question10? $webinar->survey_question10 :
+                                                        '-'); ?></span></td>
                                                 <td><?php echo e(\Carbon\Carbon::parse($webinar->created_at)->diffForHumans()); ?>
 
                                                 </td>
-                                                <td><?php echo e(\Carbon\Carbon::parse($webinar->updated_at)->diffForHumans()); ?></td>
-                                                <td><a href="/administrator/register-webinar-export/<?php echo e($webinar->slug); ?>" id="create-new-post"
-                                                    class="btn btn-primary">Result</a></td>
+                                                <td><?php echo e(\Carbon\Carbon::parse($webinar->updated_at)->diffForHumans()); ?>
+
+                                                </td>
+                                                <td><a href="/administrator/register-webinar-export/<?php echo e($webinar->slug); ?>"
+                                                        id="create-new-post" class="btn btn-primary">Result</a></td>
                                                 <td>
                                                     <a href="/administrator/webinars/<?php echo e($webinar->slug); ?>/edit"
                                                         class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                             width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                            stroke-linejoin="round" class="feather feather-edit">
+                                                            stroke="currentColor" stroke-width="2"
+                                                            stroke-linecap="round" stroke-linejoin="round"
+                                                            class="feather feather-edit">
                                                             <path
                                                                 d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
                                                             </path>
@@ -155,16 +168,17 @@
                                                                 d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                             </path>
                                                         </svg></span></a>
-                                                    <form action="/administrator/webinars/<?php echo e($webinar->slug); ?>" method="post"
-                                                        class="d-inline">
+                                                    <form action="/administrator/webinars/<?php echo e($webinar->slug); ?>"
+                                                        method="post" class="d-inline">
                                                         <?php echo method_field('delete'); ?>
                                                         <?php echo csrf_field(); ?>
                                                         <button class="badge btn-light border-0"
                                                             onclick="return confirm('Are you sure ?')"><svg
-                                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                                stroke-width="2" stroke-linecap="round"
-                                                                stroke-linejoin="round" class="feather feather-trash-2">
+                                                                xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                height="24" viewBox="0 0 24 24" fill="none"
+                                                                stroke="currentColor" stroke-width="2"
+                                                                stroke-linecap="round" stroke-linejoin="round"
+                                                                class="feather feather-trash-2">
                                                                 <polyline points="3 6 5 6 21 6"></polyline>
                                                                 <path
                                                                     d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">

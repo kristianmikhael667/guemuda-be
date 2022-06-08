@@ -26,15 +26,15 @@ class ContentController extends Controller
     public function index()
     {
         $hashids = new Hashids('', 10);
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][20])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][5])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         $search = '';
         if (request('category')) {
             $category = Category::firstWhere('slug', request('category'));
@@ -96,8 +96,9 @@ class ContentController extends Controller
             ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
 
         $taggers = Tags::all();
+        $roleuser = Auth::user()->rolesname;
         return view('admin.content', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $contents,
             'likes' => $likes,
             'views' => $kinanda,
@@ -109,17 +110,18 @@ class ContentController extends Controller
     public function create()
     {
         /* Note */
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][21])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][6])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         return view('admin.create-post', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'categories' => Category::where("parent", 0)->get(),
             'tags' => Tags::all()
         ]);
@@ -127,15 +129,15 @@ class ContentController extends Controller
 
     public function store(Request $request)
     {
-        // $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
-        //     ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
-        //     ->all();
-        // $data = array(
-        //     "name" => $rolePermissions
-        // );
-        // if (empty($data['name'][21])) {
-        //     throw UnauthorizedException::forPermissions($data);
-        // }
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][6])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_id' => 'required',
@@ -209,7 +211,7 @@ class ContentController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][20])) {
+        if (empty($data['name'][5])) {
             throw UnauthorizedException::forPermissions($data);
         }
     }
@@ -228,7 +230,7 @@ class ContentController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][22])) {
+        if (empty($data['name'][7])) {
             throw UnauthorizedException::forPermissions($data);
         }
 
@@ -238,8 +240,9 @@ class ContentController extends Controller
         $idparentarr = array_map('intval', explode(',', $idparent[0]->id));
         $images = substr($post->image, 11);
         $thumbnail = substr($post->thumbnail, 11);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.content-edit', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'categories' => Category::where("parent", 0)->get(),
             'tags' => Tags::all(),
             'tagsme' => $teg,
@@ -259,14 +262,15 @@ class ContentController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][22])) {
+        if (empty($data['name'][7])) {
             throw UnauthorizedException::forPermissions($data);
         }
         $title = DB::table('contents')->where('slug', $id)->get();
         $title_data = $title[0]->title;
         $slugs = $title[0]->slug;
+        $roleuser = Auth::user()->rolesname;
         return view('admin.content-title', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $title_data,
             'slugs' => $slugs
         ]);
@@ -288,7 +292,7 @@ class ContentController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][22])) {
+        if (empty($data['name'][7])) {
             throw UnauthorizedException::forPermissions($data);
         }
         if ($request->title) {
@@ -359,7 +363,7 @@ class ContentController extends Controller
         $data = array(
             "name" => $rolePermissions
         );
-        if (empty($data['name'][23])) {
+        if (empty($data['name'][8])) {
             throw UnauthorizedException::forPermissions($data);
         }
         if ($post->image) {

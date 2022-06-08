@@ -29,10 +29,10 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/users" method="get" role="search">
+                                            <form action="/administrator/roles" method="get" role="search">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Name ..." value="{{ request('name') }}">
+                                                        placeholder="Search Role ..." value="{{ request('search') }}">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

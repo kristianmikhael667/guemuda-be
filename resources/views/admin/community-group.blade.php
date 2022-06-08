@@ -18,7 +18,7 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h4>Community Group</h4>
+                                            <h4>Read More Community</h4>
                                         </div>
                                         {{-- <div>
                                             <a href="/administrator/community-group/create" id="create-new-post"
@@ -29,11 +29,11 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/communitiesgroup" method="get" role="search">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="title"
-                                                        placeholder="Search Title Post ..."
-                                                        value="{{ request('title') }}">
+                                                    <input type="text" class="form-control" name="search"
+                                                        placeholder="Search Title Read More ..."
+                                                        value="{{ request('search') }}">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -93,8 +93,8 @@
                                                             d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                         </path>
                                                     </svg></span></a>
-                                                <form action="/administrator/communitiesgroup/{{ $category->slug }}" method="post"
-                                                    class="d-inline">
+                                                <form action="/administrator/communitiesgroup/{{ $category->slug }}"
+                                                    method="post" class="d-inline">
                                                     @method('delete')
                                                     @csrf
                                                     <button class="badge btn-light border-0"

@@ -23,10 +23,6 @@ class PermissionTableSeeder extends Seeder
             'post-create',
             'post-edit',
             'post-delete',
-            'premium-list',
-            'premium-create',
-            'premium-edit',
-            'premium-delete',
             'webinar-list',
             'webinar-create',
             'webinar-edit',
@@ -36,8 +32,26 @@ class PermissionTableSeeder extends Seeder
             'community-edit',
             'community-delete',
             'approve-comment',
+            'media-list',
             'approve-comment-com',
-            'media-list'
+            'premium-list',
+            'premium-create',
+            'premium-edit',
+            'premium-delete',
+            'list-user-superadmin',
+            'list-user-admin',
+            'list-user-editor',
+            'list-user-contributor',
+            'list-user-subscribe',
+            'create-user-superadmin',
+            'create-user-admin',
+            'create-user-editor',
+            'create-user-contributor',
+            'create-user-subscribe',
+            'list-community-group',
+            'create-community-group',
+            'edit-community-group',
+            'delete-community-group'
         ];
 
         foreach ($permissions as $permission) {

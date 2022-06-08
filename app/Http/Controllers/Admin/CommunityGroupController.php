@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Storage;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class CommunityGroupController extends Controller
 {
@@ -20,9 +22,19 @@ class CommunityGroupController extends Controller
      */
     public function index()
     {
-        $communitygroup = CommunityGroup::latest()->get();
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][34])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
+        $communitygroup = CommunityGroup::latest()->filter(request(['search']))->get();
         return view('admin.community-group', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'groups' => $communitygroup
         ]);
     }
@@ -34,8 +46,19 @@ class CommunityGroupController extends Controller
      */
     public function create()
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][35])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
+
         return view('admin.create-community-group', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
         ]);
     }
 
@@ -47,6 +70,16 @@ class CommunityGroupController extends Controller
      */
     public function store(Request $request)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][35])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
         $validatedData = $request->validate([
             'namegroup' => 'required',
             'profile' => 'required',
@@ -75,7 +108,15 @@ class CommunityGroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][34])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
     }
 
     /**
@@ -86,12 +127,22 @@ class CommunityGroupController extends Controller
      */
     public function edit($id)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][36])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         $post = CommunityGroup::where('slug', $id)->firstOrFail();
         $images = substr($post->profile, 11);
         return view('admin.comunitygroup-edit', [
             'communities' => $post,
             'images' => $images,
-            'page' => 'Administrator'
+            'page' => $roleuser
         ]);
     }
 
@@ -104,6 +155,16 @@ class CommunityGroupController extends Controller
      */
     public function update(Request $request, $post)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][36])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
         $id = CommunityGroup::where('slug', $post)->firstOrFail();
 
         $rules = [
@@ -141,6 +202,14 @@ class CommunityGroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][37])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
     }
 }

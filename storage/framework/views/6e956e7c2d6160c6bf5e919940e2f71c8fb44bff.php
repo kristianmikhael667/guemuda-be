@@ -30,14 +30,15 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/post" method="get" role="search">
+                                            <form action="/administrator/comment/<?php echo e($slug); ?>" method="get"
+                                                role="search">
                                                 <div class="input-group">
                                                     <?php if(request('user')): ?>
-                                                    <input type="text" class="form-control" name="search"
+                                                    <input type="text" class="form-control" name="user"
                                                         placeholder="Search Comment" value="<?php echo e(request('user')); ?>">
                                                     <?php endif; ?>
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Comment" value="<?php echo e(request('body')); ?>">
+                                                        placeholder="Search Comment" value="<?php echo e(request('search')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

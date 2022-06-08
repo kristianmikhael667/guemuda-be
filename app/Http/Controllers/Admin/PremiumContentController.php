@@ -27,7 +27,16 @@ class PremiumContentController extends Controller
      */
     public function index()
     {
-        $search = '';
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][20])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         $hashids = new Hashids('', 10);
         if (request('category')) {
             $category = CatPremium::firstWhere('slug', request('category'));
@@ -65,7 +74,7 @@ class PremiumContentController extends Controller
 
         $taggers = Tags::all();
         return view('admin.premiumcontent', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $contents,
             'views' => $kinanda,
             'tages' => $taggers,
@@ -80,8 +89,19 @@ class PremiumContentController extends Controller
      */
     public function create()
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][21])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
+
         return view('admin.create-premium', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'categories' => CatPremium::where("parent", 0)->get(),
             'tags' => Tags::all()
         ]);
@@ -95,6 +115,16 @@ class PremiumContentController extends Controller
      */
     public function store(Request $request)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][21])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+
         $validatedData = $request->validate([
             'title' => 'required',
             'tags_id' => 'required',
@@ -186,8 +216,9 @@ class PremiumContentController extends Controller
         $idparentarr = array_map('intval', explode(',', $category[0]->id));
         $images = substr($premiumcontent->image, 11);
         $thumbnail = substr($premiumcontent->thumbnail, 11);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.premium-edit', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'categories' => CatPremium::where("parent", 0)->get(),
             'tags' => Tags::all(),
             'tagsme' => $teg,
@@ -221,8 +252,9 @@ class PremiumContentController extends Controller
         $title = DB::table('premium_contents')->where('slug', $id)->get();
         $title_data = $title[0]->title;
         $slugs = $title[0]->slug;
+        $roleuser = Auth::user()->rolesname;
         return view('admin.premium-title', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'contents' => $title_data,
             'slugs' => $slugs
         ]);
@@ -309,7 +341,7 @@ class PremiumContentController extends Controller
         if (empty($data['name'][23])) {
             throw UnauthorizedException::forPermissions($data);
         }
-       
+
         if ($premiumcontent->image) {
             Storage::delete($premiumcontent->image);
         }

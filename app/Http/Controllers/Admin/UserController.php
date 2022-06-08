@@ -11,8 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class UserController extends Controller
 {
@@ -24,41 +26,81 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id', 'DESC')->paginate(10);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.users', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
 
     public function superadmin()
     {
-        $data = User::orderBy('id', 'DESC')->where('rolesname', 'superadmin')->paginate(10);
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][24])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'superadmin')->filter(request(['search']))->paginate(10);
         return view('admin.users-superadmin', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
 
     public function admin()
     {
-        $data = User::orderBy('id', 'DESC')->where('rolesname', 'admin')->paginate(10);
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][25])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'admin')->filter(request(['search']))->paginate(10);
         return view('admin.user-admin', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
 
     public function admincreate()
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][30])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $roleuser = Auth::user()->rolesname;
         $data = ModelsRole::orderBy('id', 'DESC')->where('name', 'admin')->get();
         return view('admin.createadmin', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'roles' => $data[0]
         ]);
     }
 
     public function postadmin(Request $request)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][30])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         try {
             $validatedData = $request->validate([
                 'first_name' => 'required|string|max:255',
@@ -85,24 +127,53 @@ class UserController extends Controller
 
     public function editor()
     {
-        $data = User::orderBy('id', 'DESC')->where('rolesname', 'editor')->paginate(10);
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][26])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'editor')->filter(request(['search']))->paginate(10);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.user-editor', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
 
     public function editorcreate()
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][31])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         $data = ModelsRole::orderBy('id', 'DESC')->where('name', 'editor')->get();
+        $roleuser = Auth::user()->rolesname;
         return view('admin.createeditor', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'roles' => $data[0]
         ]);
     }
 
     public function posteditor(Request $request)
     {
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][31])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
         try {
             $validatedData = $request->validate([
                 'first_name' => 'required|string|max:255',
@@ -129,18 +200,38 @@ class UserController extends Controller
 
     public function contributor()
     {
-        $data = User::orderBy('id', 'DESC')->where('rolesname', 'contributor')->paginate(10);
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][27])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'contributor')->filter(request(['search']))->paginate(10);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.users-contributor', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
 
     public function subscribes()
     {
-        $data = User::orderBy('id', 'DESC')->where('rolesname', 'subscribe')->paginate(10);
-        return view('admin.users-superadmin', [
-            'page' => 'Administrator',
+        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id", Auth::user()['roles'])
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+            ->all();
+        $data = array(
+            "name" => $rolePermissions
+        );
+        if (empty($data['name'][28])) {
+            throw UnauthorizedException::forPermissions($data);
+        }
+        $data = User::orderBy('id', 'DESC')->where('rolesname', 'subscribe')->filter(request(['search']))->paginate(10);
+        $roleuser = Auth::user()->rolesname;
+        return view('admin.users-subscribe', [
+            'page' => $roleuser,
             'users' => $data
         ]);
     }
@@ -153,8 +244,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
+        $roleuser = Auth::user()->rolesname;
         return view('admin.content', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'roles' => $roles
         ]);
     }
@@ -179,8 +271,9 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
+        $roleuser = Auth::user()->rolesname;
         return view('admin.users', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
         ]);
     }
 
@@ -193,8 +286,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $roleuser = Auth::user()->rolesname;
         return view('admin.show-users', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $user
         ]);
     }
@@ -210,9 +304,9 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
-
+        $roleuser = Auth::user()->rolesname;
         return view('admin.edit-user', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
             'users' => $user,
             'roles' => $roles,
             'userroles' => $userRole
@@ -247,9 +341,9 @@ class UserController extends Controller
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
-
+        $roleuser = Auth::user()->rolesname;
         return view('admin.users', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
         ]);
     }
 
@@ -262,8 +356,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
+        $roleuser = Auth::user()->rolesname;
         return view('admin.users', [
-            'page' => 'Administrator',
+            'page' => $roleuser,
         ]);
     }
 }

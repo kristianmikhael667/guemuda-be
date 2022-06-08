@@ -21,7 +21,7 @@
             </li>
             <?php endif; ?>
             <li>
-                <a href="index.html" title="Home" data-toggle="tooltip">
+                <a href="/administrator" title="Home" data-toggle="tooltip">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -31,17 +31,7 @@
                         </svg></i>
                 </a>
             </li>
-            <li>
-                <a class="mesg-notif" href="#" title="Messages" data-toggle="tooltip">
-                    <i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-message-square">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg></i>
-                </a>
-                <span></span>
-            </li>
+            
             <li>
                 <a class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
                     <i>
@@ -54,17 +44,7 @@
                 </a>
                 <span></span>
             </li>
-            <li>
-                <a class="create" href="#" title="Add New" data-toggle="tooltip">
-                    <i>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-plus">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg></i>
-                </a>
-            </li>
+            
             <li>
                 <a title="" href="#">
                     <i>
@@ -82,14 +62,13 @@
                 <ul class="dropdown">
                     <li><a href="<?php echo e(route('profile.show')); ?>" title=""><i class="icofont-user-alt-3"></i> Your
                             Profile</a></li>
-                    <li><a href="add-new-course.html" title=""><i class="icofont-plus"></i> New Course</a></li>
-                    <li><a class="invite-new" href="#" title=""><i class="icofont-brand-slideshare"></i> Invite
-                            Collegue</a></li>
-                    <li><a href="pay-out.html" title=""><i class="icofont-price"></i> Payout</a></li>
-                    <li><a href="price-plan.html" title=""><i class="icofont-flash"></i> Upgrade</a></li>
-                    <li><a href="help-faq.html" title=""><i class="icofont-question-circle"></i> Help</a></li>
+                    
+                    
+                    
+                    
+                    
                     <li><a href="settings.html" title=""><i class="icofont-gear"></i> Setting</a></li>
-                    <li><a href="privacy-n-policy.html" title=""><i class="icofont-notepad"></i> Privacy</a></li>
+                    
                     <li><a class="dark-mod" title="" href="#"><i class="icofont-moon"></i> Dark Mode</a></li>
                     <li class="logout">
                         <?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>

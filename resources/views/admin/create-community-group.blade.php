@@ -16,7 +16,7 @@
                         <div class="col-lg-12">
                             <div class="d-widget">
                                 <form method="post" enctype="multipart/form-data"
-                                    action="/administrator/community-group">
+                                    action="/administrator/communitiesgroup">
                                     @csrf
                                     <div class="d-widget-title">
                                         <div class="d-flex justify-content-between">

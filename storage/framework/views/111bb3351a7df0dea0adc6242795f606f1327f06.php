@@ -107,7 +107,16 @@
         </li>
 
         
-        
+        <li class="<?php echo e(Request::is('administrator/category-premium*') ? 'active' : ''); ?>">
+            <a class="" href="/administrator/category-premium" title="">
+                <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-airplay">
+                        <path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path>
+                        <polygon points="12 15 17 21 7 21 12 15"></polygon>
+                    </svg></i> Premium Category
+            </a>
+        </li>
         
 
         <li class="<?php echo e(Request::is('administrator/webinars*') ? 'active' : ''); ?>">
@@ -148,7 +157,25 @@
 
         
 
-        
+        <li class="menu-item-has-children <?php echo e(Request::is('administrator/category-article*') ? 'active' : ''); ?>">
+            <a class="" href="#" title="">
+                <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-list">
+                        <line x1="8" y1="6" x2="21" y2="6"></line>
+                        <line x1="8" y1="12" x2="21" y2="12"></line>
+                        <line x1="8" y1="18" x2="21" y2="18"></line>
+                        <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                        <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                        <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                    </svg></i> Category
+            </a>
+            <ul class="submenu">
+                <li><a href="/administrator/category-article" title="">Article</a></li>
+                <li><a href="/administrator/category-community" title="">Comunnity</a></li>
+                <li><a href="/administrator/category-webinars" title="">Webinars</a></li>
+            </ul>
+        </li>
 
         <li class="<?php echo e(Request::is('administrator/media*') ? 'active' : ''); ?>">
             <a class="" href="/administrator/media" title="">

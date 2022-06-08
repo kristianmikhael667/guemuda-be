@@ -1,16 +1,15 @@
-@extends('layouts.main')
-@section('container')
+<?php $__env->startSection('container'); ?>
 <div class="theme-layout">
-    @include('partials_admin.responsiveheader')
-    @include('partials_admin.header')
-    @include('partials_admin.topsubbar')
-    @include('partials_admin.sidebar')
+    <?php echo $__env->make('partials_admin.responsiveheader', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.topsubbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('partials_admin.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel-content">
-                    {{-- <h4 class="main-title">Users Management</h4> --}}
+                    
 
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
@@ -18,22 +17,22 @@
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h4>Read More Community</h4>
+                                            <h4>Category Premium Content</h4>
                                         </div>
                                         <div>
-                                            <a href="/administrator/community-group/create" id="create-new-post"
-                                                class="btn btn-primary">Create Community Group</a>
+                                            <a href="/administrator/category-premium/create" id="create-new-post"
+                                                class="btn btn-primary">Create Premium Content</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="d-widget-title">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <form action="/administrator/communitiesgroup" method="get" role="search">
+                                            <form action="/administrator/category-premium" method="get" role="search">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Title Read More ..."
-                                                        value="{{ request('search') }}">
+                                                    <input type="text" class="form-control" name="title"
+                                                        placeholder="Search Title Post ..."
+                                                        value="<?php echo e(request('title')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -64,14 +63,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($groups as $num => $category)
+                                        <?php $__empty_1 = true; $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $num => $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                         <tr>
-                                            <td>{{ ++$num }}</td>
-                                            <td>{{ $category->namegroup }}</td>
-                                            <td>{{ $category->slug }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($category->created_at)->diffForHumans() }}
+                                            <td><?php echo e(++$num); ?></td>
+                                            <td><?php echo e($category->name); ?></td>
+                                            <td><?php echo e($category->slug); ?></td>
+                                            <td><?php echo e(\Carbon\Carbon::parse($category->created_at)->diffForHumans()); ?>
+
                                             <td>
-                                                <a href="/administrator/communitiesgroup/{{ $category->slug }}"
+                                                <a href="/dashboard/posts/<?php echo e($category->slug); ?>"
                                                     class="badge btn-light">
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -81,7 +81,7 @@
                                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                                         <circle cx="12" cy="12" r="3"></circle>
                                                     </svg></a>
-                                                <a href="/administrator/communitiesgroup/{{ $category->slug }}/edit"
+                                                <a href="/dashboard/posts/<?php echo e($category->slug); ?>/edit"
                                                     class="badge btn-light"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
                                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -93,10 +93,10 @@
                                                             d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
                                                         </path>
                                                     </svg></span></a>
-                                                <form action="/administrator/communitiesgroup/{{ $category->slug }}"
-                                                    method="post" class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
+                                                <form action="/administrator/post/<?php echo e($category->slug); ?>" method="post"
+                                                    class="d-inline">
+                                                    <?php echo method_field('delete'); ?>
+                                                    <?php echo csrf_field(); ?>
                                                     <button class="badge btn-light border-0"
                                                         onclick="return confirm('Are you sure ?')"><svg
                                                             xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -113,13 +113,13 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        @empty
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                         <tr>
                                             <td colspan="6" class="prova">
                                                 Data Table Empty
                                             </td>
                                         </tr>
-                                        @endforelse
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
 
@@ -256,4 +256,5 @@
     </div>
     <!-- side slide message & popup -->
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/mike/laravel/gue-muda/resources/views/admin/category-premium.blade.php ENDPATH**/ ?>

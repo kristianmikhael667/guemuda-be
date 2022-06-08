@@ -19,7 +19,10 @@
                                         <div>
                                             <h4>Read More Community</h4>
                                         </div>
-                                        
+                                        <div>
+                                            <a href="/administrator/communitiesgroup/create" id="create-new-post"
+                                                class="btn btn-primary">Create Community Group</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="d-widget-title">

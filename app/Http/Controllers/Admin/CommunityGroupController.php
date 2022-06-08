@@ -97,7 +97,7 @@ class CommunityGroupController extends Controller
         $slug = SlugService::createSlug(CommunityGroup::class, 'slug', $request->namegroup);
         $validatedData['slug'] = $slug;
         CommunityGroup::create($validatedData);
-        return redirect('/administrator/community-group')->with('success', 'New Community Group has been added!');
+        return redirect('/administrator/communitiesgroup')->with('success', 'New Community Group has been added!');
     }
 
     /**

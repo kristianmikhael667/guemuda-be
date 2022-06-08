@@ -107,7 +107,7 @@
         </li>
 
         {{-- Clear --}}
-        <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
+        {{-- <li class="{{ Request::is('administrator/category-premium*') ? 'active' : '' }}">
             <a class="" href="/administrator/category-premium" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -116,7 +116,7 @@
                         <polygon points="12 15 17 21 7 21 12 15"></polygon>
                     </svg></i> Premium Category
             </a>
-        </li>
+        </li> --}}
         {{-- <li class="menu-item-has-children {{ Request::is('administrator/post*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg id="ab4" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"
@@ -186,7 +186,7 @@
             </ul>
         </li> --}}
 
-        <li class="menu-item-has-children {{ Request::is('administrator/category-article*') ? 'active' : '' }}">
+        {{-- <li class="menu-item-has-children {{ Request::is('administrator/category-article*') ? 'active' : '' }}">
             <a class="" href="#" title="">
                 <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -204,7 +204,7 @@
                 <li><a href="/administrator/category-community" title="">Comunnity</a></li>
                 <li><a href="/administrator/category-webinars" title="">Webinars</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class="{{ Request::is('administrator/media*') ? 'active' : '' }}">
             <a class="" href="/administrator/media" title="">

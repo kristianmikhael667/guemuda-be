@@ -112,6 +112,7 @@ class UserController extends Controller
                 'roles' => 'required',
                 'rolesname' => 'required',
             ]);
+            $validatedData['password'] = Hash::make($validatedData['password']);
             $validatedData['address'] = '-';
             $validatedData['address'] = '-';
             $validatedData['city'] = '-';
@@ -185,6 +186,7 @@ class UserController extends Controller
                 'roles' => 'required',
                 'rolesname' => 'required',
             ]);
+            $validatedData['password'] = Hash::make($validatedData['password']);
             $validatedData['address'] = '-';
             $validatedData['address'] = '-';
             $validatedData['city'] = '-';

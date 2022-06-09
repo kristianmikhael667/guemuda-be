@@ -16,6 +16,9 @@ class IsAdmin
         if (Auth::user() && Auth::user()->rolesname === 'admin') {
             return $next($request);
         }
+        if (Auth::user() && Auth::user()->rolesname === 'editor') {
+            return $next($request);
+        }
         abort(403);
 
         // if (!$request->user()->roles($role)) {

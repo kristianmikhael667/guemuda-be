@@ -133,20 +133,32 @@ class ContentApi extends Controller
         $slug = $request->input('slug');
 
         if ($slug) {
-            // Cache::put('key', 'value', $seconds = 30);
-            // $content = Cache::remember('contentsod', $seconds, function () use ($slug) {
-            //     return Content::where('slug', $slug)->first();
-            // });
             $content = Content::where('slug', $slug)->first();
-            $like = LikeContent::where('id_post', $content->id)->count(); //kren
-            // ContentViews::createViewLog($content);
-            $browsers = Browser::browserName();
-            $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
-            $browsers_names = str_replace(".", "", $browsers_name);
+            $like = LikeContent::where('id_post', $content->id)->count();
 
-            $platforms = Browser::platformName();
-            $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
-            $platforms_names = str_replace(".", "", $platforms_name);
+            if (Browser::isChrome() || Browser::isOpera() || Browser::isSafari() || Browser::isFirefox() || Browser::isEdge()) {
+                $browsers = Browser::browserName();
+                $browsers_name = preg_replace('/[0-9]+/', '', $browsers);
+                $browsers_names = str_replace(".", "", $browsers_name);
+            } else {
+                $browsers_names = "Others";
+            }
+
+            if (Browser::isDesktop() || Browser::isMobile() || Browser::isTablet()) {
+                $platforms = Browser::deviceType();
+                $platforms_name = preg_replace('/[0-9]+/', '', $platforms);
+                $platforms_names = str_replace(".", "", $platforms_name);
+            } else {
+                $platforms_names = "Others";
+            }
+
+            if (Browser::deviceFamily() == "Apple" || Browser::deviceFamily() == "Samsung" || Browser::deviceFamily() == "Xiaomi" || Browser::deviceFamily() == "Oppo" || Browser::deviceFamily() == "Vivo") {
+                $device = Browser::deviceFamily();
+                $device_name = preg_replace('/[0-9]+/', '', $device);
+                $device_names = str_replace(".", "", $device_name);
+            } else {
+                $device_names = "Others";
+            }
 
             ContentViews::create([
                 'id_post' => $content->id,
@@ -158,7 +170,7 @@ class ContentApi extends Controller
                 'category_ids' => $content->category_id,
                 'agent' => $browsers_names,
                 'platform' =>  $platforms_names,
-                'device' => Browser::deviceFamily()
+                'device' => $device_names
             ]);
 
             if ($content) {

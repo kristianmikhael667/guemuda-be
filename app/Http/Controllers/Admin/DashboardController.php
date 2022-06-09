@@ -44,14 +44,14 @@ class DashboardController extends Controller
             ->groupBy('agent')
             ->get();
 
-        if (empty($user_info)) {
+        if (count($user_info) === 0) {
+            $data['label'][] = 0;
+            $data['data'][] = 0;
+        } else {
             foreach ($user_info as $row) {
                 $data['label'][] = $row->agent;
                 $data['data'][] = (int) $row->total;
             }
-        } else {
-            $data['label'][] = 'Empty';
-            $data['data'][] = 'Empty';
         }
 
         // Platform top
@@ -60,14 +60,14 @@ class DashboardController extends Controller
             ->groupBy('platform')
             ->get();
 
-        if (empty($platform)) {
+        if (count($platform) === 0) {
+            $datas['label'][] = 0;
+            $datas['data'][] = 0;
+        } else {
             foreach ($platform as $row) {
                 $datas['label'][] = $row->platform;
                 $datas['data'][] = (int) $row->total;
             }
-        } else {
-            $datas['label'][] = 'Empty';
-            $datas['data'][] = 'Empty';
         }
 
         // Device top
@@ -76,14 +76,14 @@ class DashboardController extends Controller
             ->groupBy('device')
             ->get();
 
-        if (empty($device)) {
+        if (count($device) === 0) {
+            $datass['label'][] = 0;
+            $datass['data'][] = 0;
+        } else {
             foreach ($device as $row) {
                 $datass['label'][] = $row->device;
                 $datass['data'][] = (int) $row->total;
             }
-        } else {
-            $datass['label'][] = 'Empty';
-            $datass['data'][] = 'Empty';
         }
 
         $roleuser = Auth::user()->rolesname;

@@ -35,10 +35,10 @@
                                                 <div class="input-group">
                                                     <?php if(request('user')): ?>
                                                     <input type="text" class="form-control" name="user"
-                                                        placeholder="Search Comment" value="<?php echo e(request('user')); ?>">
+                                                        placeholder="Search Comment Post" value="<?php echo e(request('user')); ?>">
                                                     <?php endif; ?>
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Comment" value="<?php echo e(request('search')); ?>">
+                                                        placeholder="Search Comment Post" value="<?php echo e(request('search')); ?>">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"

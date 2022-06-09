@@ -14,15 +14,17 @@ class SendGlobalNotification implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $message;
-
+    public $id;
+    public $for_user_id;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message)
+    public function __construct($message, $for_user_id)
     {
         $this->message = $message;
+        $this->for_user_id = $for_user_id;
     }
 
     /**
@@ -33,7 +35,7 @@ class SendGlobalNotification implements ShouldBroadcast
     public function broadcastOn()
     {
         // return new PrivateChannel('channel-name');
-        return ['my-channel'];
+        return ['my-channel' . $this->for_user_id];
     }
 
     public function broadcastAs()

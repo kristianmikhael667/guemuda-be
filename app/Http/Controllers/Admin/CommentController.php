@@ -121,8 +121,9 @@ class CommentController extends Controller
         if (empty($data['name'][17])) {
             throw UnauthorizedException::forPermissions($data);
         }
-        
+
         $comment = Comment::where('id', $id)->first();
+
         DB::table('comments')->where('id', $id)->update([
             'updated_at' => date('Y-m-d H:i:s'),
             'status' => $request->status
@@ -134,7 +135,7 @@ class CommentController extends Controller
             'field' => $comment->body
         ];
 
-        // event(new SendGlobalNotification($json));
+        event(new SendGlobalNotification($json, $comment->user->id));
 
         return Redirect::back()->with('success', 'Comment status has been updated!');
     }

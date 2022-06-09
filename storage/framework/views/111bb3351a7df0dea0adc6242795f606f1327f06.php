@@ -401,7 +401,7 @@
             <ul class="submenu">
                 <li><a href="/administrator/users" title="">All</a></li>
                 
-                <li><a href="/administrator/admin" title="">Admin</a></li>
+                
                 <li><a href="/administrator/editor" title="">Editor</a></li>
                 <li><a href="/administrator/contributor" title="">Contributor</a></li>
                 <li><a href="/administrator/subscriber" title="">Subscriber</a></li>

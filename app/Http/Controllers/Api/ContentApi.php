@@ -152,7 +152,7 @@ class ContentApi extends Controller
                 $platforms_names = "Others";
             }
 
-            if (Browser::deviceFamily() == "Apple" || Browser::deviceFamily() == "Samsung" || Browser::deviceFamily() == "Xiaomi" || Browser::deviceFamily() == "Oppo" || Browser::deviceFamily() == "Vivo") {
+            if (Browser::deviceFamily() == "Apple" || Browser::deviceFamily() == "Samsung" || Browser::deviceFamily() == "Xiaomi" || Browser::deviceFamily() == "OPPO" || Browser::deviceFamily() == "Vivo") {
                 $device = Browser::deviceFamily();
                 $device_name = preg_replace('/[0-9]+/', '', $device);
                 $device_names = str_replace(".", "", $device_name);

@@ -2,6 +2,7 @@
 
 use App\Events\SendGlobalNotification;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\CategoryArticle;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -91,6 +92,7 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::get('/editor', [UserController::class, 'editor']);
     Route::get('/editor/create', [UserController::class, 'editorcreate']);
     Route::post('/editor/posteditor', [UserController::class, 'posteditor']);
+
     // Route Contributor
     Route::get('/contributor', [UserController::class, 'contributor']);
 
@@ -100,6 +102,9 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     // Route Comment
     Route::resource('comment', CommentController::class);
     Route::resource('commentcom', CommentComController::class);
+
+    // Ads
+    Route::resource('ads', AdsController::class);
 });
 
 // Route::get('send-notif/{name}', function ($name) {

@@ -134,8 +134,9 @@
                                                         <span>Link Audio Embed</span>
                                                     </div>
                                                     <input class="uk-input mb-2"
-                                                        value="{{ old('link_audio', $contents->link_audio) }}" name="link_audio" id="link_audio"
-                                                        type="text" placeholder="Link Audio Post">
+                                                        value="{{ old('link_audio', $contents->link_audio) }}"
+                                                        name="link_audio" id="link_audio" type="text"
+                                                        placeholder="Link Audio Post">
                                                     @error('link_audio')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

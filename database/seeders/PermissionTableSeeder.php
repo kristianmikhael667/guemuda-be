@@ -51,7 +51,11 @@ class PermissionTableSeeder extends Seeder
             'list-community-group',
             'create-community-group',
             'edit-community-group',
-            'delete-community-group'
+            'delete-community-group',
+            'list-ads',
+            'create-ads',
+            'edit-ads',
+            'delete-ads',
         ];
 
         foreach ($permissions as $permission) {

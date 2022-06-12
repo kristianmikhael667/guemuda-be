@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdsApi;
 use App\Http\Controllers\Api\AuthAPI;
 use App\Http\Controllers\Api\CategoryCommunity;
 use App\Http\Controllers\Api\CategoryController;
@@ -108,6 +109,9 @@ Route::post('register-webinar-answer', [ApiRegisterWebinar::class, 'registerWebi
 Route::get('tags', [ContentApi::class, 'tags']);
 Route::get('tagscommunity', [CommunityGroupAPI::class, 'tagscommunity']);
 Route::get('tagswebinar', [WebinarsApi::class, 'tagswebinar']);
+
+// Get Banner
+Route::get('getads', [AdsApi::class, 'getads']);
 
 // User Service
 Route::post('login', [AuthAPI::class, 'login']);

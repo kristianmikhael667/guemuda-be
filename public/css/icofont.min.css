@@ -2825,6 +2825,10 @@
     content: "\eab4"
 }
 
+.icofont-simple-left-up:before {
+    content: "\eads"
+}
+
 .icofont-simple-left:before {
     content: "\eab5"
 }

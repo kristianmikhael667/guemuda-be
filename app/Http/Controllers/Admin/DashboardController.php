@@ -117,6 +117,7 @@ class DashboardController extends Controller
             ->groupBy("users.updated_at")
             ->groupBy("users.id")
             ->groupBy("users.userId")
+            ->limit(10)
             ->orderBy(DB::raw('COUNT(users.id)', 'desc'), 'desc')
             ->get(array(DB::raw('COUNT(users.id) as tops'), 'users.*'));
 

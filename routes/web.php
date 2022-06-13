@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\SendGlobalNotification;
+use App\Exports\UsersExport;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\CategoryArticle;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\Analytic;
+use App\Http\Controllers\Admin\AuthorsExport;
 use App\Http\Controllers\Admin\CategoryCommunity;
 use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CatPremiumController;
@@ -18,6 +20,7 @@ use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
+use App\Http\Controllers\Admin\ContentExport;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagsCommunity;
 use App\Http\Controllers\Admin\TagsWebinarsControllers;
@@ -79,6 +82,10 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     Route::get('/media', [MediaController::class, 'index']);
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+
+    // Export Excel
+    Route::get('/author/export', [AuthorsExport::class, 'export']);
+    Route::get('/content/export', [ContentExport::class, 'export']);
 
     // Route Superadmin
     Route::get('/superadmin', [UserController::class, 'superadmin']);

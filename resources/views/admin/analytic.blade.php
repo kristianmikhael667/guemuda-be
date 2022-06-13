@@ -61,6 +61,12 @@
 
                                         </tbody>
                                     </table>
+
+                                    @if ($page == "superadmin")
+                                    <a href="/administrator/content/export" class="btn btn-success mt-3">Export
+                                        Excel</a>
+                                    @endif
+
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -103,6 +109,10 @@
                                             @endforeach
                                         </tbody>
                                     </table>
+                                    @if ($page == "superadmin")
+                                    <a href="/administrator/author/export" class="btn btn-success mt-3">Export
+                                        Excel</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -130,7 +140,7 @@
                         </div>
 
                         <div class="row merged20 mb-4">
-                            <div class="col-lg-8">
+                            {{-- <div class="col-lg-8">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
                                         <h5>Manage Users</h5>
@@ -292,7 +302,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-4 col-md-4">
                                 <div class="d-widget">
                                     <div class="d-widget-title">

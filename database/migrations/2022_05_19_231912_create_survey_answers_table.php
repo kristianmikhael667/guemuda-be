@@ -49,6 +49,17 @@ class CreateSurveyAnswersTable extends Migration
             $table->text('survey_answers9')->nullable();
             $table->text('survey_question10')->nullable();
             $table->text('survey_answers10')->nullable();
+
+            $table->text('survey_question11')->nullable();
+            $table->text('survey_answers11')->nullable();
+            $table->text('survey_question12')->nullable();
+            $table->text('survey_answers12')->nullable();
+            $table->text('survey_question13')->nullable();
+            $table->text('survey_answers13')->nullable();
+            $table->text('survey_question14')->nullable();
+            $table->text('survey_answers14')->nullable();
+            $table->text('survey_question15')->nullable();
+            $table->text('survey_answers15')->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

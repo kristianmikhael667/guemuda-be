@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+use Illuminate\Support\Facades\Storage;
 
 class WebinarsControllers extends Controller
 {
@@ -104,6 +105,11 @@ class WebinarsControllers extends Controller
             'survey_question8' => 'nullable',
             'survey_question9' => 'nullable',
             'survey_question10' => 'nullable',
+            'survey_question11' => 'nullable',
+            'survey_question12' => 'nullable',
+            'survey_question13' => 'nullable',
+            'survey_question14' => 'nullable',
+            'survey_question15' => 'nullable',
             'links_maps' => 'nullable'
         ]);
 
@@ -121,6 +127,7 @@ class WebinarsControllers extends Controller
         $validatedData['tags_event'] = implode(",", $validatedData['tags_event']);
         $taglessBody = strip_tags($validatedData['description']);
         $validatedData['subdesc'] = $taglessBody;
+
         Webinar::create($validatedData);
         return redirect('/administrator/webinars')->with('success', 'New webinars has been added!');
     }
@@ -162,12 +169,16 @@ class WebinarsControllers extends Controller
             throw UnauthorizedException::forPermissions($data);
         }
         $roleuser = Auth::user()->rolesname;
+        $images = substr($webinar->avatar, 11);
+        $teg = array_map('intval', explode(',', $webinar->tags_event));
 
         return view('admin.edit-webinars', [
             'webinar' => $webinar,
             'page' => $roleuser,
+            'images' => $images,
+            'tags' => TagsWebinar::all(),
+            'tagsme' => $teg,
             'categories' => CategoryWebinar::all(),
-            'tages' => TagsWebinar::all()
         ]);
     }
 
@@ -193,7 +204,6 @@ class WebinarsControllers extends Controller
         // dd($request);
         $validatedData = $request->validate([
             'title' => 'required',
-            'tags_event' => 'nullable',
             'category_event',
             'avatar' => 'image|file|max:2024',
             'description' => 'required',
@@ -212,23 +222,35 @@ class WebinarsControllers extends Controller
             'survey_question8' => 'nullable',
             'survey_question9' => 'nullable',
             'survey_question10' => 'nullable',
+            'survey_question11' => 'nullable',
+            'survey_question12' => 'nullable',
+            'survey_question13' => 'nullable',
+            'survey_question14' => 'nullable',
+            'survey_question15' => 'nullable',
             'links_maps' => 'nullable',
+            'typewebinar' => 'nullable',
+            'tags_event' => 'required',
         ]);
 
         if ($request->file('avatar')) {
+            if ($request->oldThumbnail) {
+                Storage::delete($request->oldThumbnail);
+            }
             $validatedData['avatar'] = $request->file('avatar')->store('post-image');
         }
 
         if ($request->slug != $webinar->slug) {
             $validatedData['slug'] = $request->slug;
         }
-        $validatedData['typewebinar'] = $request->typewebinar;
         $validatedData['latitude'] = '1.2';
         $validatedData['longitude'] = '1.2';
         $validatedData['speaker_2'] = $request->speaker2 ? $request->speaker2 : Null;
         $validatedData['description'] = $request->description;
         $taglessBody = strip_tags($validatedData['description']);
         $validatedData['subdesc'] = $taglessBody;
+        $validatedData['tags_event'] = $request->tags_event ? implode(",", $request->tags_event) : implode(",", $webinar->tags_event);
+        // echo json_encode($validatedData);
+        // die;
         Webinar::where('id', $webinar->id)
             ->update($validatedData);
         return redirect('/administrator/webinars')->with('success', 'Webinars has been updated!');
@@ -251,7 +273,9 @@ class WebinarsControllers extends Controller
         if (empty($data['name'][12])) {
             throw UnauthorizedException::forPermissions($data);
         }
-
+        if ($webinar->avatar) {
+            Storage::delete($webinar->avatar);
+        }
         Webinar::destroy($webinar->id);
         return redirect('/administrator/webinars')->with('success', 'New webinars has been added!');
     }

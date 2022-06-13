@@ -14,7 +14,7 @@ class TagsWebinar extends Model
 
     public function webinars()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Webinar::class);
     }
 
     protected static function boot()

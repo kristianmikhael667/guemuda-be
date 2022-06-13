@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 
 class RegisterWebinarResult extends Controller
 {
-    public function registerWebinarExport($webinar_slug){
-        return Excel::download(new RegisterWebinarExport($webinar_slug), 'data-pendaftar-'.$webinar_slug.'.xlsx');
+    public function registerWebinarExport($webinar_slug)
+    {
+        return Excel::download(new RegisterWebinarExport($webinar_slug), 'data-pendaftar-' . $webinar_slug . '.xlsx');
     }
 }

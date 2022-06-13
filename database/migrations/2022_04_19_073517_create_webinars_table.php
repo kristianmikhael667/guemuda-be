@@ -23,7 +23,7 @@ class CreateWebinarsTable extends Migration
             $table->string('speaker_2');
             $table->date('schedule');
             $table->string('category_event')->nullable();
-            $table->string('tags_event')->nullable();
+            $table->text('tags_event')->nullable();
             $table->string('organizer');
             $table->string('moderator');
             $table->text('subdesc');
@@ -43,6 +43,11 @@ class CreateWebinarsTable extends Migration
             $table->text('survey_question8')->nullable();
             $table->text('survey_question9')->nullable();
             $table->text('survey_question10')->nullable();
+            $table->text('survey_question11')->nullable();
+            $table->text('survey_question12')->nullable();
+            $table->text('survey_question13')->nullable();
+            $table->text('survey_question14')->nullable();
+            $table->text('survey_question15')->nullable();
             $table->string('slug')->unique();
             $table->timestamps();
         });

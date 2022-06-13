@@ -15,7 +15,8 @@
                     <div class="row merged20 mb-4">
                         <div class="col-lg-12">
                             <div class="d-widget">
-                                <form method="post" enctype="multipart/form-data" action="/administrator/webinars/{{$webinar->slug}}">
+                                <form method="post" enctype="multipart/form-data"
+                                    action="/administrator/webinars/{{$webinar->slug}}">
                                     @method('put')
                                     @csrf
                                     <div class="d-widget-title">
@@ -33,8 +34,8 @@
                                                     <div class="d-flex justify-content-between mb-1">
                                                         <span>Title</span>
                                                     </div>
-                                                    <input class="uk-input" name="title" id="title" type="text"
-                                                        required value="{{old('title', $webinar->title)}}">
+                                                    <input class="uk-input" name="title" id="title" type="text" required
+                                                        value="{{old('title', $webinar->title)}}">
                                                     @error('title')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -45,8 +46,8 @@
                                                     <div class="d-flex justify-content-between mb-1">
                                                         <span>Slug</span>
                                                     </div>
-                                                    <input class="uk-input" name="slug" id="slug" type="text"
-                                                        required value="{{old('slug', $webinar->slug)}}">
+                                                    <input class="uk-input" name="slug" id="slug" type="text" required
+                                                        value="{{old('slug', $webinar->slug)}}">
                                                     @error('title')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -66,28 +67,7 @@
                                                     </div>
                                                     @enderror
                                                 </div>
-                                                <div class="uk-margin">
-                                                    <div class="d-flex justify-content-between mb-1">
-                                                        <span>Type Webinar</span>
-                                                    </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="typewebinar" id="typewebinar1" value="0">
-                                                        <label class="form-check-label" for="typewebinar1">
-                                                            Umum
-                                                        </label>
-                                                        </div>
-                                                        <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="typewebinar" id="typewebinar2" value="1" checked>
-                                                        <label class="form-check-label" for="typewebinar2">
-                                                            Premium
-                                                        </label>
-                                                        </div>
-                                                    @error('typewebinar')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
-                                                </div>
+
                                                 <div class="uk-margin">
                                                     @error('description')
                                                     <p class="text-danger">{{ $message }}</p>
@@ -96,16 +76,19 @@
                                                         <span>Description</span>
                                                     </div>
                                                     <textarea class="uk-textarea" name="description" id="createnews"
-                                                        rows="12"
-                                                        >{{old('description', $webinar->description)}}</textarea>
+                                                        rows="12">{{old('description', $webinar->description)}}</textarea>
                                                 </div>
                                                 <div class="uk-margin">
                                                     <div class="uk-margin" id="imagepost">
                                                         <div class="d-flex justify-content-between mb-1">
                                                             <span>Image Poster</span>
                                                         </div>
+                                                        <input type="hidden" name="oldImage"
+                                                            value="{{ $webinar->avatar }}">
+
                                                         <input type="file" name="avatar" id="avatar" class="dropify"
-                                                            data-max-file-size="5M" value="{{old('avatar', $webinar->avatar)}}">
+                                                            data-max-file-size="2M" data-default-file={{
+                                                            url('/api/image/' . $images) }}>
                                                     </div>
                                                 </div>
 
@@ -113,7 +96,8 @@
                                                 <div class="uk-margin">
                                                     <div class="uk-margin">
                                                         <select class="uk-select" onchange="yesnoCheck(this)">
-                                                            <option disabled="disabled" selected>-- Choose Make Survey Question --
+                                                            <option disabled="disabled" selected>-- Choose Make Survey
+                                                                Question --
                                                             </option>
                                                             <option value="on">Make Survey Questions</option>
                                                             <option value="off">No Survey Questions</option>
@@ -124,7 +108,9 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 1</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question1" id="question1" type="text" value="{{old('question1', $webinar->survey_question1)}}"/>
+                                                            <input class="uk-input" name="survey_question1"
+                                                                id="question1" type="text"
+                                                                value="{{old('question1', $webinar->survey_question1)}}" />
                                                             @error('survey_question1')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
@@ -135,7 +121,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 2</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question2" id="question2" type="text" value="{{old('question2', $webinar->survey_question2)}}
+                                                            <input class="uk-input" name="survey_question2"
+                                                                id="question2" type="text" value="{{old('question2', $webinar->survey_question2)}}
                                                             ">
                                                             @error('survey_question2')
                                                             <div class="invalid-feedback">
@@ -147,7 +134,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 3</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question3" id="question3" type="text" value="{{old('question3', $webinar->survey_question3)}}
+                                                            <input class="uk-input" name="survey_question3"
+                                                                id="question3" type="text" value="{{old('question3', $webinar->survey_question3)}}
                                                             ">
                                                             @error('survey_question3')
                                                             <div class="invalid-feedback">
@@ -159,7 +147,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 4</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question4" id="question4" type="text" value="{{old('question4', $webinar->survey_question4)}}
+                                                            <input class="uk-input" name="survey_question4"
+                                                                id="question4" type="text" value="{{old('question4', $webinar->survey_question4)}}
                                                             ">
                                                             @error('survey_question4')
                                                             <div class="invalid-feedback">
@@ -171,7 +160,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 5</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question5" id="question5" type="text" value="{{old('question5', $webinar->survey_question5)}}
+                                                            <input class="uk-input" name="survey_question5"
+                                                                id="question5" type="text" value="{{old('question5', $webinar->survey_question5)}}
                                                             ">
                                                             @error('survey_question5')
                                                             <div class="invalid-feedback">
@@ -183,7 +173,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 6</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question6" id="question6" type="text" value="{{old('question6', $webinar->survey_question6)}}
+                                                            <input class="uk-input" name="survey_question6"
+                                                                id="question6" type="text" value="{{old('question6', $webinar->survey_question6)}}
                                                             ">
                                                             @error('survey_question6')
                                                             <div class="invalid-feedback">
@@ -195,7 +186,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 7</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question7" id="question7" type="text" value="{{old('question7', $webinar->survey_question7)}}
+                                                            <input class="uk-input" name="survey_question7"
+                                                                id="question7" type="text" value="{{old('question7', $webinar->survey_question7)}}
                                                             ">
                                                             @error('survey_question7')
                                                             <div class="invalid-feedback">
@@ -207,7 +199,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 8</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question8" id="question8" type="text" value="{{old('question8', $webinar->survey_question8)}}
+                                                            <input class="uk-input" name="survey_question8"
+                                                                id="question8" type="text" value="{{old('question8', $webinar->survey_question8)}}
                                                             ">
                                                             @error('survey_question8')
                                                             <div class="invalid-feedback">
@@ -219,7 +212,8 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 9</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question9" id="question9" type="text" value="{{old('question9', $webinar->survey_question9)}}
+                                                            <input class="uk-input" name="survey_question9"
+                                                                id="question9" type="text" value="{{old('question9', $webinar->survey_question9)}}
                                                             ">
                                                             @error('survey_question9')
                                                             <div class="invalid-feedback">
@@ -231,9 +225,75 @@
                                                             <div class="d-flex justify-content-between mb-1">
                                                                 <span>Survey Question 10</span>
                                                             </div>
-                                                            <input class="uk-input" name="survey_question10" id="question10" type="text" value="{{old('question10', $webinar->survey_question10)}}
+                                                            <input class="uk-input" name="survey_question10"
+                                                                id="question10" type="text" value="{{old('question10', $webinar->survey_question10)}}
                                                             ">
                                                             @error('survey_question10')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 11</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question11"
+                                                                id="question11" type="text" value="{{old('question11', $webinar->survey_question11)}}
+                                                            ">
+                                                            @error('survey_question11')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 12</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question12"
+                                                                id="question12" type="text" value="{{old('question12', $webinar->survey_question12)}}
+                                                            ">
+                                                            @error('survey_question12')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 13</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question13"
+                                                                id="question13" type="text" value="{{old('question13', $webinar->survey_question13)}}
+                                                            ">
+                                                            @error('survey_question13')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 14</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question14"
+                                                                id="question14" type="text" value="{{old('question14', $webinar->survey_question14)}}
+                                                            ">
+                                                            @error('survey_question14')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="uk-margin">
+                                                            <div class="d-flex justify-content-between mb-1">
+                                                                <span>Survey Question 15</span>
+                                                            </div>
+                                                            <input class="uk-input" name="survey_question15"
+                                                                id="question15" type="text" value="{{old('question15', $webinar->survey_question15)}}
+                                                            ">
+                                                            @error('survey_question15')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
                                                             </div>
@@ -256,22 +316,23 @@
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
                                                     <input class="uk-input" name="organizer" id="organizer" type="text"
-                                                         value="{{old('organizer', $webinar->organizer)}}">
+                                                        value="{{old('organizer', $webinar->organizer)}}">
                                                 </div>
 
                                                 <div class="uk-card uk-card-hover mt-2">
                                                     <input class="uk-input" name="moderator" id="moderator" type="text"
-                                                         value="{{old('moderator', $webinar->moderator)}}">
+                                                        value="{{old('moderator', $webinar->moderator)}}">
                                                 </div>
 
                                                 <div class="uk-card uk-card-hover mt-2">
                                                     <input class="uk-input" name="speaker" id="speaker" type="text"
-                                                    value="{{old('speaker', $webinar->speaker)}}">
+                                                        value="{{old('speaker', $webinar->speaker)}}">
                                                 </div>
 
                                                 <div class="uk-card uk-card-hover mt-2">
                                                     <input class="uk-input" name="speaker2" id="speaker2" type="text"
-                                                        placeholder="Input Speakers 2" value="{{old('speaker_2', $webinar->speaker_2)}}">
+                                                        placeholder="Input Speakers 2"
+                                                        value="{{old('speaker_2', $webinar->speaker_2)}}">
                                                 </div>
                                             </div>
 
@@ -285,7 +346,7 @@
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
                                                     <input class="uk-input" name="address" id="address" type="text"
-                                                    value="{{old('address', $webinar->address)}}">
+                                                        value="{{old('address', $webinar->address)}}">
                                                 </div>
 
                                                 <div class="uk-card uk-card-hover mt-2">
@@ -298,19 +359,29 @@
                                                 <div class="d-widget-title">
                                                     <div class="d-flex justify-content-between">
                                                         <div>
-                                                            <h4>Category</h4>
+                                                            <h4>Type Webinar</h4>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
                                                     <div class="row">
-                                                        @foreach ($categories as $item)
-                                                        <label class="mr-2"><input class="uk-radio"
-                                                                name="category_event" value="{{ $item->id }}"
-                                                                type="radio">
-                                                            {{ $item->name }}</label>
-                                                        @endforeach
+                                                        <label class="mr-2"><input class="uk-radio" name="typewebinar"
+                                                                id="typewebinar1" {{ $webinar->typewebinar == 0 ?
+                                                            'checked' : ''}} value="0" type="radio">
+                                                            Umum</label>
+                                                        <label class="mr-2"><input class="uk-radio" name="typewebinar"
+                                                                id="typewebinar2" value="1" {{ $webinar->typewebinar ==
+                                                            1 ?
+                                                            'checked' : ''}} type="radio">
+                                                            Premium</label>
                                                     </div>
+                                                    @error('typewebinar')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+
+
                                                 </div>
                                             </div>
 
@@ -331,12 +402,12 @@
                                                 </div>
                                                 <div class="uk-card uk-card-hover">
                                                     <select class="uk-input" multiple="multiple" style="width: 100%;"
-                                                        name="tags_event[]" id="tagger" data-placeholder="tages" 
+                                                        name="tags_event[]" id="tagger" data-placeholder="tages"
                                                         required>
-                                                        @foreach ($tages as $tag)
-                                                        <option value="{{ $tag->id }}">
-                                                            {{ $tag->name }}
-                                                        </option>
+                                                        @foreach($tags as $tag)
+                                                        <option value="{{$tag->id }}" {{is_array($tagsme) &&
+                                                            in_array($tag->id, $tagsme) ? 'selected' : '' }}>
+                                                            {{$tag->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

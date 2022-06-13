@@ -91,6 +91,11 @@
                                                 <th>Question8</th>
                                                 <th>Question9</th>
                                                 <th>Question10</th>
+                                                <th>Question11</th>
+                                                <th>Question12</th>
+                                                <th>Question13</th>
+                                                <th>Question14</th>
+                                                <th>Question15</th>
                                                 <th>Created</th>
                                                 <th>Updated</th>
                                                 <th>Regist Result</th>
@@ -101,6 +106,7 @@
                                             <?php $__empty_1 = true; $__currentLoopData = $webinars; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $num => $webinar): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                             <?php 
                                             $explode_id = array_map('intval', explode(',', $webinar->tags_event));
+                                            echo json_encode($explode_id);
                                             ?>
                                             <tr>
                                                 <td><?php echo e($webinars->firstItem() + $num); ?></td>
@@ -145,6 +151,16 @@
                                                 <td><span><?php echo e($webinar->survey_question9? $webinar->survey_question9 :
                                                         '-'); ?></span></td>
                                                 <td><span><?php echo e($webinar->survey_question10? $webinar->survey_question10 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question11? $webinar->survey_question11 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question12? $webinar->survey_question12 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question13? $webinar->survey_question13 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question14? $webinar->survey_question14 :
+                                                        '-'); ?></span></td>
+                                                <td><span><?php echo e($webinar->survey_question15? $webinar->survey_question15 :
                                                         '-'); ?></span></td>
                                                 <td><?php echo e(\Carbon\Carbon::parse($webinar->created_at)->diffForHumans()); ?>
 

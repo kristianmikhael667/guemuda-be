@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use Exception;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,22 +13,22 @@ class SurveyAnswers extends Controller
     public function index(Request $request)
     {
         $register = RegisterWebinar::get();
-        if ($register){
+        if ($register) {
             return response()->json([
                 'message' => 'success fetched data',
                 'status' => '200',
                 'result' => ['data' => $register]
             ], 200);
-        }
-        else{
+        } else {
             return response()->json([
                 'message' => 'No data Register successfully fetched',
                 'status' => '400',
-            ], 400);    
+            ], 400);
         }
     }
 
-    public function registerWebinar(Request $request){
+    public function registerWebinar(Request $request)
+    {
         try {
             $request->validate([
                 'webinar' => 'required',
@@ -64,11 +65,21 @@ class SurveyAnswers extends Controller
                 'survey_answers9' => 'nullable',
                 'survey_question10' => 'nullable',
                 'survey_answers10' => 'nullable',
+                'survey_question11' => 'nullable',
+                'survey_answers11' => 'nullable',
+                'survey_question12' => 'nullable',
+                'survey_answers12' => 'nullable',
+                'survey_question13' => 'nullable',
+                'survey_answers13' => 'nullable',
+                'survey_question14' => 'nullable',
+                'survey_answers14' => 'nullable',
+                'survey_question15' => 'nullable',
+                'survey_answers15' => 'nullable',
             ]);
 
             RegisterWebinar::create([
-                'webinar' =>$request->webinar,
-                'webinar_slug' =>$request->webinar_slug,
+                'webinar' => $request->webinar,
+                'webinar_slug' => $request->webinar_slug,
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -101,6 +112,16 @@ class SurveyAnswers extends Controller
                 'survey_answers9' => $request->survey_answers9 ? $request->survey_answers9 : "-",
                 'survey_question10' => $request->survey_question10 ? $request->survey_question10 : "-",
                 'survey_answers10' => $request->survey_answers10 ? $request->survey_answers10 : "-",
+                'survey_question11' => $request->survey_question11 ? $request->survey_question11 : "-",
+                'survey_answers11' => $request->survey_answers11 ? $request->survey_answers11 : "-",
+                'survey_question12' => $request->survey_question12 ? $request->survey_question12 : "-",
+                'survey_answers12' => $request->survey_answers12 ? $request->survey_answers12 : "-",
+                'survey_question13' => $request->survey_question13 ? $request->survey_question13 : "-",
+                'survey_answers13' => $request->survey_answers13 ? $request->survey_answers13 : "-",
+                'survey_question14' => $request->survey_question14 ? $request->survey_question14 : "-",
+                'survey_answers14' => $request->survey_answers14 ? $request->survey_answers14 : "-",
+                'survey_question15' => $request->survey_question15 ? $request->survey_question15 : "-",
+                'survey_answers15' => $request->survey_answers15 ? $request->survey_answers15 : "-",
             ]);
 
             $regist = RegisterWebinar::where('email', $request->email)->first();
@@ -108,14 +129,14 @@ class SurveyAnswers extends Controller
             return response()->json([
                 'message' => 'success created',
                 'status' => '201',
-                'result' => ['data' => $regist]   
+                'result' => ['data' => $regist]
             ], 201);
         } catch (Exception $error) {
             return response()->json([
                 'message' => 'Somethings variable wrong (Authentication Failed)',
                 'status' => '402',
-                'error' => $error   
+                'error' => $error
             ], 402);
         }
-    } 
+    }
 }

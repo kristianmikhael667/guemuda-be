@@ -33,6 +33,22 @@
                 <div class="col-lg-12">
                     <div class="panel-content">
                         <h4 class="main-title">Analytic Article</h4>
+                        <div class="row">
+                            <div class="col-lg-2 col-sm-2 mb-2">
+                                <form action="/administrator" method="post">
+                                    @csrf
+                                    <select onchange="this.form.submit()" class="uk-input" name="filters" id="">
+                                        <option {{ $selected=="-24" ? 'selected' : '' }} value="-24">Show Per Day
+                                        </option>
+                                        <option {{ $selected=="-168" ? 'selected' : '' }} value="-168">Show Per Week
+                                        </option>
+                                        <option {{ $selected=="-730" ? 'selected' : '' }} value="-730">Show Per Month
+                                        </option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+
 
                         <div class="row merged20">
                             <div class="col-lg-8">
@@ -122,7 +138,8 @@
                                     <div class="d-widget-title">
                                         <h5>Hit Statistics</h5>
                                     </div>
-                                    <div id="uniqueVisits"></div>
+                                    {{-- <div id="uniqueVisits"></div> --}}
+                                    <canvas id="canvas" height="280" width="600"></canvas>
                                 </div>
                             </div>
 

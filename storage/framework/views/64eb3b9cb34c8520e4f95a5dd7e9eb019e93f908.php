@@ -213,4 +213,40 @@
       });
  
   });
+</script>
+
+
+<script>
+  var year = <?php echo $mount; ?>;
+  var user = <?php echo $graphs; ?>;
+  var barChartData = {
+      labels: year,
+      datasets: [{
+          label: 'Article Visitor',
+          backgroundColor: "#7BC144",
+          data: user
+      }]
+  };
+
+  window.onload = function() {
+      var ctx = document.getElementById("canvas").getContext("2d");
+      window.myBar = new Chart(ctx, {
+          type: 'bar',
+          data: barChartData,
+          options: {
+              elements: {
+                rectangle: {
+                        borderWidth: 2,
+                        borderColor: '#c1c1c1',
+                        borderSkipped: 'bottom'
+                    }
+                },
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Total User Visitor'
+                }
+            }
+        });
+    };
 </script><?php /**PATH /Users/mike/laravel/gue-muda/resources/views/admin/js-analytic.blade.php ENDPATH**/ ?>

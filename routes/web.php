@@ -57,6 +57,8 @@ Route::get('auth/google/callback', [SocialAPI::class, 'handleGoogleCallback']);
 // Login Admin Superadmin Editor
 Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/', [DashboardController::class, 'filtere']);
+
     Route::get('/analytic', [Analytic::class, 'index']);
     Route::resource('admin', AdminController::class);
     Route::resource('post', ContentController::class);

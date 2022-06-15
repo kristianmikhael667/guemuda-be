@@ -157,169 +157,41 @@
                         </div>
 
                         <div class="row merged20 mb-4">
-                            {{-- <div class="col-lg-8">
+                            <div class="col-lg-8">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
-                                        <h5>Manage Users</h5>
+                                        <h5>Top 10 Likers</h5>
                                     </div>
                                     <div class="d-widget-content">
                                         <table class="table manage-user table-default table-responsive-md">
                                             <thead>
                                                 <tr>
-                                                    <th>User Name</th>
-                                                    <th>View profile</th>
-                                                    <th>Chat History</th>
-                                                    <th>Blocked</th>
-                                                    <th>Hide</th>
-                                                    <th>Delete</th>
+                                                    <th>Title Article</th>
+                                                    <th>Category</th>
+                                                    <th>Total Like</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @foreach ($likers as $item)
                                                 <tr>
-                                                    <td>
-                                                        <figure><img src="images/resources/user.png" alt=""></figure>
-                                                        <h5>Maria K.</h5>
-                                                    </td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch1">
-                                                            <label class="switch" for="switch1"></label>
-                                                        </div>
+                                                    <td>{{ $item->title }}
                                                     </td>
                                                     <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch2">
-                                                            <label class="switch" for="switch2"></label>
-                                                        </div>
+                                                        <h5>{{ $item->category->name }}</h5>
                                                     </td>
-                                                    <td>
-                                                        <div class="actions-btn">
-                                                            <span class="iconbox button soft-primary"><i
-                                                                    class="icofont-pen-alt-1"></i></span>
-                                                            <span class="iconbox button soft-danger"><i
-                                                                    class="icofont-trash"></i></span>
-                                                        </div>
-                                                    </td>
+                                                    <td>{{ $item->total_like
+                                                        }}</td>
                                                 </tr>
-                                                <tr>
-                                                    <td>
-                                                        <figure><img src="images/resources/user2.jpg" alt=""></figure>
-                                                        <h5>Sarika sing.</h5>
-                                                    </td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch3">
-                                                            <label class="switch" for="switch3"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch4">
-                                                            <label class="switch" for="switch4"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="actions-btn">
-                                                            <span class="iconbox button soft-primary"><i
-                                                                    class="icofont-pen-alt-1"></i></span>
-                                                            <span class="iconbox button soft-danger"><i
-                                                                    class="icofont-trash"></i></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <figure><img src="images/resources/user3.jpg" alt=""></figure>
-                                                        <h5>King Khan</h5>
-                                                    </td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch5">
-                                                            <label class="switch" for="switch5"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch6">
-                                                            <label class="switch" for="switch6"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="actions-btn">
-                                                            <span class="iconbox button soft-primary"><i
-                                                                    class="icofont-pen-alt-1"></i></span>
-                                                            <span class="iconbox button soft-danger"><i
-                                                                    class="icofont-trash"></i></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <figure><img src="images/resources/user4.jpg" alt=""></figure>
-                                                        <h5>jacob</h5>
-                                                    </td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch7">
-                                                            <label class="switch" for="switch7"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch8">
-                                                            <label class="switch" for="switch8"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="actions-btn">
-                                                            <span class="iconbox button soft-primary"><i
-                                                                    class="icofont-pen-alt-1"></i></span>
-                                                            <span class="iconbox button soft-danger"><i
-                                                                    class="icofont-trash"></i></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <figure><img src="images/resources/user5.jpg" alt=""></figure>
-                                                        <h5>Andrew</h5>
-                                                    </td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td><a class="mini-btn" href="#" title="">view</a></td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch9">
-                                                            <label class="switch" for="switch9"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="switch-btn">
-                                                            <input type="checkbox" hidden="hidden" id="switch10">
-                                                            <label class="switch" for="switch10"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="actions-btn">
-                                                            <span class="iconbox button soft-primary"><i
-                                                                    class="icofont-pen-alt-1"></i></span>
-                                                            <span class="iconbox button soft-danger"><i
-                                                                    class="icofont-trash"></i></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
+                                        @if ($page == "superadmin")
+                                        <a href="/administrator/likes/export" class="btn btn-success mt-3">Export
+                                            Excel</a>
+                                        @endif
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
@@ -331,7 +203,43 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="row merged20 mb-4">
+                            <div class="col-lg-12">
+                                <div class="d-widget">
+                                    <div class="d-widget-title">
+                                        <h5>Top 10 Comment</h5>
+                                    </div>
+                                    <div class="d-widget-content">
+                                        <table class="table manage-user table-default table-responsive-md">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title Article</th>
+                                                    <th>Category</th>
+                                                    <th>Total Comment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($comments as $item)
+                                                <tr>
+                                                    <td>{{ $item->title }}
+                                                    </td>
+                                                    <td>
+                                                        <h5>{{ $item->category->name }}</h5>
+                                                    </td>
+                                                    <td>{{ $item->total_comment
+                                                        }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        @if ($page == "superadmin")
+                                        <a href="/administrator/comments/export" class="btn btn-success mt-3">Export
+                                            Excel</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

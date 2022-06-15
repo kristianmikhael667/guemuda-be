@@ -157,7 +157,41 @@
                         </div>
 
                         <div class="row merged20 mb-4">
-                            
+                            <div class="col-lg-8">
+                                <div class="d-widget">
+                                    <div class="d-widget-title">
+                                        <h5>Top 10 Likers</h5>
+                                    </div>
+                                    <div class="d-widget-content">
+                                        <table class="table manage-user table-default table-responsive-md">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title Article</th>
+                                                    <th>Category</th>
+                                                    <th>Total Like</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $__currentLoopData = $likers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e($item->title); ?>
+
+                                                    </td>
+                                                    <td>
+                                                        <h5><?php echo e($item->category->name); ?></h5>
+                                                    </td>
+                                                    <td><?php echo e($item->total_like); ?></td>
+                                                </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
+                                        </table>
+                                        <?php if($page == "superadmin"): ?>
+                                        <a href="/administrator/likes/export" class="btn btn-success mt-3">Export
+                                            Excel</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="d-widget">
                                     <div class="d-widget-title">
@@ -169,7 +203,43 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row merged20 mb-4">
+                            <div class="col-lg-12">
+                                <div class="d-widget">
+                                    <div class="d-widget-title">
+                                        <h5>Top 10 Comment</h5>
+                                    </div>
+                                    <div class="d-widget-content">
+                                        <table class="table manage-user table-default table-responsive-md">
+                                            <thead>
+                                                <tr>
+                                                    <th>Title Article</th>
+                                                    <th>Category</th>
+                                                    <th>Total Comment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php $__currentLoopData = $comments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e($item->title); ?>
 
+                                                    </td>
+                                                    <td>
+                                                        <h5><?php echo e($item->category->name); ?></h5>
+                                                    </td>
+                                                    <td><?php echo e($item->total_comment); ?></td>
+                                                </tr>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </tbody>
+                                        </table>
+                                        <?php if($page == "superadmin"): ?>
+                                        <a href="/administrator/comments/export" class="btn btn-success mt-3">Export
+                                            Excel</a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

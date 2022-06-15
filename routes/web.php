@@ -17,10 +17,12 @@ use App\Http\Controllers\Admin\CategoryWebinarController;
 use App\Http\Controllers\Admin\CatPremiumController;
 use App\Http\Controllers\Admin\CommentComController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CommentsExport;
 use App\Http\Controllers\Admin\CommunityGroupController;
 use App\Http\Controllers\Admin\CommunityNews;
 use App\Http\Controllers\Admin\CommunityVideoController;
 use App\Http\Controllers\Admin\ContentExport;
+use App\Http\Controllers\Admin\LikesExport;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\TagsCommunity;
 use App\Http\Controllers\Admin\TagsWebinarsControllers;
@@ -88,6 +90,8 @@ Route::prefix('administrator')->middleware(['auth:sanctum', 'admin'])->group(fun
     // Export Excel
     Route::get('/author/export', [AuthorsExport::class, 'export']);
     Route::get('/content/export', [ContentExport::class, 'export']);
+    Route::get('/likes/export', [LikesExport::class, 'export']);
+    Route::get('/comments/export', [CommentsExport::class, 'export']);
 
     // Route Superadmin
     Route::get('/superadmin', [UserController::class, 'superadmin']);

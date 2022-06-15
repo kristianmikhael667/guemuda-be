@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\ContentViews;
+use App\Models\LikeContent;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        // Top Viewer
         $top10views = Content::join("content_views", "content_views.id_post", "=", "contents.id")
             ->where("content_views.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
             ->groupBy("contents.slug")
@@ -92,6 +94,7 @@ class DashboardController extends Controller
         }
 
         $roleuser = Auth::user()->rolesname;
+
         // Top Authors
         $authors = User::join("contents", "contents.uid_user", "=", "users.id")
             // ->where("users.created_at", ">=", date("Y-m-d H:i:s", strtotime('-24 hours', time())))
@@ -130,11 +133,66 @@ class DashboardController extends Controller
         $datenow = Carbon::now()->format('d');
         $month = [$datenow];
         $views = [];
+
         foreach ($month as $key => $value) {
             $views[] = ContentViews::where(DB::raw("DATE_FORMAT(created_at, '%d')"), $value)->count();
         }
+
+        // Total Like
+        $top10Like = Content::join("like_contents", "like_contents.id_post", "=", "contents.id")
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->limit(10)
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
+
+        // Total Comment
+        $top10Comment = Content::join("comments", "comments.post_id", "=", "contents.id")
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->limit(10)
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_comment'), 'contents.*'));
+
+
         return view('admin.analytic', [
             'page' => $roleuser,
+            'likers' => $top10Like,
+            'comments' => $top10Comment,
             'viewer' => $top10views,
             'chart_data' => json_encode($data),
             'platform' => json_encode($datas),
@@ -271,10 +329,26 @@ class DashboardController extends Controller
 
         if ($request->filters == "-168") {
             $now = Carbon::now();
-            $agoDate = $now->subDays($now->dayOfWeek - 2)->subWeek()->format('d'); // gives 2016-01-31
-            $weekStartDate = $now->startOfWeek()->format('d');
+            // $agoDate = $now->subDays($now->dayOfWeek - 2)->subWeek()->format('Y-m-d'); // gives 2022-06-07
+            // $weekStartDate = Carbon::now()->format('Y-m-d');
             $monthstring = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            $month = [$agoDate, $weekStartDate];
+
+            // $dateweek = ContentViews::whereBetween('created_at', [$agoDate, $weekStartDate])->get();
+
+            // $date = $dateweek->map(function ($item) {
+            //     return [
+            //         'date' => date("d", strtotime($item->created_at))
+            //     ];
+            // });
+            $date = ContentViews::where("created_at", ">=", date("Y-m-d H:i:s", strtotime('-168 hours', time())))->get();
+            // $dates = $date->map(function ($item) {
+            //     return [
+            //         'date' => date("d", strtotime($item->created_at))
+            //     ];
+            // });
+
+            $month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
+            // $month = $date;
             $views = [];
             foreach ($month as $key => $value) {
                 $views[] = ContentViews::where(DB::raw("DATE_FORMAT(created_at, '%d')"), $value)->count();
@@ -290,6 +364,56 @@ class DashboardController extends Controller
             }
         }
 
+        // Total Like
+        $top10Like = Content::join("like_contents", "like_contents.id_post", "=", "contents.id")
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->limit(10)
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_like'), 'contents.*'));
+
+        // Total Comment
+        $top10Comment = Content::join("comments", "comments.post_id", "=", "contents.id")
+            ->groupBy("contents.slug")
+            ->groupBy("contents.id")
+            ->groupBy("contents.uid_user")
+            ->groupBy("contents.uid_user_2")
+            ->groupBy("contents.thumbnail")
+            ->groupBy("contents.description")
+            ->groupBy("contents.link")
+            ->groupBy("contents.status")
+            ->groupBy("contents.created_at")
+            ->groupBy("contents.updated_at")
+            ->groupBy("contents.link_audio")
+            ->groupBy("contents.title")
+            ->groupBy("contents.subdesc")
+            ->groupBy("contents.image")
+            ->groupBy("contents.captions")
+            ->groupBy("contents.type")
+            ->groupBy("contents.video")
+            ->groupBy("contents.category_id")
+            ->groupBy("contents.tags_id")
+            ->limit(10)
+            ->orderBy(DB::raw('COUNT(contents.id)', 'desc'), 'desc')
+            ->get(array(DB::raw('COUNT(contents.id) as total_comment'), 'contents.*'));
+
         return view('admin.analytic', [
             'page' => $roleuser,
             'viewer' => $top10views,
@@ -299,7 +423,9 @@ class DashboardController extends Controller
             'authors' =>  $authors,
             'selected' => $request->filters,
             'graphs' => json_encode($views),
-            'mount' => json_encode($monthstring)
+            'mount' => json_encode($monthstring),
+            'likers' => $top10Like,
+            'comments' => $top10Comment,
         ]);
     }
 }

@@ -9,6 +9,7 @@ use App\Models\ContentViews;
 use App\Models\LikeContent;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -328,30 +329,20 @@ class DashboardController extends Controller
         }
 
         if ($request->filters == "-168") {
-            $now = Carbon::now();
-            // $agoDate = $now->subDays($now->dayOfWeek - 2)->subWeek()->format('Y-m-d'); // gives 2022-06-07
-            // $weekStartDate = Carbon::now()->format('Y-m-d');
-            $monthstring = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-            // $dateweek = ContentViews::whereBetween('created_at', [$agoDate, $weekStartDate])->get();
+            $monday = Carbon::now()->subDay(3);
+            $tuesday = $monday->copy()->addDay();
+            $wednesday = $tuesday->copy()->addDay();
+            $thuesday = $wednesday->copy()->addDay();
+            $friday = $thuesday->copy()->addDay();
+            $saturday = $friday->copy()->addDay();
+            $sunday = $saturday->copy()->addDay();
 
-            // $date = $dateweek->map(function ($item) {
-            //     return [
-            //         'date' => date("d", strtotime($item->created_at))
-            //     ];
-            // });
-            $date = ContentViews::where("created_at", ">=", date("Y-m-d H:i:s", strtotime('-168 hours', time())))->get();
-            // $dates = $date->map(function ($item) {
-            //     return [
-            //         'date' => date("d", strtotime($item->created_at))
-            //     ];
-            // });
-
-            $month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'];
-            // $month = $date;
+            $monthstring = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            $month = [$monday->format('m-d'), $tuesday->format('m-d'), $wednesday->format('m-d'), $thuesday->format('m-d'), $friday->format('m-d'), $saturday->format('m-d'), $sunday->format('m-d')];
             $views = [];
             foreach ($month as $key => $value) {
-                $views[] = ContentViews::where(DB::raw("DATE_FORMAT(created_at, '%d')"), $value)->count();
+                $views[] = ContentViews::where(DB::raw("DATE_FORMAT(created_at, '%m-%d')"), $value)->count();
             }
         }
 

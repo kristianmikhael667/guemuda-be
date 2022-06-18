@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CommunityGroupAPI;
 use App\Http\Controllers\Api\CommunityNewsApi;
 use App\Http\Controllers\Api\CommunityVideoApi;
 use App\Http\Controllers\Api\ContentApi;
+use App\Http\Controllers\Api\Notifications;
 use App\Http\Controllers\Api\PremiumContentAPI;
 use App\Http\Controllers\Api\RegisterUserAPI;
 use App\Http\Controllers\Api\SocialAPI;
@@ -64,6 +65,9 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::resource('categoryprem', CategoryPremiumAPI::class);
     Route::get('subcategoryprem', [CategoryPremiumAPI::class, 'subcategories']);
     Route::get('category-parent-prem', [CategoryPremiumAPI::class, 'categoryparent']);
+
+    // Get Notif
+    Route::get('notifications', [Notifications::class, 'getnotif']);
 });
 
 // Category Content

@@ -11,14 +11,12 @@ class ResponseFormatter
             'message' => null,
         ],
         'data' => null,
-        'like' => null //ewn
     ];
 
-    public static function like($data = null, $message = null, $like = null) //ren
+    public static function like($data = null, $message = null) //ren
     {
         self::$response['meta']['message'] = $message;
         self::$response['data'] = $data;
-        self::$response['like'] = $like; //rem
         return response()->json(self::$response, self::$response['meta']['code']);
     }
 

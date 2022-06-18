@@ -14,8 +14,9 @@ use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
     use HasApiTokens;
     use SoftDeletes;
@@ -103,8 +104,22 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Content::class);
     }
 
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     public function communitynews()
     {
         return $this->hasMany(CommunityNews::class);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

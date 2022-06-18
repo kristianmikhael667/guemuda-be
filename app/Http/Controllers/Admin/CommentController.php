@@ -6,6 +6,7 @@ use App\Events\SendGlobalNotification;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Content;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -123,19 +124,35 @@ class CommentController extends Controller
         }
 
         $comment = Comment::where('id', $id)->first();
+        $content = Content::where('id', $comment->post_id)->first();
 
         DB::table('comments')->where('id', $id)->update([
             'updated_at' => date('Y-m-d H:i:s'),
             'status' => $request->status
         ]);
+
         $json = [
             'from' => Auth::user()->username,
             'time' => Carbon::now(),
             'message' => $request->status == "accept" ? 'Your Message In Accept' : "Your Message In Reject",
-            'field' => $comment->body
+            'field' => $comment->body,
+            'title' => $content->title,
         ];
 
         event(new SendGlobalNotification($json, $comment->user->id));
+
+        // Create notif
+        $createnotif = [
+            'usernamefrom' => Auth::user()->username,
+            'id_user_from' => Auth::user()->id,
+            'id_user_to' => $comment->user->id,
+            'times' => Carbon::now(),
+            'message' => $request->status == "accept" ? 'Your Message In Accept' : "Your Message In Reject",
+            'body' => $comment->body,
+            'title' => $content->title
+        ];
+
+        Notification::create($createnotif);
 
         return Redirect::back()->with('success', 'Comment status has been updated!');
     }

@@ -34,6 +34,15 @@ class UsersAPI extends Controller
         }
     }
 
+    public function getprofile(Request $request)
+    {
+        $user = Auth::user();
+        if ($user) {
+            return ResponseFormatter::success($user, 'My Profile');
+        }
+        return ResponseFormatter::error(null, 'Error');
+    }
+
     public function updateProfile(Request $request)
     {
         $user = Auth::user();

@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/user', [Test::class, 'test']);
+    Route::get('/myprofile', [UsersAPI::class, 'getprofile']);
     Route::post('user/profile', [UsersAPI::class, 'updateProfile']);
     Route::post('user/photo', [UsersAPI::class, 'updatePhoto']);
 

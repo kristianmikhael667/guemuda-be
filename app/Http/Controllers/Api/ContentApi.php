@@ -62,7 +62,7 @@ class ContentApi extends Controller
     public function newstoday()
     {
         $limit = 6;
-        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1);
+        $posts = Content::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(-1);
         if ($posts) {
             return ResponseFormatter::success(
                 $posts,
@@ -195,7 +195,7 @@ class ContentApi extends Controller
 
         return ResponseFormatter::success(
             // DB::table('contents')->orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
-            $content = Content::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
+            $content = Content::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(-1),
 
             // $content->paginate($limit),
             'Data Content retrieved successfully'
@@ -259,7 +259,7 @@ class ContentApi extends Controller
         $type = $request->input('type');
 
         if ($type) {
-            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate(6)->onEachSide(1);
+            $content = Content::where('type', $type)->orderBy('created_at', 'desc')->paginate(6)->onEachSide(-1);
             if ($content) {
                 return ResponseFormatter::success(
                     $content,
@@ -280,7 +280,7 @@ class ContentApi extends Controller
         }
 
         return ResponseFormatter::success(
-            $content = Content::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(1),
+            $content = Content::orderBy('created_at', 'desc')->paginate($limit)->onEachSide(-1),
             'Data Content retrieved successfully'
         );
     }

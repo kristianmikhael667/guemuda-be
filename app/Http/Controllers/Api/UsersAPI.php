@@ -50,10 +50,10 @@ class UsersAPI extends Controller
         $update = DB::table('users')->where('userId', $user->userId)->update([
             'first_name' => $request->first_name ? $request->first_name : $user->first_name,
             'last_name' => $request->last_name ? $request->last_name : $user->last_name,
-            'address' => $request->address ? $request->address : '-',
-            'city' => $request->city ? $request->city : '-',
-            'job' => $request->job ? $request->job : '-',
-            'bio' => $request->bio ? $request->bio : '-',
+            'address' => $request->address ? $request->address : $user->address,
+            'city' => $request->city ? $request->city : $user->city,
+            'job' => $request->job ? $request->job : $user->job,
+            'bio' => $request->bio ? $request->bio : $user->bio,
             'date_birth' => $request->date_birth ? $request->date_birth : Carbon::now()
         ]);
 

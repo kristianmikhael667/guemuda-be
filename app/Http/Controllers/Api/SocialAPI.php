@@ -13,6 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Helpers\ResponseFormatter;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class SocialAPI extends Controller
 {
@@ -30,17 +31,12 @@ class SocialAPI extends Controller
             $findemail = User::where('email', $user['email'])->first();
 
             if ($finduser) {
-                // Auth::login($finduser);
-                $tokenResult = $finduser->createToken('authToken')->plainTextToken;
-                // return ResponseFormatter::success([
-                //     'access_token' => $tokenResult,
-                //     'token_type' => 'Bearer',
-                //     'user' => $finduser
-                // ], 'Authenticated');
-                // http://front.dewanhoster.my.id/email_verify_url?verify=
-                return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $finduser . '&' . 'token=' . $tokenResult)->with(['user' => $finduser, 'tokem' => $tokenResult]);
+                /* Use Token Sanctum
+                 $tokenResult = $finduser->createToken('authToken')->plainTextToken */
 
-                // return redirect()->intended('dashboard');
+                //  Use JWT Token
+                $token = JWTAuth::fromUser($finduser);
+                return Redirect::to('http://front.dewanhoster.my.id/google?user=' . $finduser . '&' . 'token=' . $token)->with(['user' => $finduser, 'tokem' => $token]);
             } else if ($findemail && $finduser == null) {
                 $updated = DB::table('users')->where('email', $user['email'])->update([
                     'google_id' => $user['id'],

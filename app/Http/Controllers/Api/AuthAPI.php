@@ -147,7 +147,7 @@ class AuthAPI extends Controller
         $credentials = $request->only('email', 'password');
 
         $validator = Validator::make($credentials, [
-            'email' => 'required|email',
+            'email' => 'required|email:rfc,dns',
             'password' => 'required|string|min:6|max:50'
         ]);
 

@@ -187,10 +187,15 @@ class ContentApi extends Controller
             }
         }
 
-        $content = Content::query();
-
         if ($title) {
-            $content->where('title', 'like', '%' . $title . '%');
+            $content = DB::table('contents')
+                ->where('title', 'like', '%' . $title . '%')
+                ->get();
+
+            return ResponseFormatter::success( //ren
+                $content,
+                'Result Search by Title retrieved successfully',
+            );
         }
 
         return ResponseFormatter::success(

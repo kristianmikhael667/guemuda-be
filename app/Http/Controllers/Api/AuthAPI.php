@@ -111,6 +111,8 @@ class AuthAPI extends Controller
         return response()->json([
             'success' => true,
             'message' => 'User created successfully',
+            'token_type' => 'Bearer',
+            'token' => JWTAuth::attempt($data, ['exp' => Carbon::now()->addDays(1)->timestamp]),
             'data' => $user
         ], Response::HTTP_OK);
     }

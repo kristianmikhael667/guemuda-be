@@ -47,7 +47,6 @@ Route::middleware('jwt.verify', 'verified')->group(function () {
     Route::post('post/reply', [CommentAPI::class, 'reply']);
     Route::get('users', [UsersAPI::class, 'index']);
     Route::get('like', [ContentApi::class, 'likecontent']);
-    Route::get('ceklike', [ContentApi::class, 'ceklike']);
 
     Route::post('post/commentcom', [CommentComAPI::class, 'store']);
     Route::post('post/replycom', [CommentComAPI::class, 'reply']);
@@ -75,6 +74,7 @@ Route::middleware('jwt.verify', 'verified')->group(function () {
 Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
 Route::get('category-parent', [CategoryController::class, 'categoryparent']);
+Route::get('ceklike', [ContentApi::class, 'ceklike']);
 
 // Category Community
 Route::resource('category-community', CategoryCommunity::class);

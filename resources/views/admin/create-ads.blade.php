@@ -38,7 +38,7 @@
                                                 </div>
                                                 <div class="uk-margin">
                                                     <div class="d-flex justify-content-between mb-1">
-                                                        <span>Date Post Community</span>
+                                                        <span>Date Post Ads</span>
                                                     </div>
                                                     <input min='1899-01-01' max='2000-13-13' class="uk-input"
                                                         name="created_at" id="created_at" type="date"

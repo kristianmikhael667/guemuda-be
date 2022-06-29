@@ -106,7 +106,6 @@
                                             @forelse ($webinars as $num => $webinar)
                                             <?php 
                                             $explode_id = array_map('intval', explode(',', $webinar->tags_event));
-                                            echo json_encode($explode_id);
                                             ?>
                                             <tr>
                                                 <td>{{ $webinars->firstItem() + $num }}</td>

@@ -1,5 +1,28 @@
 {{-- Post Tags --}}
 <script>
+    var input = document.getElementById('image');
+
+    input.addEventListener("change", function() {
+    var file  = this.files[0];
+    var img = new Image();
+
+    img.onload = function() {
+        var sizes = {
+            width:this.width,
+            height: this.height
+        };
+        URL.revokeObjectURL(this.src);
+        if(this.width > 730 && this.height > 486){
+            alert('Image pixel max 730 x 486');
+        }
+    }
+
+    var objectURL = URL.createObjectURL(file);
+
+    img.src = objectURL;
+});
+</script>
+<script>
     ganti = (sel) => {
         let fd = new FormData();
         const parent = sel.value;

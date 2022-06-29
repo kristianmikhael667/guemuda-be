@@ -73,7 +73,8 @@
                                                         <input class="uk-input mb-2 captions" name="captions"
                                                             id="captions" type="text" placeholder="Caption Image Post">
                                                         <input type="file" name="image" id="image" class="dropify"
-                                                            data-max-file-size="5M">
+                                                            data-max-file-size="2M">
+                                                        <span>Size Image <b style="color: red">730 x 486</b></span>
                                                     </div>
                                                     <div class="uk-margin" id="videopost" style="display: none">
                                                         {{-- <input class="uk-input mb-2" name="captions" id="captions"

@@ -188,9 +188,16 @@ class ContentApi extends Controller
         }
 
         if ($title) {
+
             $content = DB::table('contents')
-                ->where('title', 'like', '%' . $title . '%')
-                ->get();
+                ->join('users', 'contents.uid_user', '=', 'users.id')
+                ->join('categories', 'contents.category_id', '=', 'categories.id')
+                ->when(
+                    $request->input('title'),
+                    function ($query) use ($request) {
+                        $query->where('title', 'like', '%' . $request->input('title') . '%');
+                    }
+                )->paginate(6);
 
             return ResponseFormatter::success( //ren
                 $content,

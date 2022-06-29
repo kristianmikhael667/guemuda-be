@@ -38,7 +38,8 @@
                                                         placeholder="Search Comment Post" value="{{ request('user') }}">
                                                     @endif
                                                     <input type="text" class="form-control" name="search"
-                                                        placeholder="Search Comment Post" value="{{ request('search') }}">
+                                                        placeholder="Search Comment Post"
+                                                        value="{{ request('search') }}">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-outline-secondary">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -74,7 +75,7 @@
 
                                         <tr>
                                             <td>{{ $comments->firstItem() + $num }}</td>
-                                            <td>{{ $comment->user['username'] }}</td>
+                                            <td>{{ $comment->user['username'] ?? null }}</td>
 
                                             <td>{{ $comment->body }}</td>
 

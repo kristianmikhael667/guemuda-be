@@ -121,7 +121,7 @@ Route::get('getads', [AdsApi::class, 'getads']);
 // User Service
 Route::post('login', [AuthAPI::class, 'login']);
 Route::post('register', [AuthAPI::class, 'register']);
-Route::post('email/verification-notification', [RegisterUserAPI::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
-Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
+Route::post('email/verification-notification', [RegisterUserAPI::class, 'sendVerificationEmail'])->middleware('jwt.verify');
+Route::get('verify-email/{id}/{hash}', [RegisterUserAPI::class, 'verify'])->name('verification.verify')->middleware('jwt.verify');
 Route::get('auth/google', [SocialAPI::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [SocialAPI::class, 'handleGoogleCallback']);

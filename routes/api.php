@@ -51,6 +51,7 @@ Route::middleware('jwt.verify', 'verified')->group(function () {
     Route::post('post/commentcom', [CommentComAPI::class, 'store']);
     Route::post('post/replycom', [CommentComAPI::class, 'reply']);
     Route::get('likecom', [CommunityNewsApi::class, 'likecontent']);
+    Route::get('ceklike', [ContentApi::class, 'ceklike']);
     Route::get('ceklikecome', [CommunityNewsApi::class, 'ceklike']);
     // Premium Content
     Route::get('categoriespremium', [PremiumContentAPI::class, 'categories']);
@@ -74,7 +75,6 @@ Route::middleware('jwt.verify', 'verified')->group(function () {
 Route::resource('category', CategoryController::class);
 Route::get('subcategory', [CategoryController::class, 'subcategories']);
 Route::get('category-parent', [CategoryController::class, 'categoryparent']);
-Route::get('ceklike', [ContentApi::class, 'ceklike']);
 
 // Category Community
 Route::resource('category-community', CategoryCommunity::class);

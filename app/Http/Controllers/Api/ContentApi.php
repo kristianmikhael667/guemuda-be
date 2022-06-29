@@ -188,10 +188,10 @@ class ContentApi extends Controller
         }
 
         if ($title) {
-
             $content = DB::table('contents')
                 ->join('users', 'contents.uid_user', '=', 'users.id')
                 ->join('categories', 'contents.category_id', '=', 'categories.id')
+                ->select('users.username', 'contents.title', 'categories.name', 'contents.created_at', 'contents.slug', 'contents.subdesc', 'contents.image')
                 ->when(
                     $request->input('title'),
                     function ($query) use ($request) {

@@ -26,8 +26,8 @@ class CreateAdminUserSeeder extends Seeder
         $user = User::create([
             'first_name' => 'Super',
             'last_name' => 'Guemuda',
-            'username' => 'super',
-            'email' => 'super@gmail.com',
+            'username' => 'superadmin',
+            'email' => 'superadmin@gmail.com',
             'address' => "-",
             'city' => "-",
             'job' =>  "-",
@@ -36,7 +36,7 @@ class CreateAdminUserSeeder extends Seeder
             'date_birth' => Carbon::now(),
             'roles' => $role->id,
             'rolesname' => $role->name,
-            'password' => Hash::make('12345678'),
+            'password' => Hash::make('dtsguemuda20'),
         ]);
 
 
